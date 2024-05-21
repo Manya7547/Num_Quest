@@ -112,14 +112,20 @@ class _DartGamePageState extends State<DartGamePage> {
       appBar: AppBar(
         title: Text(
           'Choose factors of the given number',
-          style: TextStyle(fontSize: 20), // Increased font size
+          style: TextStyle(fontSize: 20),
+        ),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
       ),
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image:
-                AssetImage('/Users/manyasohal/num_quest/assets/classboard.jpg'),
+            image: AssetImage(
+                '/Users/manyasohal/num_quest/assets/Bigschooldesk_generated.jpg'),
             fit: BoxFit.cover,
           ),
         ),
@@ -129,12 +135,12 @@ class _DartGamePageState extends State<DartGamePage> {
             children: [
               Text(
                 'Round $roundNumber',
-                style: TextStyle(fontSize: 24), // Increased font size
+                style: TextStyle(fontSize: 24),
               ),
               SizedBox(height: 30),
               Text(
                 'Select the Factors of $generatedNumber',
-                style: TextStyle(fontSize: 20), // Increased font size
+                style: TextStyle(fontSize: 20),
               ),
               SizedBox(height: 30),
               Padding(
@@ -156,7 +162,7 @@ class _DartGamePageState extends State<DartGamePage> {
                       },
                       child: Text(
                         (index + 1).toString(),
-                        style: TextStyle(fontSize: 16), // Increased font size
+                        style: TextStyle(fontSize: 16),
                       ),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: selectedFactors.contains(index + 1)
@@ -172,7 +178,7 @@ class _DartGamePageState extends State<DartGamePage> {
                 onPressed: checkAnswer,
                 child: Text(
                   'Check',
-                  style: TextStyle(fontSize: 18), // Increased font size
+                  style: TextStyle(fontSize: 18),
                 ),
               ),
               SizedBox(height: 10),
@@ -180,7 +186,7 @@ class _DartGamePageState extends State<DartGamePage> {
                 onPressed: nextRound,
                 child: Text(
                   'Next Round',
-                  style: TextStyle(fontSize: 18), // Increased font size
+                  style: TextStyle(fontSize: 18),
                 ),
               ),
               SizedBox(height: 10),
@@ -188,13 +194,13 @@ class _DartGamePageState extends State<DartGamePage> {
                 onPressed: resetGame,
                 child: Text(
                   'Reset Game',
-                  style: TextStyle(fontSize: 18), // Increased font size
+                  style: TextStyle(fontSize: 18),
                 ),
               ),
               SizedBox(height: 20),
               Text(
                 feedback,
-                style: TextStyle(fontSize: 20), // Increased font size
+                style: TextStyle(fontSize: 20),
               ),
             ],
           ),
