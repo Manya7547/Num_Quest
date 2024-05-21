@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'game_list_page.dart';
 import 'lessons_page.dart';
 //import 'game_list_page.dart';
 
@@ -51,10 +52,11 @@ class MyApp extends StatelessWidget {
                       RoundedButton(
                         text: 'PLAY',
                         onPressed: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(builder: (context) => GameListPage()),
-                          // );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => GameListPage()),
+                          );
                         },
                       ),
                       SizedBox(width: 40),
