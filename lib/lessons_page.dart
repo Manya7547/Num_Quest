@@ -171,7 +171,7 @@ class LessonButton extends StatelessWidget {
             title,
             textAlign: TextAlign.center, // Align text in the center
             style: TextStyle(
-              fontSize: 20, // Change font size
+              fontSize: 30, // Change font size
               fontWeight: FontWeight.bold, // Make text bold
               fontFamily: 'Arial', // Change font family if needed
             ),
