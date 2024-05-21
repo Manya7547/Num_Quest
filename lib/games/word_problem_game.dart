@@ -103,7 +103,7 @@ class _WordProblemsGameState extends State<WordProblemsGame> {
                   foregroundColor: Colors.white, // foreground
                 ),
               ),
-              if (currentQuestion != null) ...[
+              ...[
                 SizedBox(height: 20),
                 Card(
                   elevation: 5,
