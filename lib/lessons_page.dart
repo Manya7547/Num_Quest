@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'lessons/even_number_info_page.dart';
-// import 'lessons/odd_number_info_page.dart';
+import 'lessons/odd_number_info_page.dart';
 // import 'lessons/prime_number_info_page.dart';
 // import 'lessons/composite_number_info_page.dart';
 // import 'lessons/triangular_number_info_page.dart';
@@ -47,7 +47,10 @@ class LessonsPage extends StatelessWidget {
                 LessonButton(
                   title: 'Odd Numbers',
                   onPressed: () {
-                    //Navigator.push(context, MaterialPageRoute(builder: (context) => OddNumberInfoPage()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => OddNumberInfoPage()));
                   },
                 ),
                 LessonButton(
