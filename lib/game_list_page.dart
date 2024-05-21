@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'games/even_odd_sort.dart'; // Import the game widgets
+import 'games/choose_factors_game.dart';
 import 'games/word_problem_game.dart';
 import 'games/prime_number_game.dart';
 
@@ -28,7 +29,12 @@ class GameListPage extends StatelessWidget {
               GameButton(
                 title: 'Number Placement Game',
                 onPressed: () {
-                  // Add navigation logic for Number Placement Game
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //       builder: (context) => NumberGuessingGame()),
+                  // );
+                  // // Add navigation logic for Number Placement Game
                 },
               ),
               GameButton(
@@ -79,8 +85,14 @@ class GameListPage extends StatelessWidget {
                 },
               ),
               GameButton(
-                title: 'Factor Trees',
+                title: 'Choose Factors',
                 onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ChooseFactorsGame()),
+                  );
+                  // Add navigation logic for Factor Trees Game
                   // Add navigation logic for Factor Trees Game
                 },
               ),
