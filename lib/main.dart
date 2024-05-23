@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:num_quest/practice/practice_page.dart';
 import 'game_list_page.dart';
 import 'lessons_page.dart';
 //import 'game_list_page.dart';
@@ -61,9 +62,13 @@ class MyApp extends StatelessWidget {
                       ),
                       SizedBox(width: 40),
                       RoundedButton(
-                        text: 'SETTINGS',
+                        text: 'PRACTICE',
                         onPressed: () {
-                          // Navigate to settings page or perform desired action
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => PracticePage()),
+                          );
                         },
                       ),
                     ],
