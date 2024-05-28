@@ -80,7 +80,7 @@ class _EvenNumberInfoPageState extends State<EvenNumberInfoPage> {
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(
-                '/Users/manyasohal/num_quest/assets/classboard.jpg'), // Set your background image here
+                'assets/classboard.jpg'), // Set your background image here
             fit: BoxFit.cover,
           ),
         ),
@@ -137,7 +137,7 @@ class _EvenNumberInfoPageState extends State<EvenNumberInfoPage> {
                       SizedBox(
                         height: 150, // Set the height of the image
                         child: Image.asset(
-                            '/Users/manyasohal/num_quest/assets/candies.png'),
+                            'assets/candies.png'),
                       ),
                       SizedBox(height: 15),
                       Row(

@@ -125,7 +125,7 @@ class _DartGamePageState extends State<DartGamePage> {
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(
-                '/Users/manyasohal/num_quest/assets/Bigschooldesk_generated.jpg'),
+                'assets/Bigschooldesk_generated.jpg'),
             fit: BoxFit.cover,
           ),
         ),

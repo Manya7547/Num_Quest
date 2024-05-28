@@ -1,4 +1,4 @@
-// TODO Implement this library. /Users/manyasohal/num_quest/assets/classboard.jpg
+// TODO Implement this library. assets/classboard.jpg
 import 'package:flutter/material.dart';
 import 'package:flip_card/flip_card.dart'; // Import the FlipCard package
 
@@ -32,7 +32,7 @@ class SquareNumberInfoPage extends StatelessWidget {
       decoration: BoxDecoration(
         image: DecorationImage(
           image: AssetImage(
-              '/Users/manyasohal/num_quest/assets/classboard.jpg'), // Set your background image here
+              'assets/classboard.jpg'), // Set your background image here
           fit: BoxFit.cover,
         ),
       ),
@@ -86,7 +86,7 @@ class SquareNumberInfoPage extends StatelessWidget {
       decoration: BoxDecoration(
         image: DecorationImage(
           image: AssetImage(
-              '/Users/manyasohal/num_quest/assets/classboard.jpg'), // Set your background image here
+              'assets/classboard.jpg'), // Set your background image here
           fit: BoxFit.cover,
         ),
       ),

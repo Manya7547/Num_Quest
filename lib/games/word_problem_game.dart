@@ -79,7 +79,7 @@ class _WordProblemsGameState extends State<WordProblemsGame> {
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(
-                "/Users/manyasohal/num_quest/assets/word_problem.jpg"), // replace with your image
+                "assets/word_problem.jpg"), // replace with your image
             fit: BoxFit.cover,
           ),
         ),

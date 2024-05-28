@@ -77,7 +77,7 @@ class _EvenNumberExamplesPageState extends State<EvenNumberExamplesPage> {
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(
-                '/Users/manyasohal/num_quest/assets/classboard.jpg'), // Set your background image here
+                'assets/classboard.jpg'), // Set your background image here
             fit: BoxFit.cover,
           ),
         ),

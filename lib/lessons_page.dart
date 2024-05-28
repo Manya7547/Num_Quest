@@ -22,7 +22,7 @@ class LessonsPage extends StatelessWidget {
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(
-                '/Users/manyasohal/num_quest/assets/lesson_page.jpeg'),
+                'assets/lesson_page.jpeg'),
             fit: BoxFit.cover,
           ),
         ),
