@@ -15,7 +15,7 @@ class GameListPage extends StatelessWidget {
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(
-                '/Users/manyasohal/num_quest/assets/Bigschooldesk_generated.jpg'), // Set the background image
+                'assets/Bigschooldesk_generated.jpg'), // Set the background image
             fit: BoxFit.cover,
           ),
         ),

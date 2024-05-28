@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
           children: <Widget>[
             Positioned.fill(
               child: Image.asset(
-                '/Users/manyasohal/num_quest/assets/vecteezy_meadow-panorama-3d-illustration-bright-landscape-of-green_20570946.jpg',
+                'assets/start_page.jpg',
                 fit: BoxFit.cover,
               ),
             ),

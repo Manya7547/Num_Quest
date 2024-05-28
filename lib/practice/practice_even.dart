@@ -23,7 +23,7 @@ class _WordProblemPracticeState extends State<WordProblemPractice> {
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(
-                '/Users/manyasohal/num_quest/assets/word_problem.jpg'), // Path to your background image
+                'assets/word_problem.jpg'), // Path to your background image
             fit: BoxFit.cover,
           ),
         ),
