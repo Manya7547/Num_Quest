@@ -36,12 +36,16 @@ class _WordProblemPracticeState extends State<WordProblemPractice> {
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      'There are 8 children in a room. If we divide them into two teams, '
-                      'one with even numbered children and the other with odd numbered children, '
-                      'how many children will be in the even numbered team?',
+                      'Which of the following is NOT an odd number?\n'
+                      '225\n'
+                      '233\n'
+                      '370\n'
+                      '391',
                       style: TextStyle(fontSize: 18),
+                      textAlign: TextAlign.left,
                     ),
                     TextField(
                       controller: _controller1,
@@ -53,7 +57,7 @@ class _WordProblemPracticeState extends State<WordProblemPractice> {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        _checkAnswer(_controller1.text, _answer1);
+                        _checkAnswer(_controller1.text, '370');
                       },
                       child: Text('Check Answer'),
                     ),
@@ -68,12 +72,16 @@ class _WordProblemPracticeState extends State<WordProblemPractice> {
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      'There are 9 apples in a basket. If we divide them into two groups, '
-                      'one with even numbered apples and the other with odd numbered apples, '
-                      'how many apples will be in the odd numbered group?',
+                      'Which number is an even number?\n'
+                      '23\n'
+                      '19\n'
+                      '24\n'
+                      '31',
                       style: TextStyle(fontSize: 18),
+                      textAlign: TextAlign.left,
                     ),
                     TextField(
                       controller: _controller2,
@@ -85,7 +93,7 @@ class _WordProblemPracticeState extends State<WordProblemPractice> {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        _checkAnswer(_controller2.text, _answer2);
+                        _checkAnswer(_controller2.text, '24');
                       },
                       child: Text('Check Answer'),
                     ),
@@ -100,23 +108,28 @@ class _WordProblemPracticeState extends State<WordProblemPractice> {
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      'Sarah has 7 pens, and Jack has 6 pens. '
-                      'Together, do they have an even or an odd number of pens?',
+                      'Which is a set of EVEN numbers?\n'
+                      '96, 107, 128, 139\n'
+                      '85, 97, 119, 211\n'
+                      '106, 148, 190, 202\n'
+                      '112, 153, 188, 216',
                       style: TextStyle(fontSize: 18),
+                      textAlign: TextAlign.left,
                     ),
                     TextField(
                       controller: _controller3,
-                      keyboardType: TextInputType.text,
+                      keyboardType: TextInputType.number,
                       decoration: InputDecoration(
-                        labelText: 'Enter your answer (Even/Odd)',
+                        labelText: 'Enter your answer',
                         border: OutlineInputBorder(),
                       ),
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        _checkAnswer(_controller3.text, _answer3);
+                        _checkAnswer(_controller3.text, '106, 148, 190, 202');
                       },
                       child: Text('Check Answer'),
                     ),
