@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:num_quest/lessons/EvenNumberExamplesPage.dart';
+import '../practice/EvenNumberExamplesPage.dart';
+import '../practice/OddNumberExamplesPage.dart';
 import '../lessons/even_numbers/even_number_info_page.dart';
 import '../lessons/odd_numbers/odd_number_info_page.dart';
 import '../lessons/prime_number_info_page.dart';
@@ -51,7 +52,7 @@ class PracticePage extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => OddNumberInfoPage()));
+                            builder: (context) => OddNumberExamplesPage()));
                   },
                 ),
                 LessonButton(

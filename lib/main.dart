@@ -51,23 +51,23 @@ class MyApp extends StatelessWidget {
                       ),
                       SizedBox(width: 40),
                       RoundedButton(
-                        text: 'PLAY',
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => GameListPage()),
-                          );
-                        },
-                      ),
-                      SizedBox(width: 40),
-                      RoundedButton(
                         text: 'PRACTICE',
                         onPressed: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => PracticePage()),
+                          );
+                        },
+                      ),
+                      SizedBox(width: 40),
+                      RoundedButton(
+                        text: 'PLAY',
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => GameListPage()),
                           );
                         },
                       ),

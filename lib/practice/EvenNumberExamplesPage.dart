@@ -11,49 +11,55 @@ class _EvenNumberExamplesPageState extends State<EvenNumberExamplesPage> {
   List<Map<String, String>> _examples = [];
   final List<Map<String, String>> _allExamples = [
     {
-      'number': '10',
-      'description_en':
-          'It\'s EVEN! \nIf you have 10 cookies, they are even. You can keep 5 for you and give 5 to your friend. \nThere won\'t be any leftover cookies.',
-      'description_es':
-          '¡Es PAR! \nSi tienes 10 galletas, son pares. Puedes quedarte con 5 y darle 5 a tu amigo. \nNo quedarán galletas sobrantes.'
+      'number': '2',
+      'description_en': 'It\'s EVEN! \nThere are 2 sides to a coin: heads and tails!',
+      'description_es': '¡Es PAR! \n¡Hay 2 lados en una moneda: cara y cruz!',
     },
     {
-      'number': '75',
-      'description_en':
-          'It\'s ODD! \n75 is not divisible by 2 and it ends with 5. \nRemember, odd numbers are not divisible by 2 and end with 1, 3, 5, 7, or 9.',
-      'description_es':
-          '¡Es IMPAR! \n75 no es divisible por 2 y termina en 5. \nRecuerda, los números impares no son divisibles por 2 y terminan en 1, 3, 5, 7 o 9.'
+      'number': '4',
+      'description_en': 'It\'s EVEN! \nFour wheels on a car make it even!',
+      'description_es': '¡Es PAR! \n¡Cuatro ruedas en un coche lo hacen par!',
+    },
+    {
+      'number': '6',
+      'description_en': 'It\'s EVEN! \nSix legs on three insects, all even!',
+      'description_es': '¡Es PAR! \n¡Seis patas en tres insectos, todo par!',
     },
     {
       'number': '8',
-      'description_en':
-          'It\'s EVEN! \n8 is divisible by 2 and it ends with 8. \nRemember, even numbers are divisible by 2 and end with 0, 2, 4, 6, or 8.',
-      'description_es':
-          '¡Es PAR! \n8 es divisible por 2 y termina en 8. \nRecuerda, los números pares son divisibles por 2 y terminan en 0, 2, 4, 6 u 8.'
+      'description_en': 'It\'s EVEN! \nEight slices of pizza, let\'s share!',
+      'description_es': '¡Es PAR! \n¡Ocho porciones de pizza, vamos a compartir!',
     },
-    // Add more examples here
+    {
+      'number': '10',
+      'description_en': 'It\'s EVEN! \n10 cookies: 5 for you and 5 for your friend!',
+      'description_es': '¡Es PAR! \n10 galletas: ¡5 para ti y 5 para tu amigo!',
+    },
     {
       'number': '12',
-      'description_en':
-          'It\'s EVEN! \n12 is divisible by 2 and it ends with 2. \nRemember, even numbers are divisible by 2 and end with 0, 2, 4, 6, or 8.',
-      'description_es':
-          '¡Es PAR! \n12 es divisible por 2 y termina en 2. \nRecuerda, los números pares son divisibles por 2 y terminan en 0, 2, 4, 6 u 8.'
+      'description_en': 'It\'s EVEN! \nA dozen eggs, all even!',
+      'description_es': '¡Es PAR! \nUna docena de huevos, todo par!',
     },
     {
-      'number': '45',
-      'description_en':
-          'It\'s ODD! \n45 is not divisible by 2 and it ends with 5. \nRemember, odd numbers are not divisible by 2 and end with 1, 3, 5, 7, or 9.',
-      'description_es':
-          '¡Es IMPAR! \n45 no es divisible por 2 y termina en 5. \nRecuerda, los números impares no son divisibles por 2 y terminan en 1, 3, 5, 7 o 9.'
+      'number': '14',
+      'description_en': 'It\'s EVEN! \nFourteen stars in the sky, paired up high!',
+      'description_es': '¡Es PAR! \n¡Catorce estrellas en el cielo, emparejadas en lo alto!',
     },
     {
-      'number': '22',
-      'description_en':
-          'It\'s EVEN! \n22 is divisible by 2 and it ends with 2. \nRemember, even numbers are divisible by 2 and end with 0, 2, 4, 6, or 8.',
-      'description_es':
-          '¡Es PAR! \n22 es divisible por 2 y termina en 2. \nRecuerda, los números pares son divisibles por 2 y terminan en 0, 2, 4, 6 u 8.'
+      'number': '16',
+      'description_en': 'It\'s EVEN! \nSixteen colorful blocks, build in pairs!',
+      'description_es': '¡Es PAR! \n¡Dieciséis bloques coloridos, construye en pares!',
     },
-    // Continue adding up to 18 examples
+    {
+      'number': '18',
+      'description_en': 'It\'s EVEN! \nEighteen fish in the aquarium, swimming in pairs!',
+      'description_es': '¡Es PAR! \n¡Dieciocho peces en el acuario, nadando en parejas!',
+    },
+    {
+      'number': '20',
+      'description_en': 'It\'s EVEN! \nTwenty crayons, perfect for sharing!',
+      'description_es': '¡Es PAR! \n¡Veinte crayones, perfectos para compartir!',
+    },
   ];
 
   @override
@@ -63,21 +69,21 @@ class _EvenNumberExamplesPageState extends State<EvenNumberExamplesPage> {
   }
 
   void _refreshExamples() {
-    _examples = (_allExamples.toList()..shuffle()).take(3).toList();
+    setState(() {
+      _examples = (_allExamples.toList()..shuffle()).take(3).toList();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-            _isEnglish ? 'Even Number Examples' : 'Ejemplos de Números Pares'),
+        title: Text(_isEnglish ? 'Even Number Examples' : 'Ejemplos de Números Pares'),
       ),
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage(
-                'assets/classboard.jpg'), // Set your background image here
+            image: AssetImage('assets/classboard.jpg'), // Set your background image here
             fit: BoxFit.cover,
           ),
         ),
@@ -87,13 +93,8 @@ class _EvenNumberExamplesPageState extends State<EvenNumberExamplesPage> {
             child: Column(
               children: <Widget>[
                 Text(
-                  _isEnglish
-                      ? 'Tap on these numbers to reveal if they are even or odd'
-                      : 'Pulsa estos números para revelar si son pares o impares.',
-                  style: TextStyle(
-                      fontSize: 28,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold),
+                  _isEnglish ? 'Tap on these numbers to reveal if they are even or odd' : 'Pulsa estos números para revelar si son pares o impares.',
+                  style: TextStyle(fontSize: 28, color: Colors.black, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 20),
@@ -103,9 +104,7 @@ class _EvenNumberExamplesPageState extends State<EvenNumberExamplesPage> {
                     itemBuilder: (context, index) {
                       return _buildExampleCard(
                         _examples[index]['number']!,
-                        _isEnglish
-                            ? _examples[index]['description_en']!
-                            : _examples[index]['description_es']!,
+                        _isEnglish ? _examples[index]['description_en']! : _examples[index]['description_es']!,
                       );
                     },
                   ),
@@ -115,14 +114,9 @@ class _EvenNumberExamplesPageState extends State<EvenNumberExamplesPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          _refreshExamples();
-                        });
-                      },
+                      onPressed: _refreshExamples,
                       style: ElevatedButton.styleFrom(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                         backgroundColor: Colors.blue,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
@@ -140,8 +134,7 @@ class _EvenNumberExamplesPageState extends State<EvenNumberExamplesPage> {
                         });
                       },
                       style: ElevatedButton.styleFrom(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                         backgroundColor: Colors.green,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
