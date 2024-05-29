@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../practice/PrimeNumberExamplesPage.dart';
 import '../practice/EvenNumberExamplesPage.dart';
 import '../practice/OddNumberExamplesPage.dart';
 import '../lessons/even_numbers/even_number_info_page.dart';
@@ -23,8 +24,7 @@ class PracticePage extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage(
-                'assets/Bigschooldesk_generated.jpg'),
+            image: AssetImage('assets/Bigschooldesk_generated.jpg'),
             fit: BoxFit.cover,
           ),
         ),
@@ -61,7 +61,7 @@ class PracticePage extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => PrimeNumberInfoPage()));
+                            builder: (context) => PrimeNumberPracticePage()));
                   },
                 ),
                 LessonButton(
