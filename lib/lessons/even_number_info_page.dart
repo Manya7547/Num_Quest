@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:num_quest/lessons/EvenNumberExamplesPage.dart';
-import 'package:num_quest/practice/practice_even.dart';
+import 'package:num_quest/lessons/even_numbers/practice_even.dart';
 
 class EvenNumberInfoPage extends StatefulWidget {
   EvenNumberInfoPage({super.key});
