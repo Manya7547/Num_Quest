@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../widgets/MultipageContainer.dart';
-import './practice_even.dart';
+import './practice_odd.dart';
 
-class EvenNumberInfoPage extends StatelessWidget {
+class OddNumberInfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultipageContainer(
@@ -24,8 +24,8 @@ class EvenNumberInfoPage extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       isEnglish
-                          ? 'Even numbers can be small or they can be very big. If a number ends in a 0, 2, 4, 6 or 8, it is an even number.'
-                          : 'Los números pares pueden ser pequeños o muy grandes. Si un número termina en 0, 2, 4, 6 u 8, es un número par.',
+                          ? 'Odd numbers, like even numbers can be small or they can be very big. If a number ends in a 1, 3, 5, 7 or 9 it is an odd number.'
+                          : 'Los números impares, al igual que los pares, pueden ser pequeños o muy grandes. Si un número termina en 1, 3, 5, 7 o 9 es un número impar.',
                       style: TextStyle(
                         fontSize: 30,
                         color: Color.fromARGB(255, 18, 3, 48),
@@ -35,8 +35,8 @@ class EvenNumberInfoPage extends StatelessWidget {
                     SizedBox(height: 50),
                     Text(
                       isEnglish
-                          ? 'Imagine you have some candies, and you want to share them equally between you and your friend. If you can give each of you exactly the same amount of candies without any extras, then the number of candies you have is an even number! Even Numbers can be halved with no remainders left over.'
-                          : 'Imagina que tienes algunos dulces y quieres compartirlos en partes iguales entre tú y tu amigo. Si pueden darles a cada uno exactamente la misma cantidad de dulces sin extras, ¡entonces la cantidad de dulces que tienen es par! Los números pares se pueden dividir por la mitad sin dejar restos.',
+                          ? 'Imagine you have some candies, and you want to share them equally between you and your friend. If after dividing the candies equally, there is one candy left over, then the number of candies you have is an odd number! Odd numbers can\'t be halved exactly, there\'s always one left over.'
+                          : 'Imagina que tienes algunos dulces y quieres compartirlos en partes iguales entre tú y tu amigo. Si después de dividir los caramelos en partes iguales, queda un caramelo, entonces el número de caramelos que tienes es impar. Los números impares no se pueden dividir exactamente por la mitad, siempre sobra uno.',
                       style: TextStyle(
                         fontSize: 30,
                         color: Color.fromARGB(255, 18, 3, 48),
@@ -51,7 +51,7 @@ class EvenNumberInfoPage extends StatelessWidget {
               height: 350,
               child: Padding(
                 padding: EdgeInsets.only(top: 10),
-                child: Image.asset('assets/candies.png'),
+                child: Image.asset('assets/Odd_candy.png'),
               ),
             ),
           ],
@@ -73,8 +73,8 @@ class EvenNumberInfoPage extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       isEnglish
-                          ? 'Suppose you have 6 candies. Let\'s make pairs, we see that all the candies are in pairs, and there are no candies left over. That means 6 is an even number! Even Numbers can be halved with no remainders left over.'
-                          : 'Supongamos que tienes 6 caramelos. Hagamos parejas, vemos que todos los caramelos están emparejados y no queda ningún caramelo sobrante. ¡Eso significa que 6 es un número par! Los números pares se pueden dividir por la mitad sin dejar restos.',
+                          ? 'Suppose you have 7 candies. Let\'s make pairs, we see that after pairing the candies, there is one candy left over. That means 7 is an odd number! Odd numbers can\'t be halved exactly, there\'s always one left over.'
+                          : 'Supongamos que tienes 7 caramelos. Hagamos parejas, vemos que después de emparejar los caramelos queda un caramelo. ¡Eso significa que 7 es un número impar! Los números impares no se pueden dividir exactamente por la mitad, siempre sobra uno.',
                       style: TextStyle(
                         fontSize: 30,
                         color: Color.fromARGB(255, 18, 3, 48),
@@ -86,7 +86,7 @@ class EvenNumberInfoPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 100),
-            Image.asset('assets/candies2.png', height: 400),
+            Image.asset('assets/Odd_candy_2.png', height: 400),
           ],
         ),
         // Third Page Content
@@ -106,7 +106,7 @@ class EvenNumberInfoPage extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       isEnglish
-                          ? 'This is a number square. Do you see the numbers that are highlighted in a special color? Those are our even numbers! They form a special pattern! Can you see the way they line up in neat rows and columns?'
+                          ? 'This is a number square. Do you see the numbers that are highlighted in a special color? Those are our odd numbers! They form a special pattern! Can you see the way they line up in neat rows and columns?'
                           : 'Este es un cuadrado numérico. ¿Ves los números que están resaltados en un color especial? ¡Esos son nuestros números pares! ¡Forman un patrón especial! ¿Puedes ver cómo se alinean en filas y columnas ordenadas?',
                       style: TextStyle(
                         fontSize: 30,
@@ -118,7 +118,7 @@ class EvenNumberInfoPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 40),
-            Image.asset('assets/number_square.png', height: 600),
+            Image.asset('assets/odd_table.png', height: 600),
           ],
         ),
         // Fourth Page Content
@@ -138,8 +138,8 @@ class EvenNumberInfoPage extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       isEnglish
-                          ? 'Now that you know what even numbers are let\'s go ahead and solve some fun problems.'
-                          : 'Ahora que sabes qué son los números pares, vamos a resolver algunos problemas divertidos.',
+                          ? 'Now that you know what odd numbers are let\'s go ahead and solve some fun problems.'
+                          : 'Ahora que sabes qué son los números impares, sigamos adelante y resuelvamos algunos problemas divertidos.',
                       style: TextStyle(
                         fontSize: 30,
                         color: Color.fromARGB(255, 18, 3, 48),
@@ -180,6 +180,6 @@ class EvenNumberInfoPage extends StatelessWidget {
 
 void main() {
   runApp(MaterialApp(
-    home: EvenNumberInfoPage(),
+    home: OddNumberInfoPage(),
   ));
 }
