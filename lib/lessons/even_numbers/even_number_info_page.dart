@@ -1,8 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:audioplayers/audioplayers.dart';
 import '../../widgets/MultipageContainer.dart';
 import './practice_even.dart';
 
 class EvenNumberInfoPage extends StatelessWidget {
+  final AudioPlayer audioPlayer = AudioPlayer();
+
+  void playAudio(String url) async {
+    int result = await audioPlayer.play(url);
+    if (result == 1) {
+      // success
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MultipageContainer(
@@ -32,6 +42,15 @@ class EvenNumberInfoPage extends StatelessWidget {
                           ),
                           textAlign: TextAlign.center,
                         ),
+                        SizedBox(height: 10),
+                        IconButton(
+                          icon: Icon(Icons.play_arrow),
+                          onPressed: () {
+                            playAudio(isEnglish
+                                ? 'https://drive.google.com/uc?export=download&id=1Z7tFWWEAw0nZjSg35wQdInyVngbNF3dR'
+                                : 'https://drive.google.com/uc?export=download&id=1se6r2mbhhZYf3fgVBLc2j2u2H9pJpiVZ');
+                          },
+                        ),
                         SizedBox(height: 50),
                         Text(
                           isEnglish
@@ -42,6 +61,15 @@ class EvenNumberInfoPage extends StatelessWidget {
                             color: Color.fromARGB(255, 18, 3, 48),
                           ),
                           textAlign: TextAlign.center,
+                        ),
+                        SizedBox(height: 10),
+                        IconButton(
+                          icon: Icon(Icons.play_arrow),
+                          onPressed: () {
+                            playAudio(isEnglish
+                                ? 'https://drive.google.com/uc?export=download&id=1hrbOYtGLKH5vJ5rcxRIj0oXFrp_CYE-0'
+                                : 'https://drive.google.com/uc?export=download&id=1IeupKYCYia4JB47rs4discodUcDfU0yb');
+                          },
                         ),
                       ],
                     ),
@@ -81,6 +109,15 @@ class EvenNumberInfoPage extends StatelessWidget {
                           ),
                           textAlign: TextAlign.center,
                         ),
+                        SizedBox(height: 10),
+                        IconButton(
+                          icon: Icon(Icons.play_arrow),
+                          onPressed: () {
+                            playAudio(isEnglish
+                                ? 'https://drive.google.com/uc?export=download&id=1HoNkco_Ct4uqv1uWuY0Uxm36L4Ulhc5o'
+                                : 'https://drive.google.com/uc?export=download&id=1fufJFTw1GhARSj9sJUJqgTjeXFPRUfYp');
+                          },
+                        ),
                       ],
                     ),
                   ),
@@ -113,6 +150,15 @@ class EvenNumberInfoPage extends StatelessWidget {
                             color: Color.fromARGB(255, 18, 3, 48),
                           ),
                         ),
+                        SizedBox(height: 10),
+                        IconButton(
+                          icon: Icon(Icons.play_arrow),
+                          onPressed: () {
+                            playAudio(isEnglish
+                                ? 'https://drive.google.com/uc?export=download&id=1OCGKlY2mXpprP-ZUKi5kcwfD_ptQeA7r'
+                                : 'https://drive.google.com/uc?export=download&id=1AO_a5We4vckT8_GGG69NJW4Kkhc2ZH61');
+                          },
+                        ),
                       ],
                     ),
                   ),
@@ -144,6 +190,15 @@ class EvenNumberInfoPage extends StatelessWidget {
                             fontSize: 30,
                             color: Color.fromARGB(255, 18, 3, 48),
                           ),
+                        ),
+                        SizedBox(height: 10),
+                        IconButton(
+                          icon: Icon(Icons.play_arrow),
+                          onPressed: () {
+                            playAudio(isEnglish
+                                ? 'https://example.com/english5.mp3'
+                                : 'https://example.com/spanish5.mp3');
+                          },
                         ),
                       ],
                     ),
