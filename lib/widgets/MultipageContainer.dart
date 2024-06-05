@@ -27,7 +27,7 @@ class _MultipageContainerState extends State<MultipageContainer> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_isEnglish ? 'What are Even Numbers?' : '¿Qué son los números pares?'),
+        title: Text(_isEnglish ? 'Lessons' : 'lecciones'),
       ),
       body: PageView(
         children: widget.pages.map((pageBuilder) {
@@ -51,7 +51,8 @@ class _MultipageContainerState extends State<MultipageContainer> {
                         });
                       },
                       style: ElevatedButton.styleFrom(
-                        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 30, vertical: 20),
                         backgroundColor: Colors.orange,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
