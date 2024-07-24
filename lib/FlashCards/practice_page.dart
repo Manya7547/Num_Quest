@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../practice/PrimeNumberExamplesPage.dart';
-import '../practice/EvenNumberExamplesPage.dart';
-import '../practice/OddNumberExamplesPage.dart';
+import 'PrimeNumberExamplesPage.dart';
+import 'EvenNumberExamplesPage.dart';
+import 'OddNumberExamplesPage.dart';
 
 class PracticePage extends StatelessWidget {
   @override

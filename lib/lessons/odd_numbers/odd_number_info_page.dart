@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import '../../widgets/MultipageContainer.dart';
 import './practice_odd.dart';
 
 class OddNumberInfoPage extends StatelessWidget {
+  final FlutterTts flutterTts = FlutterTts();
+
+  Future<void> speak(String text, bool isEnglish) async {
+    await flutterTts.setLanguage(isEnglish ? 'en-US' : 'es-ES');
+    await flutterTts.setPitch(1.0);
+    await flutterTts.speak(text);
+  }
+
   @override
   Widget build(BuildContext context) {
     return MultipageContainer(
@@ -32,6 +41,18 @@ class OddNumberInfoPage extends StatelessWidget {
                           ),
                           textAlign: TextAlign.center,
                         ),
+                        SizedBox(height: 10),
+                        IconButton(
+                          icon: Icon(Icons.play_arrow),
+                          onPressed: () {
+                            speak(
+                              isEnglish
+                                  ? 'Odd numbers, like even numbers can be small or they can be very big. If a number ends in a 1, 3, 5, 7 or 9 it is an odd number.'
+                                  : 'Los números impares, al igual que los pares, pueden ser pequeños o muy grandes. Si un número termina en 1, 3, 5, 7 o 9 es un número impar.',
+                              isEnglish,
+                            );
+                          },
+                        ),
                         SizedBox(height: 50),
                         Text(
                           isEnglish
@@ -42,6 +63,18 @@ class OddNumberInfoPage extends StatelessWidget {
                             color: Color.fromARGB(255, 18, 3, 48),
                           ),
                           textAlign: TextAlign.center,
+                        ),
+                        SizedBox(height: 10),
+                        IconButton(
+                          icon: Icon(Icons.play_arrow),
+                          onPressed: () {
+                            speak(
+                              isEnglish
+                                  ? 'Imagine you have some candies, and you want to share them equally between you and your friend. If after dividing the candies equally, there is one candy left over, then the number of candies you have is an odd number! Odd numbers can\'t be halved exactly, there\'s always one left over.'
+                                  : 'Imagina que tienes algunos dulces y quieres compartirlos en partes iguales entre tú y tu amigo. Si después de dividir los caramelos en partes iguales, queda un caramelo, entonces el número de caramelos que tienes es impar. Los números impares no se pueden dividir exactamente por la mitad, siempre sobra uno.',
+                              isEnglish,
+                            );
+                          },
                         ),
                       ],
                     ),
@@ -81,6 +114,18 @@ class OddNumberInfoPage extends StatelessWidget {
                           ),
                           textAlign: TextAlign.center,
                         ),
+                        SizedBox(height: 10),
+                        IconButton(
+                          icon: Icon(Icons.play_arrow),
+                          onPressed: () {
+                            speak(
+                              isEnglish
+                                  ? 'Suppose you have 7 candies. Let\'s make pairs, we see that after pairing the candies, there is one candy left over. That means 7 is an odd number! Odd numbers can\'t be halved exactly, there\'s always one left over.'
+                                  : 'Supongamos que tienes 7 caramelos. Hagamos parejas, vemos que después de emparejar los caramelos queda un caramelo. ¡Eso significa que 7 es un número impar! Los números impares no se pueden dividir exactamente por la mitad, siempre sobra uno.',
+                              isEnglish,
+                            );
+                          },
+                        ),
                       ],
                     ),
                   ),
@@ -107,11 +152,23 @@ class OddNumberInfoPage extends StatelessWidget {
                         Text(
                           isEnglish
                               ? 'This is a number square. Do you see the numbers that are highlighted in a special color? Those are our odd numbers! They form a special pattern! Can you see the way they line up in neat rows and columns?'
-                              : 'Este es un cuadrado numérico. ¿Ves los números que están resaltados en un color especial? ¡Esos son nuestros números pares! ¡Forman un patrón especial! ¿Puedes ver cómo se alinean en filas y columnas ordenadas?',
+                              : 'Este es un cuadrado numérico. ¿Ves los números que están resaltados en un color especial? ¡Esos son nuestros números impares! ¡Forman un patrón especial! ¿Puedes ver cómo se alinean en filas y columnas ordenadas?',
                           style: TextStyle(
                             fontSize: 30,
                             color: Color.fromARGB(255, 18, 3, 48),
                           ),
+                        ),
+                        SizedBox(height: 10),
+                        IconButton(
+                          icon: Icon(Icons.play_arrow),
+                          onPressed: () {
+                            speak(
+                              isEnglish
+                                  ? 'This is a number square. Do you see the numbers that are highlighted in a special color? Those are our odd numbers! They form a special pattern! Can you see the way they line up in neat rows and columns?'
+                                  : 'Este es un cuadrado numérico. ¿Ves los números que están resaltados en un color especial? ¡Esos son nuestros números impares! ¡Forman un patrón especial! ¿Puedes ver cómo se alinean en filas y columnas ordenadas?',
+                              isEnglish,
+                            );
+                          },
                         ),
                       ],
                     ),
@@ -139,11 +196,22 @@ class OddNumberInfoPage extends StatelessWidget {
                         Text(
                           isEnglish
                               ? 'Now that you know what odd numbers are let\'s go ahead and solve some fun problems.'
-                              : 'Ahora que sabes qué son los números impares, sigamos adelante y resuelvamos algunos problemas divertidos.',
+                              : 'Ahora que sabes qué son los números impares, sigamos adelante y resolvamos algunos problemas divertidos.',
                           style: TextStyle(
                             fontSize: 30,
                             color: Color.fromARGB(255, 18, 3, 48),
                           ),
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.play_arrow),
+                          onPressed: () {
+                            speak(
+                              isEnglish
+                                  ? 'Now that you know what odd numbers are let\'s go ahead and solve some fun problems.'
+                                  : 'Ahora que sabes qué son los números impares, sigamos adelante y resolvamos algunos problemas divertidos.',
+                              isEnglish,
+                            );
+                          },
                         ),
                       ],
                     ),

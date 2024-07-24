@@ -35,7 +35,7 @@ class PrimeNumberInfoPage extends StatelessWidget {
                         Text(
                           isEnglish
                               ? 'A prime number can be defined as a natural number greater than 1 whose only factors are 1 and the number itself. '
-                              : '',
+                              : 'Un número primo se puede definir como un número natural mayor que 1 cuyos únicos factores son 1 y el propio número.',
                           style: TextStyle(
                             fontSize: 30,
                             color: Color.fromARGB(255, 18, 3, 48),
@@ -53,7 +53,7 @@ class PrimeNumberInfoPage extends StatelessWidget {
                         Text(
                           isEnglish
                               ? 'For example, 7 has only 2 factors, 1 and 7 itself. So, it is a prime number. However, 6 has four factors, 1, 2, 3 and 6. Therefore, it is not a prime number. It is a composite number. We will learn about composite numbers in the next lesson.'
-                              : '',
+                              : 'Por ejemplo, 7 tiene solo 2 factores, 1 y 7. Por lo tanto, es un número primo. Sin embargo, 6 tiene cuatro factores, 1, 2, 3 y 6. Por lo tanto, no es un número primo. Es un número compuesto. Aprenderemos sobre los números compuestos en la próxima lección.',
                           style: TextStyle(
                             fontSize: 30,
                             color: Color.fromARGB(255, 18, 3, 48),
@@ -77,7 +77,7 @@ class PrimeNumberInfoPage extends StatelessWidget {
                   height: 350,
                   child: Padding(
                     padding: EdgeInsets.only(top: 10),
-                    child: Image.asset('assets/candies.png'),
+                    child: Image.asset('assets/prime1.png'),
                   ),
                 ),
               ],
@@ -98,7 +98,9 @@ class PrimeNumberInfoPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         Text(
-                          isEnglish ? '' : '',
+                          isEnglish
+                              ? 'A prime number is always bigger than 1. The number 1 is not a prime number.\nThe number 2 is the only even prime number. All other even numbers can be divided by 2, so they are not prime.\nThe smallest prime number is 2.\nPrime numbers can’t be split evenly: If you try to split a prime number into equal groups, there will always be one left over, except when you split it into 1 group or groups of itself.'
+                              : 'Un número primo siempre es mayor que 1. El número 1 no es un número primo. El número 2 es el único número primo par. \nTodos los demás números pares se pueden dividir entre 2, por lo que no son primos.\nEl número primo más pequeño es 2. \nLos números primos no se pueden dividir en partes iguales: si intentas dividir un número primo en grupos iguales, siempre quedará uno, excepto cuando lo divides en 1 grupo o en grupos de sí mismo.',
                           style: TextStyle(
                             fontSize: 30,
                             color: Color.fromARGB(255, 18, 3, 48),
@@ -119,7 +121,7 @@ class PrimeNumberInfoPage extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 100),
-                Image.asset('assets/candies2.png', height: 400),
+                Image.asset('assets/prime2.png', height: 400),
               ],
             ),
         // Third Page Content
@@ -139,8 +141,8 @@ class PrimeNumberInfoPage extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           isEnglish
-                              ? 'This is a number square. Do you see the numbers that are highlighted in a special color? Those are our even numbers! They form a special pattern! Can you see the way they line up in neat rows and columns?'
-                              : 'Este es un cuadrado numérico. ¿Ves los números que están resaltados en un color especial? ¡Esos son nuestros números pares! ¡Forman un patrón especial! ¿Puedes ver cómo se alinean en filas y columnas ordenadas?',
+                              ? 'The chart below shows the prime numbers up to 100, represented in coloured boxes.'
+                              : 'El cuadro de abajo muestra los números primos hasta 100, representados en cuadros de colores.',
                           style: TextStyle(
                             fontSize: 30,
                             color: Color.fromARGB(255, 18, 3, 48),
@@ -160,7 +162,7 @@ class PrimeNumberInfoPage extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 40),
-                Image.asset('assets/number_square.png', height: 600),
+                Image.asset('assets/prime3.png', height: 600),
               ],
             ),
         // Fourth Page Content
@@ -180,8 +182,8 @@ class PrimeNumberInfoPage extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           isEnglish
-                              ? 'Now that you know what even numbers are let\'s go ahead and solve some fun problems.'
-                              : 'Ahora que sabes qué son los números pares, vamos a resolver algunos problemas divertidos.',
+                              ? 'Now that you know what prime numbers are let\'s go ahead and solve some fun problems.'
+                              : 'Ahora que sabes qué son los números primos, vamos a resolver algunos problemas divertidos.',
                           style: TextStyle(
                             fontSize: 30,
                             color: Color.fromARGB(255, 18, 3, 48),
