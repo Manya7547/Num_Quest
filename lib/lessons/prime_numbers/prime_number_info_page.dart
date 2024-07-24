@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import '../../widgets/MultipageContainer.dart';
-//import './practice_even.dart';
 
 class PrimeNumberInfoPage extends StatelessWidget {
-  final AudioPlayer audioPlayer = AudioPlayer();
+  final FlutterTts flutterTts = FlutterTts();
 
-  void playAudio(String url) async {
-    int result = await audioPlayer.play(url);
-    if (result == 1) {
-      // success
-    }
+  void speakText(String text) async {
+    await flutterTts.setLanguage("en-US"); // Set language to English
+    await flutterTts.setPitch(1.0); // Set pitch
+    await flutterTts.speak(text);
+  }
+
+  void speakTextSpanish(String text) async {
+    await flutterTts.setLanguage("es-ES"); // Set language to Spanish
+    await flutterTts.setPitch(1.0); // Set pitch
+    await flutterTts.speak(text);
   }
 
   @override
@@ -34,7 +38,7 @@ class PrimeNumberInfoPage extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           isEnglish
-                              ? 'A prime number can be defined as a natural number greater than 1 whose only factors are 1 and the number itself. '
+                              ? 'A prime number can be defined as a natural number greater than 1 whose only factors are 1 and the number itself.'
                               : 'Un número primo se puede definir como un número natural mayor que 1 cuyos únicos factores son 1 y el propio número.',
                           style: TextStyle(
                             fontSize: 30,
@@ -46,7 +50,11 @@ class PrimeNumberInfoPage extends StatelessWidget {
                         IconButton(
                           icon: Icon(Icons.play_arrow),
                           onPressed: () {
-                            playAudio(isEnglish ? '' : '');
+                            isEnglish
+                                ? speakText(
+                                    'A prime number can be defined as a natural number greater than 1 whose only factors are 1 and the number itself.')
+                                : speakTextSpanish(
+                                    'Un número primo se puede definir como un número natural mayor que 1 cuyos únicos factores son 1 y el propio número.');
                           },
                         ),
                         SizedBox(height: 50),
@@ -64,9 +72,11 @@ class PrimeNumberInfoPage extends StatelessWidget {
                         IconButton(
                           icon: Icon(Icons.play_arrow),
                           onPressed: () {
-                            playAudio(isEnglish
-                                ? 'https://drive.google.com/uc?export=download&id=1hrbOYtGLKH5vJ5rcxRIj0oXFrp_CYE-0'
-                                : 'https://drive.google.com/uc?export=download&id=1IeupKYCYia4JB47rs4discodUcDfU0yb');
+                            isEnglish
+                                ? speakText(
+                                    'For example, 7 has only 2 factors, 1 and 7 itself. So, it is a prime number. However, 6 has four factors, 1, 2, 3 and 6. Therefore, it is not a prime number. It is a composite number. We will learn about composite numbers in the next lesson.')
+                                : speakTextSpanish(
+                                    'Por ejemplo, 7 tiene solo 2 factores, 1 y 7. Por lo tanto, es un número primo. Sin embargo, 6 tiene cuatro factores, 1, 2, 3 y 6. Por lo tanto, no es un número primo. Es un número compuesto. Aprenderemos sobre los números compuestos en la próxima lección.');
                           },
                         ),
                       ],
@@ -111,16 +121,18 @@ class PrimeNumberInfoPage extends StatelessWidget {
                         IconButton(
                           icon: Icon(Icons.play_arrow),
                           onPressed: () {
-                            playAudio(isEnglish
-                                ? 'https://drive.google.com/uc?export=download&id=1HoNkco_Ct4uqv1uWuY0Uxm36L4Ulhc5o'
-                                : 'https://drive.google.com/uc?export=download&id=1fufJFTw1GhARSj9sJUJqgTjeXFPRUfYp');
+                            isEnglish
+                                ? speakText(
+                                    'A prime number is always bigger than 1. The number 1 is not a prime number. The number 2 is the only even prime number. All other even numbers can be divided by 2, so they are not prime. The smallest prime number is 2. Prime numbers can’t be split evenly: If you try to split a prime number into equal groups, there will always be one left over, except when you split it into 1 group or groups of itself.')
+                                : speakTextSpanish(
+                                    'Un número primo siempre es mayor que 1. El número 1 no es un número primo. El número 2 es el único número primo par. Todos los demás números pares se pueden dividir entre 2, por lo que no son primos. El número primo más pequeño es 2. Los números primos no se pueden dividir en partes iguales: si intentas dividir un número primo en grupos iguales, siempre quedará uno, excepto cuando lo divides en 1 grupo o en grupos de sí mismo.');
                           },
                         ),
                       ],
                     ),
                   ),
                 ),
-                SizedBox(height: 100),
+                SizedBox(height: 10),
                 Image.asset('assets/prime2.png', height: 400),
               ],
             ),
@@ -152,9 +164,11 @@ class PrimeNumberInfoPage extends StatelessWidget {
                         IconButton(
                           icon: Icon(Icons.play_arrow),
                           onPressed: () {
-                            playAudio(isEnglish
-                                ? 'https://drive.google.com/uc?export=download&id=1OCGKlY2mXpprP-ZUKi5kcwfD_ptQeA7r'
-                                : 'https://drive.google.com/uc?export=download&id=1AO_a5We4vckT8_GGG69NJW4Kkhc2ZH61');
+                            isEnglish
+                                ? speakText(
+                                    'The chart below shows the prime numbers up to 100, represented in coloured boxes.')
+                                : speakTextSpanish(
+                                    'El cuadro de abajo muestra los números primos hasta 100, representados en cuadros de colores.');
                           },
                         ),
                       ],
@@ -193,9 +207,11 @@ class PrimeNumberInfoPage extends StatelessWidget {
                         IconButton(
                           icon: Icon(Icons.play_arrow),
                           onPressed: () {
-                            playAudio(isEnglish
-                                ? 'https://example.com/english5.mp3'
-                                : 'https://example.com/spanish5.mp3');
+                            isEnglish
+                                ? speakText(
+                                    'Now that you know what prime numbers are let\'s go ahead and solve some fun problems.')
+                                : speakTextSpanish(
+                                    'Ahora que sabes qué son los números primos, vamos a resolver algunos problemas divertidos.');
                           },
                         ),
                       ],
@@ -231,9 +247,3 @@ class PrimeNumberInfoPage extends StatelessWidget {
     );
   }
 }
-
-// void main() {
-//   runApp(MaterialApp(
-//     home: EvenNumberInfoPage(),
-//   ));
-// }
