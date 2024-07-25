@@ -87,8 +87,8 @@ class FactorsInfoPage extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           isEnglish
-                              ? 'A prime number is always bigger than 1. The number 1 is not a prime number.\nThe number 2 is the only even prime number. All other even numbers can be divided by 2, so they are not prime.\nThe smallest prime number is 2.\nPrime numbers can’t be split evenly: If you try to split a prime number into equal groups, there will always be one left over, except when you split it into 1 group or groups of itself.'
-                              : 'Un número primo siempre es mayor que 1. El número 1 no es un número primo. El número 2 es el único número primo par. \nTodos los demás números pares se pueden dividir entre 2, por lo que no son primos.\nEl número primo más pequeño es 2. \nLos números primos no se pueden dividir en partes iguales: si intentas dividir un número primo en grupos iguales, siempre quedará uno, excepto cuando lo divides en 1 grupo o en grupos de sí mismo.',
+                              ? 'Types of Factors:\nPrime Factors - Most numbers (except square numbers) have an even number of factors. However, a prime number has only two factors – the prime number itself and the number 1. This means it only has one factor pair.\nCommon Factors - When working out the factors of two numbers, there will often be some factors which appear in both lists. We call these \'common factors\'. Factors of 18 are 1, 2, 3, 6, 9 and 18. Factors of 24 are 1, 2, 3, 4, 6, 8, 12 and 24. The common factors of 18 and 24 are 1, 2, 3 and 6.\nThe highest common factor is the common factor with the greatest value. Amongst the common factors of 18 and 24, the highest number is 6 so 6 is the highest common factor of these two numbers.'
+                              : 'Tipos de Factores: \nFactores Primos - La mayoría de los números (excepto los números cuadrados) tienen un número par de factores. Sin embargo, un número primo solo tiene dos factores: el propio número primo y el número 1. Esto significa que solo tiene un par de factores.\nUn factor primo es simplemente un factor que también es un número primo. Es un número mayor que 1 que no puede ser dividido exactamente por ningún número excepto por sí mismo o por 1.\nFactores Comunes Al calcular los factores de dos números, a menudo habrá algunos factores que aparezcan en ambas listas. A estos los llamamos \'factores comunes\'. Los factores de 18 son 1, 2, 3, 6, 9 y 18. Los factores de 24 son 1, 2, 3, 4, 6, 8, 12 y 24. Los factores comunes de 18 y 24 son 1, 2, 3 y 6. \nEl factor común más alto es el factor común con el mayor valor. Entre los factores comunes de 18 y 24, el número más alto es 6, por lo que 6 es el factor común más alto de estos dos números. ',
                           style: TextStyle(
                             fontSize: 30,
                             color: Color.fromARGB(255, 18, 3, 48),
@@ -101,17 +101,15 @@ class FactorsInfoPage extends StatelessWidget {
                           onPressed: () {
                             isEnglish
                                 ? speakText(
-                                    'A prime number is always bigger than 1. The number 1 is not a prime number. The number 2 is the only even prime number. All other even numbers can be divided by 2, so they are not prime. The smallest prime number is 2. Prime numbers can’t be split evenly: If you try to split a prime number into equal groups, there will always be one left over, except when you split it into 1 group or groups of itself.')
+                                    'Types of Factors:\nPrime Factors - Most numbers (except square numbers) have an even number of factors. However, a prime number has only two factors – the prime number itself and the number 1. This means it only has one factor pair.\nCommon Factors - When working out the factors of two numbers, there will often be some factors which appear in both lists. We call these \'common factors\'. Factors of 18 are 1, 2, 3, 6, 9 and 18. Factors of 24 are 1, 2, 3, 4, 6, 8, 12 and 24. The common factors of 18 and 24 are 1, 2, 3 and 6.\nThe highest common factor is the common factor with the greatest value. Amongst the common factors of 18 and 24, the highest number is 6 so 6 is the highest common factor of these two numbers.')
                                 : speakTextSpanish(
-                                    'Un número primo siempre es mayor que 1. El número 1 no es un número primo. El número 2 es el único número primo par. Todos los demás números pares se pueden dividir entre 2, por lo que no son primos. El número primo más pequeño es 2. Los números primos no se pueden dividir en partes iguales: si intentas dividir un número primo en grupos iguales, siempre quedará uno, excepto cuando lo divides en 1 grupo o en grupos de sí mismo.');
+                                    'Tipos de Factores: \nFactores Primos - La mayoría de los números (excepto los números cuadrados) tienen un número par de factores. Sin embargo, un número primo solo tiene dos factores: el propio número primo y el número 1. Esto significa que solo tiene un par de factores.\nUn factor primo es simplemente un factor que también es un número primo. Es un número mayor que 1 que no puede ser dividido exactamente por ningún número excepto por sí mismo o por 1.\nFactores Comunes Al calcular los factores de dos números, a menudo habrá algunos factores que aparezcan en ambas listas. A estos los llamamos \'factores comunes\'. Los factores de 18 son 1, 2, 3, 6, 9 y 18. Los factores de 24 son 1, 2, 3, 4, 6, 8, 12 y 24. Los factores comunes de 18 y 24 son 1, 2, 3 y 6. \nEl factor común más alto es el factor común con el mayor valor. Entre los factores comunes de 18 y 24, el número más alto es 6, por lo que 6 es el factor común más alto de estos dos números.');
                           },
                         ),
                       ],
                     ),
                   ),
                 ),
-                SizedBox(height: 10),
-                Image.asset('assets/prime2.png', height: 400),
               ],
             ),
         // Third Page Content
@@ -131,8 +129,8 @@ class FactorsInfoPage extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           isEnglish
-                              ? 'The chart below shows the prime numbers up to 100, represented in coloured boxes.'
-                              : 'El cuadro de abajo muestra los números primos hasta 100, representados en cuadros de colores.',
+                              ? 'Here\'s an example that shows how to find factors using multiplication'
+                              : 'Aquí hay un ejemplo que muestra cómo encontrar factores usando la multiplicación.',
                           style: TextStyle(
                             fontSize: 30,
                             color: Color.fromARGB(255, 18, 3, 48),
@@ -144,17 +142,17 @@ class FactorsInfoPage extends StatelessWidget {
                           onPressed: () {
                             isEnglish
                                 ? speakText(
-                                    'The chart below shows the prime numbers up to 100, represented in coloured boxes.')
+                                    'Here\'s an example that shows how to find factors using multiplication')
                                 : speakTextSpanish(
-                                    'El cuadro de abajo muestra los números primos hasta 100, representados en cuadros de colores.');
+                                    'Aquí hay un ejemplo que muestra cómo encontrar factores usando la multiplicación.');
                           },
                         ),
                       ],
                     ),
                   ),
                 ),
-                SizedBox(height: 40),
-                Image.asset('assets/prime3.png', height: 600),
+                SizedBox(height: 10),
+                Image.asset('assets/factors3.png', height: 600),
               ],
             ),
         // Fourth Page Content
