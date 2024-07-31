@@ -91,7 +91,7 @@ class _EvenNumberExamplesPageState extends State<EvenNumberExamplesPage> {
         height: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/demo1.jpg'),
+            image: AssetImage('assets/demo3.jpg'),
             fit: BoxFit.cover,
           ),
         ),
@@ -151,7 +151,7 @@ class _EvenNumberExamplesPageState extends State<EvenNumberExamplesPage> {
                         onPressed: _refreshExamples,
                         style: ElevatedButton.styleFrom(
                           padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                          backgroundColor: Colors.blue,
+                          backgroundColor: Colors.lightBlueAccent.shade200,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
@@ -169,7 +169,7 @@ class _EvenNumberExamplesPageState extends State<EvenNumberExamplesPage> {
                         },
                         style: ElevatedButton.styleFrom(
                           padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                          backgroundColor: Colors.green,
+                          backgroundColor: Colors.amber.shade700,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
@@ -200,13 +200,13 @@ class _EvenNumberExamplesPageState extends State<EvenNumberExamplesPage> {
           height: 150,
           width: MediaQuery.of(context).size.width * 0.8, // Adjust width
           decoration: BoxDecoration(
-            color: Colors.teal.shade500,
+            color: Colors.white70,
             borderRadius: BorderRadius.circular(15.0),
           ),
           child: Center(
             child: Text(
               number,
-              style: const TextStyle(fontSize: 50, color: Colors.white),
+              style: const TextStyle(fontSize: 50, color: Colors.black54),
             ),
           ),
         ),
@@ -214,7 +214,7 @@ class _EvenNumberExamplesPageState extends State<EvenNumberExamplesPage> {
           height: 150,
           width: MediaQuery.of(context).size.width * 0.8, // Adjust width
           decoration: BoxDecoration(
-            color: Colors.amber.shade500,
+            color: Colors.grey.shade200,
             borderRadius: BorderRadius.circular(15.0),
           ),
           child: Center(
@@ -222,7 +222,7 @@ class _EvenNumberExamplesPageState extends State<EvenNumberExamplesPage> {
               padding: const EdgeInsets.all(10.0),
               child: Text(
                 description,
-                style: const TextStyle(fontSize: 25, color: Colors.white),
+                style: const TextStyle(fontSize: 25, color: Colors.black54),
                 textAlign: TextAlign.center,
               ),
             ),

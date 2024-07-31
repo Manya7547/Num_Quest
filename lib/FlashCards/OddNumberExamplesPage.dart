@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flip_card/flip_card.dart';
+import "package:google_fonts/google_fonts.dart";
+
 
 class OddNumberExamplesPage extends StatefulWidget {
+  const OddNumberExamplesPage({super.key});
+
   @override
-  _OddNumberExamplesPageState createState() => _OddNumberExamplesPageState();
+  _OddNumberExamplesPageState createState() {
+    return _OddNumberExamplesPageState();
+  }
 }
 
 class _OddNumberExamplesPageState extends State<OddNumberExamplesPage> {
@@ -55,85 +61,112 @@ class _OddNumberExamplesPageState extends State<OddNumberExamplesPage> {
   }
 
   void _refreshExamples() {
-    _examples = (_allExamples.toList()..shuffle()).take(3).toList();
+    setState(() {
+      _examples = (_allExamples.toList()..shuffle()).take(3).toList();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_isEnglish ? 'Odd Number Examples' : 'Ejemplos de Números Impares'),
+        title: Text(_isEnglish ? 'Even Number Examples' : 'Ejemplos de Números Pares'),
       ),
       body: Container(
+        width: double.infinity,
+        height: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/classboard.jpg'), // Set your background image here
+            image: AssetImage('assets/demo1.jpg'),
             fit: BoxFit.cover,
           ),
         ),
-        child: Center(
+        child: Center( // Wrap the entire content in a Center widget
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center, // Center the column vertically
               children: <Widget>[
                 Text(
-                  _isEnglish ? 'Tap on these numbers to reveal if they are odd' : 'Pulsa estos números para revelar si son impares.',
-                  style: TextStyle(fontSize: 28, color: Colors.black, fontWeight: FontWeight.bold),
+                  _isEnglish
+                      ? 'Tap on these numbers to reveal if they are even or odd'
+                      : 'Pulsa estos números para revelar si son pares o impares.',
+                  style: GoogleFonts.lato(
+                    textStyle: TextStyle(
+                      fontSize: 38,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      shadows: [
+                        Shadow(
+                          offset: const Offset(5.0, 5.0),
+                          blurRadius: 3.0,
+                          color: Colors.grey.withOpacity(0.5),
+                        ),
+                      ],
+                    ),
+                  ),
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(height: 20),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: _examples.length,
-                    itemBuilder: (context, index) {
-                      return _buildExampleCard(
-                        _examples[index]['number']!,
-                        _isEnglish ? _examples[index]['description_en']! : _examples[index]['description_es']!,
-                      );
-                    },
+                SizedBox(height: 30),
+
+                // Center the ListView.builder and reduce its width
+                Center(
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.8, // Limit width of the ListView
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: _examples.length,
+                      itemBuilder: (context, index) {
+                        return _buildExampleCard(
+                          _examples[index]['number']!,
+                          _isEnglish ? _examples[index]['description_en']! : _examples[index]['description_es']!,
+                        );
+                      },
+                    ),
                   ),
                 ),
-                SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          _refreshExamples();
-                        });
-                      },
-                      style: ElevatedButton.styleFrom(
-                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                        backgroundColor: Colors.blue,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
+
+                const SizedBox(height: 30),
+
+                // Center the Row containing buttons
+                Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton(
+                        onPressed: _refreshExamples,
+                        style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                          backgroundColor: Colors.blue,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                        ),
+                        child: Text(
+                          _isEnglish ? 'More Examples' : 'Más ejemplos',
+                          style: TextStyle(fontSize: 20, color: Colors.white),
                         ),
                       ),
-                      child: Text(
-                        _isEnglish ? 'More Examples' : 'Más ejemplos',
-                        style: TextStyle(fontSize: 18, color: Colors.white),
-                      ),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          _isEnglish = !_isEnglish;
-                        });
-                      },
-                      style: ElevatedButton.styleFrom(
-                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                        backgroundColor: Colors.green,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
+                      ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            _isEnglish = !_isEnglish;
+                          });
+                        },
+                        style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                          backgroundColor: Colors.green,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                        ),
+                        child: Text(
+                          _isEnglish ? 'Tap to Translate' : 'Toca para Traducir',
+                          style: TextStyle(fontSize: 20, color: Colors.white),
                         ),
                       ),
-                      child: Text(
-                        _isEnglish ? 'Tap to Translate' : 'Toca para Traducir',
-                        style: TextStyle(fontSize: 18, color: Colors.white),
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -143,6 +176,7 @@ class _OddNumberExamplesPageState extends State<OddNumberExamplesPage> {
     );
   }
 
+
   Widget _buildExampleCard(String number, String description) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
@@ -150,9 +184,10 @@ class _OddNumberExamplesPageState extends State<OddNumberExamplesPage> {
         direction: FlipDirection.HORIZONTAL,
         front: Container(
           height: 150,
+          width: MediaQuery.of(context).size.width * 0.8, // Adjust width
           decoration: BoxDecoration(
-            color: Colors.blueAccent,
-            borderRadius: BorderRadius.circular(10.0),
+            color: Colors.teal.shade500,
+            borderRadius: BorderRadius.circular(15.0),
           ),
           child: Center(
             child: Text(
@@ -163,16 +198,17 @@ class _OddNumberExamplesPageState extends State<OddNumberExamplesPage> {
         ),
         back: Container(
           height: 150,
+          width: MediaQuery.of(context).size.width * 0.8, // Adjust width
           decoration: BoxDecoration(
-            color: Colors.orangeAccent,
-            borderRadius: BorderRadius.circular(10.0),
+            color: Colors.amber.shade500,
+            borderRadius: BorderRadius.circular(15.0),
           ),
           child: Center(
             child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: Text(
                 description,
-                style: const TextStyle(fontSize: 20, color: Colors.white),
+                style: const TextStyle(fontSize: 25, color: Colors.white),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -181,10 +217,4 @@ class _OddNumberExamplesPageState extends State<OddNumberExamplesPage> {
       ),
     );
   }
-}
-
-void main() {
-  runApp(MaterialApp(
-    home: OddNumberExamplesPage(),
-  ));
 }
