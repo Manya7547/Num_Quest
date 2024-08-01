@@ -91,7 +91,7 @@ class _EvenNumberExamplesPageState extends State<EvenNumberExamplesPage> {
         height: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/demo3.jpg'),
+            image: AssetImage('background1.jpg'),
             fit: BoxFit.cover,
           ),
         ),

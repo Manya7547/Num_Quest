@@ -13,13 +13,13 @@ class PracticePage extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/Bigschooldesk_generated.jpg'),
+            image: AssetImage('background1.jpg'),
             fit: BoxFit.cover,
           ),
         ),
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(100, 50, 100, 50),
+            padding: const EdgeInsets.fromLTRB(100, 100, 100, 100),
             child: GridView.count(
               crossAxisCount: 4,
               crossAxisSpacing: 20.0,
@@ -27,21 +27,12 @@ class PracticePage extends StatelessWidget {
               shrinkWrap: true,
               children: [
                 LessonButton(
-                  title: 'Even Numbers',
+                  title: 'ODD & Even Numbers',
                   onPressed: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => EvenNumberExamplesPage()));
-                  },
-                ),
-                LessonButton(
-                  title: 'Odd Numbers',
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => OddNumberExamplesPage()));
                   },
                 ),
                 LessonButton(
@@ -63,15 +54,6 @@ class PracticePage extends StatelessWidget {
                   },
                 ),
                 LessonButton(
-                  title: 'Triangular Numbers',
-                  onPressed: () {
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) => TriangularNumberInfoPage()));
-                  },
-                ),
-                LessonButton(
                   title: 'Perfect Numbers',
                   onPressed: () {
                     // Navigator.push(
@@ -87,15 +69,6 @@ class PracticePage extends StatelessWidget {
                     //     context,
                     //     MaterialPageRoute(
                     //         builder: (context) => SquareNumberInfoPage()));
-                  },
-                ),
-                LessonButton(
-                  title: 'Fibonacci Numbers',
-                  onPressed: () {
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) => FibonacciNumberInfoPage()));
                   },
                 ),
                 LessonButton(
@@ -125,7 +98,6 @@ class PracticePage extends StatelessWidget {
                     //         builder: (context) => ModuloNumberInfoPage()));
                   },
                 ),
-                // Add more LessonButton widgets for each lesson
               ],
             ),
           ),
@@ -144,15 +116,12 @@ class LessonButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: Colors.cyan.shade100,
-        borderRadius: BorderRadius.circular(10),
-      ),
+      padding: EdgeInsets.all(0),
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          elevation: 0, // Remove button shadow
+          elevation: 3, // Remove button shadow
+          backgroundColor: Colors.white30,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
@@ -162,7 +131,7 @@ class LessonButton extends StatelessWidget {
             title,
             textAlign: TextAlign.center, // Align text in the center
             style: TextStyle(
-              fontSize: 30, // Change font size
+              fontSize: 20, // Change font size
               fontWeight: FontWeight.bold, // Make text bold
               fontFamily: 'Arial', // Change font family if needed
             ),
