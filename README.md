@@ -28,10 +28,10 @@ Follow these instructions to set up and run the Num Quest project on your local 
 Clone the Repository
 git clone https://github.com/yourusername/num-quest.git
 
-Navigate to the Project Directory
+Navigate to the Project Directory:
 cd num-quest
 
-Install Dependencies
+Install Dependencies:
 flutter pub get
 
 ## Running the Application
