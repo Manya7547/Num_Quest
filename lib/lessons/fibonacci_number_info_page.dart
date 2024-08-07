@@ -1,184 +1,248 @@
 import 'package:flutter/material.dart';
-import 'package:flip_card/flip_card.dart'; // Import the FlipCard package
+import 'package:flutter_tts/flutter_tts.dart';
+import 'package:num_quest/widgets/MultipageContainer.dart';
 
 class FibonacciNumberInfoPage extends StatelessWidget {
-  final GlobalKey<FlipCardState> _flipCardKey = GlobalKey<FlipCardState>();
+  final FlutterTts flutterTts = FlutterTts();
+
+  void speakText(String text) async {
+    await flutterTts.setLanguage("en-US"); // Set language to English
+    await flutterTts.setPitch(1.0); // Set pitch
+    await flutterTts.speak(text);
+  }
+
+  void speakTextSpanish(String text) async {
+    await flutterTts.setLanguage("es-ES"); // Set language to Spanish
+    await flutterTts.setPitch(1.0); // Set pitch
+    await flutterTts.speak(text);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('What are Fibonacci Numbers?'),
-      ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: FlipCard(
-            key: _flipCardKey, // Assign the GlobalKey to the FlipCard
-            direction:
-                FlipDirection.HORIZONTAL, // Set the direction of the flip
-            flipOnTouch: true,
-            front: _buildFront(context),
-            back: _buildBack(context),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildFront(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage(
-              'assets/classboard.jpg'), // Set your background image here
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: Container(
-        color: Colors.black.withOpacity(0.5), // Add opacity to background color
-        padding: EdgeInsets.all(20.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              'Fibonacci numbers are a series of numbers in which each number is the sum of the two preceding ones, usually starting with 0 and 1.',
-              style: TextStyle(
-                  fontSize: 32,
-                  color: Colors.white), // Increased font size and colored text
+    return MultipageContainer(
+      pages: [
+        // First Page Content
+        (bool isEnglish) => Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Card(
+                  color: Colors.white.withOpacity(0.8),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          isEnglish
+                              ? 'The Fibonacci sequence is a famous series of numbers with a pattern. The pattern is that every number is added to the one before it. Here’s the first few parts of the sequence: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89.'
+                              : 'La secuencia de Fibonacci es una serie famosa de números con un patrón. El patrón es que cada número se suma al anterior. Aquí están las primeras partes de la secuencia: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89',
+                          style: TextStyle(
+                            fontSize: 30,
+                            color: Color.fromARGB(255, 18, 3, 48),
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        SizedBox(height: 10),
+                        IconButton(
+                          icon: Icon(Icons.play_arrow),
+                          onPressed: () {
+                            isEnglish
+                                ? speakText(
+                                    'The Fibonacci sequence is a famous series of numbers with a pattern. The pattern is that every number is added to the one before it. Here’s the first few parts of the sequence: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89.')
+                                : speakTextSpanish(
+                                    'La secuencia de Fibonacci es una serie famosa de números con un patrón. El patrón es que cada número se suma al anterior. Aquí están las primeras partes de la secuencia: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89');
+                          },
+                        ),
+                        SizedBox(height: 50),
+                        Text(
+                          isEnglish
+                              ? 'As you can see, 1 + 1 = 2, 2 + 1 = 3, 3 + 2 = 5 and so on. It’s a really simple progression and can go on forever. What’s impressive about this sequence is that you get a spiral if you turn those numbers into boxes.'
+                              : 'Como puedes ver, 1 + 1 = 2, 2 + 1 = 3, 3 + 2 = 5, y así sucesivamente. Es una progresión muy simple y puede continuar para siempre. Lo impresionante de esta secuencia es que obtienes una espiral si conviertes esos números en cuadrados.',
+                          style: TextStyle(
+                            fontSize: 30,
+                            color: Color.fromARGB(255, 18, 3, 48),
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        SizedBox(height: 10),
+                        IconButton(
+                          icon: Icon(Icons.play_arrow),
+                          onPressed: () {
+                            isEnglish
+                                ? speakText(
+                                    'As you can see, 1 + 1 = 2, 2 + 1 = 3, 3 + 2 = 5 and so on. It’s a really simple progression and can go on forever. What’s impressive about this sequence is that you get a spiral if you turn those numbers into boxes.')
+                                : speakTextSpanish(
+                                    'Como puedes ver, 1 + 1 = 2, 2 + 1 = 3, 3 + 2 = 5, y así sucesivamente. Es una progresión muy simple y puede continuar para siempre. Lo impresionante de esta secuencia es que obtienes una espiral si conviertes esos números en cuadrados.');
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 350,
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 10),
+                    child: Image.asset('assets/fibonacci1.png'),
+                  ),
+                ),
+              ],
             ),
-            SizedBox(height: 20),
-            Text(
-              'These numbers often appear in nature, such as in the branching of trees or in the arrangement of seeds in a sunflower.',
-              style: TextStyle(
-                  fontSize: 24,
-                  color: Colors.white), // Increased font size and colored text
+        // Second Page Content
+        (bool isEnglish) => Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Card(
+                  color: Colors.white.withOpacity(0.8),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          isEnglish
+                              ? 'You can see the Fibonacci sequence in a lot of things in real life. Surprisingly, it’s found a lot in nature. Here’s a list of where you can find the Fibonacci sequence in real life, think about the spiral from earlier and where you might find it.'
+                              : 'Puedes ver la secuencia de Fibonacci en muchas cosas en la vida real. Sorprendentemente, se encuentra mucho en la naturaleza. Aquí hay una lista de dónde puedes encontrar la secuencia de Fibonacci en la vida real, piensa en la espiral de antes y dónde podrías encontrarla.',
+                          style: TextStyle(
+                            fontSize: 30,
+                            color: Color.fromARGB(255, 18, 3, 48),
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        SizedBox(height: 10),
+                        IconButton(
+                          icon: Icon(Icons.play_arrow),
+                          onPressed: () {
+                            isEnglish
+                                ? speakText(
+                                    'You can see the Fibonacci sequence in a lot of things in real life. Surprisingly, it’s found a lot in nature. Here’s a list of where you can find the Fibonacci sequence in real life, think about the spiral from earlier and where you might find it.')
+                                : speakTextSpanish(
+                                    'Puedes ver la secuencia de Fibonacci en muchas cosas en la vida real. Sorprendentemente, se encuentra mucho en la naturaleza. Aquí hay una lista de dónde puedes encontrar la secuencia de Fibonacci en la vida real, piensa en la espiral de antes y dónde podrías encontrarla.');
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(height: 10),
+                Image.asset('assets/fibonacci2.png', height: 400),
+              ],
             ),
-            SizedBox(height: 20),
-            _buildExamples(context),
-            SizedBox(height: 20),
-            RotatedBox(
-              quarterTurns: 1, // Rotate the icon button 90 degrees
-              child: IconButton(
-                icon: Icon(Icons.translate),
-                onPressed: () {
-                  // Add logic to flip the card using the GlobalKey
-                  _flipCardKey.currentState?.toggleCard();
-                },
-              ),
+        // Third Page Content
+        (bool isEnglish) => Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Card(
+                  color: Colors.white.withOpacity(0.8),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          isEnglish
+                              ? 'Here’s the Fibonacci sequence.'
+                              : 'Aquí está la secuencia de Fibonacci.',
+                          style: TextStyle(
+                            fontSize: 30,
+                            color: Color.fromARGB(255, 18, 3, 48),
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        IconButton(
+                          icon: Icon(Icons.play_arrow),
+                          onPressed: () {
+                            isEnglish
+                                ? speakText('Here’s the Fibonacci sequence.')
+                                : speakTextSpanish(
+                                    'Aquí está la secuencia de Fibonacci.');
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(height: 40),
+                Image.asset('assets/fibonacci3.png', height: 600),
+              ],
             ),
-            Text(
-              'Tap to Translate',
-              style: TextStyle(
-                  fontSize: 24,
-                  color: Colors.white), // Increased font size and colored text
+        // Fourth Page Content
+        (bool isEnglish) => Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Card(
+                  color: Colors.white.withOpacity(0.8),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          isEnglish
+                              ? 'Now that you know what fibonacci numbers are let\'s go ahead and solve some fun problems.'
+                              : 'Ahora que sabes qué son los números fibonacci, vamos a resolver algunos problemas divertidos',
+                          style: TextStyle(
+                            fontSize: 30,
+                            color: Color.fromARGB(255, 18, 3, 48),
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        IconButton(
+                          icon: Icon(Icons.play_arrow),
+                          onPressed: () {
+                            isEnglish
+                                ? speakText(
+                                    'Now that you know what fibonacci numbers are let\'s go ahead and solve some fun problems.')
+                                : speakTextSpanish(
+                                    'Ahora que sabes qué son los números fibonacci, vamos a resolver algunos problemas divertidos.');
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(height: 40),
+                Image.asset('assets/practice.png', height: 500),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //       builder: (context) => WordProblemPractice()),
+                    // );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                    backgroundColor: Colors.orange,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  child: Text(
+                    isEnglish ? 'Quiz' : 'examen',
+                    style: TextStyle(fontSize: 20, color: Colors.white),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildBack(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage(
-              'assets/classboard.jpg'), // Set your background image here
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: Container(
-        color: Colors.black.withOpacity(0.5), // Add opacity to background color
-        padding: EdgeInsets.all(20.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              'Los números de Fibonacci son una serie de números en la cual cada número es la suma de los dos anteriores, generalmente comenzando con 0 y 1.',
-              style: TextStyle(
-                  fontSize: 28,
-                  color: Colors.white), // Increased font size and colored text
-            ),
-            SizedBox(height: 20),
-            Text(
-              'Estos números a menudo aparecen en la naturaleza, como en la ramificación de los árboles o en la disposición de las semillas en un girasol.',
-              style: TextStyle(
-                  fontSize: 24,
-                  color: Colors.white), // Increased font size and colored text
-            ),
-            SizedBox(height: 20),
-            _buildExamples(context),
-            SizedBox(height: 20),
-            RotatedBox(
-              quarterTurns: 1, // Rotate the icon button 90 degrees
-              child: IconButton(
-                icon: Icon(Icons.translate),
-                onPressed: () {
-                  // Add logic to flip the card using the GlobalKey
-                  _flipCardKey.currentState?.toggleCard();
-                },
-              ),
-            ),
-            Text(
-              'Tap to Translate',
-              style: TextStyle(
-                  fontSize: 24,
-                  color: Colors.white), // Increased font size and colored text
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildExamples(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(height: 20),
-        Text(
-          'Here are a few examples of Fibonacci numbers:',
-          style: TextStyle(
-              fontSize: 24,
-              color: Colors.white), // Increased font size and colored text
-        ),
-        SizedBox(height: 20),
-        _buildBulletPoint(context,
-            'First 10 Fibonacci numbers: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34'),
-        _buildBulletPoint(context,
-            'First 20 Fibonacci numbers: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181'),
-        SizedBox(height: 20),
       ],
-    );
-  }
-
-  Widget _buildBulletPoint(BuildContext context, String text) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(right: 10),
-            child: Icon(
-              Icons.circle,
-              size: 20,
-              color: Colors.white, // Change bullet point color to white
-            ),
-          ),
-          Expanded(
-            child: Text(
-              text,
-              style: TextStyle(
-                  fontSize: 24,
-                  color: Colors.white), // Increased font size and colored text
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

@@ -1,184 +1,210 @@
 import 'package:flutter/material.dart';
-import 'package:flip_card/flip_card.dart'; // Import the FlipCard package
+import 'package:flutter_tts/flutter_tts.dart'; // Import the FlipCard package
+import '../../widgets/MultipageContainer.dart';
 
 class TriangularNumberInfoPage extends StatelessWidget {
-  final GlobalKey<FlipCardState> _flipCardKey = GlobalKey<FlipCardState>();
+  final FlutterTts flutterTts = FlutterTts();
+
+  Future<void> speak(String text, bool isEnglish) async {
+    await flutterTts.setLanguage(isEnglish ? 'en-US' : 'es-ES');
+    await flutterTts.setPitch(1.0);
+    await flutterTts.speak(text);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('What are Triangle Numbers?'),
-      ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: FlipCard(
-            key: _flipCardKey, // Assign the GlobalKey to the FlipCard
-            direction:
-                FlipDirection.HORIZONTAL, // Set the direction of the flip
-            flipOnTouch: true,
-            front: _buildFront(context),
-            back: _buildBack(context),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildFront(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage(
-              'assets/classboard.jpg'), // Set your background image here
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: Container(
-        color: Colors.black.withOpacity(0.5), // Add opacity to background color
-        padding: EdgeInsets.all(20.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              'Triangle numbers are numbers that can form an equilateral triangle when dots are arranged in the shape of a triangle.',
-              style: TextStyle(
-                  fontSize: 32,
-                  color: Colors.white), // Increased font size and colored text
+    return MultipageContainer(
+      pages: [
+        // First Page Content
+        (bool isEnglish) => Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Card(
+                  color: Colors.white.withOpacity(0.8),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          isEnglish
+                              ? 'The triangular number sequence is the representation of the numbers in the form of equilateral triangle arranged in a series or sequence. These numbers are in a sequence of 1, 3, 6, 10, 15, 21, 28, 36, 45, and so on.'
+                              : 'La secuencia de números triangulares es la representación de los números en forma de triángulo equilátero dispuestos en una serie o secuencia. Estos números están en una secuencia de 1, 3, 6, 10, 15, 21, 28, 36, 45, y así sucesivamente.',
+                          style: TextStyle(
+                            fontSize: 30,
+                            color: Color.fromARGB(255, 18, 3, 48),
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        SizedBox(height: 10),
+                        IconButton(
+                          icon: Icon(Icons.play_arrow),
+                          onPressed: () {
+                            speak(
+                              isEnglish
+                                  ? 'The triangular number sequence is the representation of the numbers in the form of equilateral triangle arranged in a series or sequence. These numbers are in a sequence of 1, 3, 6, 10, 15, 21, 28, 36, 45, and so on.'
+                                  : 'La secuencia de números triangulares es la representación de los números en forma de triángulo equilátero dispuestos en una serie o secuencia. Estos números están en una secuencia de 1, 3, 6, 10, 15, 21, 28, 36, 45, y así sucesivamente.',
+                              isEnglish,
+                            );
+                          },
+                        ),
+                        SizedBox(height: 50),
+                        Text(
+                          isEnglish
+                              ? 'List Of Triangular Numbers: 0, 1, 3, 6, 10, 15, 21, 28, 36, 45, 55, 66, 78, 91, 105, 120,136, 153, 171, 190, 210, 231, 253, 276, 300, 325, 351, 378, 406, 435, 465, 496, 528, 561, 595, 630, 666, 703, 741, 780, 820, 861, 903, 946, 990, 1035, 1081, 1128, 1176, 1225, 1275, 1326, 1378, 1431, and so on.'
+                              : 'Lista de Números Triangulares: 0, 1, 3, 6, 10, 15, 21, 28, 36, 45, 55, 66, 78, 91, 105, 120, 136, 153, 171, 190, 210, 231, 253, 276, 300, 325, 351, 378, 406, 435, 465, 496, 528, 561, 595, 630, 666, 703, 741, 780, 820, 861, 903, 946, 990, 1035, 1081, 1128, 1176, 1225, 1275, 1326, 1378, 1431, y así sucesivamente.',
+                          style: TextStyle(
+                            fontSize: 30,
+                            color: Color.fromARGB(255, 18, 3, 48),
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        SizedBox(height: 10),
+                        IconButton(
+                          icon: Icon(Icons.play_arrow),
+                          onPressed: () {
+                            speak(
+                              isEnglish
+                                  ? 'List Of Triangular Numbers: 0, 1, 3, 6, 10, 15, 21, 28, 36, 45, 55, 66, 78, 91, 105, 120,136, 153, 171, 190, 210, 231, 253, 276, 300, 325, 351, 378, 406, 435, 465, 496, 528, 561, 595, 630, 666, 703, 741, 780, 820, 861, 903, 946, 990, 1035, 1081, 1128, 1176, 1225, 1275, 1326, 1378, 1431, and so on.'
+                                  : 'Lista de Números Triangulares: 0, 1, 3, 6, 10, 15, 21, 28, 36, 45, 55, 66, 78, 91, 105, 120, 136, 153, 171, 190, 210, 231, 253, 276, 300, 325, 351, 378, 406, 435, 465, 496, 528, 561, 595, 630, 666, 703, 741, 780, 820, 861, 903, 946, 990, 1035, 1081, 1128, 1176, 1225, 1275, 1326, 1378, 1431, y así sucesivamente.',
+                              isEnglish,
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 350,
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 10),
+                    child: Image.asset('assets/triangular1.png'),
+                  ),
+                ),
+              ],
             ),
-            SizedBox(height: 20),
-            Text(
-              'Imagine you have some dots and you arrange them in the shape of a triangle with one dot in the first row, two dots in the second row, three dots in the third row, and so on. The number of dots you need to form the triangle is a triangle number!',
-              style: TextStyle(
-                  fontSize: 24,
-                  color: Colors.white), // Increased font size and colored text
+        // Second Page Content
+        (bool isEnglish) => Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Card(
+                  color: Colors.white.withOpacity(0.8),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          isEnglish
+                              ? 'In the pattern of triangular numbers you will see, the next number in the sequence is added with an extra row. Let us explain in detail. First number is 1. In number 2,  a row is added with two dots to the first number. In number 3, a row is added with three dots to the second numberAgain, in number 4, a row is added with four dots to the third number and so on. So the sequence formed here is in the pattern: 1, 1 + 2, 1 + 2 + 3, 1 + 2 + 3 + 4,  and so on.'
+                              : 'En el patrón de los números triangulares, verás que el siguiente número en la secuencia se forma añadiendo una fila extra. Vamos a explicar esto en detalle. El primer número es 1. En el número 2, se añade una fila con dos puntos al primer número. En el número 3, se añade una fila con tres puntos al segundo número. De nuevo, en el número 4, se añade una fila con cuatro puntos al tercer número, y así sucesivamente. Así que la secuencia que se forma sigue el patrón: 1, 1 + 2, 1 + 2 + 3, 1 + 2 + 3 + 4, y así sucesivamente.',
+                          style: TextStyle(
+                            fontSize: 30,
+                            color: Color.fromARGB(255, 18, 3, 48),
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        SizedBox(height: 10),
+                        IconButton(
+                          icon: Icon(Icons.play_arrow),
+                          onPressed: () {
+                            speak(
+                              isEnglish
+                                  ? 'In the pattern of triangular numbers you will see, the next number in the sequence is added with an extra row. Let us explain in detail. First number is 1. In number 2,  a row is added with two dots to the first number. In number 3, a row is added with three dots to the second numberAgain, in number 4, a row is added with four dots to the third number and so on. So the sequence formed here is in the pattern: 1, 1 + 2, 1 + 2 + 3, 1 + 2 + 3 + 4,  and so on.'
+                                  : 'En el patrón de los números triangulares, verás que el siguiente número en la secuencia se forma añadiendo una fila extra. Vamos a explicar esto en detalle. El primer número es 1. En el número 2, se añade una fila con dos puntos al primer número. En el número 3, se añade una fila con tres puntos al segundo número. De nuevo, en el número 4, se añade una fila con cuatro puntos al tercer número, y así sucesivamente. Así que la secuencia que se forma sigue el patrón: 1, 1 + 2, 1 + 2 + 3, 1 + 2 + 3 + 4, y así sucesivamente.',
+                              isEnglish,
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(height: 100),
+                Image.asset('assets/triangular2.jpg', height: 400),
+              ],
             ),
-            SizedBox(height: 20),
-            _buildExamples(context),
-            SizedBox(height: 20),
-            RotatedBox(
-              quarterTurns: 1, // Rotate the icon button 90 degrees
-              child: IconButton(
-                icon: Icon(Icons.translate),
-                onPressed: () {
-                  // Add logic to flip the card using the GlobalKey
-                  _flipCardKey.currentState?.toggleCard();
-                },
-              ),
+        // Fourth Page Content
+        (bool isEnglish) => Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Card(
+                  color: Colors.white.withOpacity(0.8),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          isEnglish
+                              ? 'Now that you know what triangular numbers are let\'s go ahead and solve some fun problems.'
+                              : 'Ahora que sabes qué son los Números Triangulares, vamos a resolver algunos problemas divertidos.',
+                          style: TextStyle(
+                            fontSize: 30,
+                            color: Color.fromARGB(255, 18, 3, 48),
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        IconButton(
+                          icon: Icon(Icons.play_arrow),
+                          onPressed: () {
+                            speak(
+                              isEnglish
+                                  ? 'Now that you know what triangular numbers are let\'s go ahead and solve some fun problems.'
+                                  : 'Ahora que sabes qué son los Números Triangulares, vamos a resolver algunos problemas divertidos.',
+                              isEnglish,
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(height: 40),
+                Image.asset('assets/practice.png', height: 500),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //       builder: (context) => WordProblemPractice()),
+                    // );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                    backgroundColor: Colors.orange,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  child: Text(
+                    isEnglish ? 'Quiz' : 'examen',
+                    style: TextStyle(fontSize: 20, color: Colors.white),
+                  ),
+                ),
+              ],
             ),
-            Text(
-              'Tap to Translate',
-              style: TextStyle(
-                  fontSize: 24,
-                  color: Colors.white), // Increased font size and colored text
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildBack(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage(
-              'assets/classboard.jpg'), // Set your background image here
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: Container(
-        color: Colors.black.withOpacity(0.5), // Add opacity to background color
-        padding: EdgeInsets.all(20.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              'Los números triangulares son números que pueden formar un triángulo equilátero cuando los puntos están dispuestos en forma de triángulo.',
-              style: TextStyle(
-                  fontSize: 28,
-                  color: Colors.white), // Increased font size and colored text
-            ),
-            SizedBox(height: 20),
-            Text(
-              'Imagina que tienes algunos puntos y los dispones en forma de triángulo con un punto en la primera fila, dos puntos en la segunda fila, tres puntos en la tercera fila, y así sucesivamente. La cantidad de puntos que necesitas para formar el triángulo es un número triangular.',
-              style: TextStyle(
-                  fontSize: 24,
-                  color: Colors.white), // Increased font size and colored text
-            ),
-            SizedBox(height: 20),
-            _buildExamples(context),
-            SizedBox(height: 20),
-            RotatedBox(
-              quarterTurns: 1, // Rotate the icon button 90 degrees
-              child: IconButton(
-                icon: Icon(Icons.translate),
-                onPressed: () {
-                  // Add logic to flip the card using the GlobalKey
-                  _flipCardKey.currentState?.toggleCard();
-                },
-              ),
-            ),
-            Text(
-              'Tap to Translate',
-              style: TextStyle(
-                  fontSize: 24,
-                  color: Colors.white), // Increased font size and colored text
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildExamples(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(height: 20),
-        Text(
-          'Here are a few examples of triangle numbers:',
-          style: TextStyle(
-              fontSize: 24,
-              color: Colors.white), // Increased font size and colored text
-        ),
-        SizedBox(height: 20),
-        _buildBulletPoint(context,
-            'Triangle numbers up to 10: 1, 3, 6, 10, 15, 21, 28, 36, 45, 55'),
-        _buildBulletPoint(context,
-            'Triangle numbers up to 20: 1, 3, 6, 10, 15, 21, 28, 36, 45, 55, 66, 78, 91, 105, 120, 136, 153, 171, 190, 210'),
-        SizedBox(height: 20),
       ],
     );
   }
+}
 
-  Widget _buildBulletPoint(BuildContext context, String text) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(right: 10),
-            child: Icon(
-              Icons.circle,
-              size: 20,
-              color: Colors.white, // Change bullet point color to white
-            ),
-          ),
-          Expanded(
-            child: Text(
-              text,
-              style: TextStyle(
-                  fontSize: 24,
-                  color: Colors.white), // Increased font size and colored text
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+void main() {
+  runApp(MaterialApp(
+    home: TriangularNumberInfoPage(),
+  ));
 }

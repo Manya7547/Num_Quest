@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'lessons/even_numbers/even_number_info_page.dart';
 import 'lessons/odd_numbers/odd_number_info_page.dart';
 import 'lessons/prime_numbers/prime_number_info_page.dart';
-import 'lessons/composite_number_info_page.dart';
+import 'lessons/composite_numbers/composite_number_info_page.dart';
 import 'lessons/triangular_number_info_page.dart';
 import 'lessons/perfect_number_info_page.dart';
 import 'lessons/square_number_info_page.dart';
 import 'lessons/fibonacci_number_info_page.dart';
 import 'lessons/factors_info_page.dart';
 import 'lessons/cube_number_info_page.dart';
-import 'lessons/modulo_number_info_page.dart';
 
 class LessonsPage extends StatelessWidget {
   @override
@@ -21,8 +20,7 @@ class LessonsPage extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage(
-                'assets/lesson_page.jpeg'),
+            image: AssetImage('assets/lesson_page.jpeg'),
             fit: BoxFit.cover,
           ),
         ),
@@ -123,15 +121,6 @@ class LessonsPage extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                             builder: (context) => CubeNumberInfoPage()));
-                  },
-                ),
-                LessonButton(
-                  title: 'Modulo Numbers',
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ModuloNumberInfoPage()));
                   },
                 ),
                 // Add more LessonButton widgets for each lesson
