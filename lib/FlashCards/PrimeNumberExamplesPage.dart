@@ -42,7 +42,7 @@ class _PrimeNumberPracticePageState extends State<PrimeNumberPracticePage> {
       'answer': '25',
     },
     {
-      'question_en': 'English: What is the smallest prime number greater than 20?
+      'question_en': 'English: What is the smallest prime number greater than 20?',
       'question_es': '¿Cuál es el número primo más pequeño mayor que 20?',
       'options': ['23', '19', '21'],
       'answer': '23',
@@ -226,7 +226,7 @@ class _PrimeNumberPracticePageState extends State<PrimeNumberPracticePage> {
                 style: const TextStyle(fontSize: 25, color: Colors.black54),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: options.map((option) {
@@ -235,8 +235,8 @@ class _PrimeNumberPracticePageState extends State<PrimeNumberPracticePage> {
                       _checkAnswer(option, answer);
                     },
                     style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      backgroundColor: Colors.lightBlueAccent.shade200,
+                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      backgroundColor: Colors.yellow.shade500,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),

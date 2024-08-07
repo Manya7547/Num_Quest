@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'PrimeNumberExamplesPage.dart';
 import 'EvenNumberExamplesPage.dart';
-import 'OddNumberExamplesPage.dart';
+import 'SquaresPracticePage.dart';
 
 class PracticePage extends StatelessWidget {
   @override
@@ -17,89 +17,93 @@ class PracticePage extends StatelessWidget {
             fit: BoxFit.cover,
           ),
         ),
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(100, 100, 100, 100),
-            child: GridView.count(
-              crossAxisCount: 4,
-              crossAxisSpacing: 20.0,
-              mainAxisSpacing: 20.0,
-              shrinkWrap: true,
-              children: [
-                LessonButton(
-                  title: 'ODD & EVEN\nNUMBERS',
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => EvenNumberExamplesPage()));
-                  },
-                ),
-                LessonButton(
-                  title: 'PRIME\nNUMBERS',
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => PrimeNumberPracticePage()));
-                  },
-                ),
-                LessonButton(
-                  title: 'COMPOSITE\nNUMBERS',
-                  onPressed: () {
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) => CompositeNumberInfoPage()));
-                  },
-                ),
-                LessonButton(
-                  title: 'PERFECT\nNUMBERS',
-                  onPressed: () {
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) => PerfectNumberInfoPage()));
-                  },
-                ),
-                LessonButton(
-                  title: 'SQUARE NUMBERS',
-                  onPressed: () {
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) => SquareNumberInfoPage()));
-                  },
-                ),
-                LessonButton(
-                  title: 'FACTORS',
-                  onPressed: () {
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) => FactorsInfoPage()));
-                  },
-                ),
-                LessonButton(
-                  title: 'CUBE\nNUMBERS',
-                  onPressed: () {
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) => CubeNumberInfoPage()));
-                  },
-                ),
-                LessonButton(
-                  title: 'MODULO\nNUMBERS',
-                  onPressed: () {
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) => ModuloNumberInfoPage()));
-                  },
-                ),
-              ],
-            ),
+        child: Padding(
+          padding: const EdgeInsets.all(100.0), // Adjust padding as needed
+          child: GridView.count(
+            crossAxisCount: 4, // Number of columns
+            crossAxisSpacing: 10.0, // Space between columns
+            mainAxisSpacing: 10.0, // Space between rows
+            childAspectRatio: 1.2, // Aspect ratio for smaller buttons
+            children: [
+              LessonButton(
+                title: 'ODD & EVEN\nNUMBERS',
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => EvenNumberExamplesPage(),
+                    ),
+                  );
+                },
+              ),
+              LessonButton(
+                title: 'PRIME\nNUMBERS',
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PrimeNumberPracticePage(),
+                    ),
+                  );
+                },
+              ),
+              LessonButton(
+                title: 'COMPOSITE\nNUMBERS',
+                onPressed: () {
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) => CompositeNumberExamplePage(),
+                  //   ),
+                  // );
+                },
+              ),
+              LessonButton(
+                title: 'PERFECT\nNUMBERS',
+                onPressed: () {
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (context) => PerfectNumberInfoPage()));
+                },
+              ),
+              LessonButton(
+                title: 'SQUARE\nNUMBERS',
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SquaresExamplePage()));
+                },
+              ),
+              LessonButton(
+                title: 'FACTORS',
+                onPressed: () {
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (context) => FactorsInfoPage()));
+                },
+              ),
+              LessonButton(
+                title: 'CUBE\nNUMBERS',
+                onPressed: () {
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (context) => CubeNumberInfoPage()));
+                },
+              ),
+              LessonButton(
+                title: 'MODULO\nNUMBERS',
+                onPressed: () {
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (context) => ModuloNumberInfoPage()));
+                },
+              ),
+            ],
           ),
         ),
       ),
@@ -116,12 +120,12 @@ class LessonButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(0),
+      padding: EdgeInsets.all(20), // Ensure minimal padding
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           elevation: 3, // Remove button shadow
-          backgroundColor: Colors.white30,
+          backgroundColor: Colors.white70,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
@@ -131,9 +135,9 @@ class LessonButton extends StatelessWidget {
             title,
             textAlign: TextAlign.center, // Align text in the center
             style: TextStyle(
-              fontSize: 20, // Change font size
-              fontWeight: FontWeight.bold, // Make text bold
-              fontFamily: 'Poppins', // Change font family if needed
+              fontSize: 30, // Reduce font size for smaller buttons
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Poppins',
               color: Colors.black,
             ),
           ),

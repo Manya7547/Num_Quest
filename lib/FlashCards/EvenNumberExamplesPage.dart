@@ -119,7 +119,7 @@ class _EvenNumberExamplesPageState extends State<EvenNumberExamplesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_isEnglish ? 'Even Number Examples' : 'Ejemplos de Números Pares'),
+        title: Text(_isEnglish ? 'Even Number Practice' : 'Ejemplos de Números Primos'),
       ),
       body: Container(
         width: double.infinity,
@@ -138,8 +138,8 @@ class _EvenNumberExamplesPageState extends State<EvenNumberExamplesPage> {
               children: <Widget>[
                 Text(
                   _isEnglish
-                      ? 'Tap on the number to reveal the answer'
-                      : 'Pulsa estos números para revelar si son pares o impares.',
+                      ? 'Tap on the card to reveal the answer'
+                      : 'Toca la tarjeta para revelar la respuesta',
                   style: GoogleFonts.lato(
                     textStyle: TextStyle(
                       fontSize: 38,

@@ -3,69 +3,49 @@ import 'package:flip_card/flip_card.dart';
 import "package:google_fonts/google_fonts.dart";
 
 
-class EvenNumberExamplesPage extends StatefulWidget {
-  const EvenNumberExamplesPage({super.key});
+
+
+
+class SquaresExamplePage extends StatefulWidget {
+  const SquaresExamplePage({super.key});
 
   @override
-  _EvenNumberExamplesPageState createState() {
-    return _EvenNumberExamplesPageState();
+  _SquaresExamplePageState createState() {
+    return _SquaresExamplePageState();
   }
 }
 
-class _EvenNumberExamplesPageState extends State<EvenNumberExamplesPage> {
+class _SquaresExamplePageState extends State<SquaresExamplePage> {
   bool _isEnglish = true; // State to keep track of language
   List<Map<String, String>> _examples = [];
   final List<Map<String, String>> _allExamples = [
+    //
     {
-      'number': '2',
-      'description_en': 'It\'s EVEN! \nThere are 2 sides to a coin: heads and tails!',
-      'description_es': '¡Es PAR! \n¡Hay 2 lados en una moneda: cara y cruz!',
+      'Front_en': 'What is the square of 4?',
+      'Front_es': '¿Cuál es el cuadrado de 4?',
+      'Back_en': '16',
+      'Back_es': '16',
     },
     {
-      'number': '4',
-      'description_en': 'It\'s EVEN! \nFour wheels on a car make it even!',
-      'description_es': '¡Es PAR! \n¡Cuatro ruedas en un coche lo hacen par!',
+      'Front_en': 'What is the square root of 81?',
+      'Front_es': ' ¿Cuál es la raíz cuadrada de 81?',
+      'Back_en': '9',
+      'Back_es': '9',
     },
     {
-      'number': '6',
-      'description_en': 'It\'s EVEN! \nSix legs on three insects, all even!',
-      'description_es': '¡Es PAR! \n¡Seis patas en tres insectos, todo par!',
+    'Front_en': 'True or False: 144 is a square number.',
+    'Front_es': ' Verdadero o Falso: 144 es un número cuadrado.',
+    'Back_en': 'True\n(12 × 12 = 144)',
+    'Back_es': 'Verdadero\n(12 × 12 = 144)',
     },
     {
-      'number': '8',
-      'description_en': 'It\'s EVEN! \nEight slices of pizza, let\'s share!',
-      'description_es': '¡Es PAR! \n¡Ocho porciones de pizza, vamos a compartir!',
+      'Front_en': 'What is the smallest two-digit square number?',
+      'Front_es': '¿Cuál es el menor número cuadrado de dos dígitos?',
+      'Back_en': '16',
+      'Back_es': '16',
+
     },
-    {
-      'number': '10',
-      'description_en': 'It\'s EVEN! \n10 cookies: 5 for you and 5 for your friend!',
-      'description_es': '¡Es PAR! \n10 galletas: ¡5 para ti y 5 para tu amigo!',
-    },
-    {
-      'number': '12',
-      'description_en': 'It\'s EVEN! \nA dozen eggs, all even!',
-      'description_es': '¡Es PAR! \nUna docena de huevos, todo par!',
-    },
-    {
-      'number': '14',
-      'description_en': 'It\'s EVEN! \nFourteen stars in the sky, paired up high!',
-      'description_es': '¡Es PAR! \n¡Catorce estrellas en el cielo, emparejadas en lo alto!',
-    },
-    {
-      'number': '16',
-      'description_en': 'It\'s EVEN! \nSixteen colorful blocks, build in pairs!',
-      'description_es': '¡Es PAR! \n¡Dieciséis bloques coloridos, construye en pares!',
-    },
-    {
-      'number': '18',
-      'description_en': 'It\'s EVEN! \nEighteen fish in the aquarium, swimming in pairs!',
-      'description_es': '¡Es PAR! \n¡Dieciocho peces en el acuario, nadando en parejas!',
-    },
-    {
-      'number': '20',
-      'description_en': 'It\'s EVEN! \nTwenty crayons, perfect for sharing!',
-      'description_es': '¡Es PAR! \n¡Veinte crayones, perfectos para compartir!',
-    },
+
   ];
 
   @override
@@ -84,14 +64,14 @@ class _EvenNumberExamplesPageState extends State<EvenNumberExamplesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_isEnglish ? 'Even Number Examples' : 'Ejemplos de Números Pares'),
+        title: Text(_isEnglish ? 'Square Number Practice' : 'Práctica de Números Cuadrados'),
       ),
       body: Container(
         width: double.infinity,
         height: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/demo1.jpg'),
+            image: AssetImage('background1.jpg'),
             fit: BoxFit.cover,
           ),
         ),
@@ -103,12 +83,13 @@ class _EvenNumberExamplesPageState extends State<EvenNumberExamplesPage> {
               children: <Widget>[
                 Text(
                   _isEnglish
-                      ? 'Tap on these numbers to reveal if they are even or odd'
-                      : 'Pulsa estos números para revelar si son pares o impares.',
+                      ? 'Tap on the card to reveal the answer'
+                      : 'Toca la tarjeta para revelar la respuesta',
                   style: GoogleFonts.lato(
                     textStyle: TextStyle(
                       fontSize: 38,
                       color: Colors.black,
+                      fontFamily: 'Poppins',
                       fontWeight: FontWeight.bold,
                       shadows: [
                         Shadow(
@@ -132,8 +113,8 @@ class _EvenNumberExamplesPageState extends State<EvenNumberExamplesPage> {
                       itemCount: _examples.length,
                       itemBuilder: (context, index) {
                         return _buildExampleCard(
-                          _examples[index]['number']!,
-                          _isEnglish ? _examples[index]['description_en']! : _examples[index]['description_es']!,
+                          _isEnglish ? _examples[index]['Front_en']! : _examples[index]['Front_es']!,
+                          _isEnglish ? _examples[index]['Back_en']! : _examples[index]['Back_es']!,
                         );
                       },
                     ),
@@ -151,7 +132,7 @@ class _EvenNumberExamplesPageState extends State<EvenNumberExamplesPage> {
                         onPressed: _refreshExamples,
                         style: ElevatedButton.styleFrom(
                           padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                          backgroundColor: Colors.blue,
+                          backgroundColor: Colors.lightBlueAccent.shade200,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
@@ -169,7 +150,7 @@ class _EvenNumberExamplesPageState extends State<EvenNumberExamplesPage> {
                         },
                         style: ElevatedButton.styleFrom(
                           padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                          backgroundColor: Colors.green,
+                          backgroundColor: Colors.amber.shade700,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
@@ -191,6 +172,7 @@ class _EvenNumberExamplesPageState extends State<EvenNumberExamplesPage> {
   }
 
 
+
   Widget _buildExampleCard(String number, String description) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
@@ -200,13 +182,13 @@ class _EvenNumberExamplesPageState extends State<EvenNumberExamplesPage> {
           height: 150,
           width: MediaQuery.of(context).size.width * 0.8, // Adjust width
           decoration: BoxDecoration(
-            color: Colors.teal.shade500,
+            color: Colors.white70,
             borderRadius: BorderRadius.circular(15.0),
           ),
           child: Center(
             child: Text(
               number,
-              style: const TextStyle(fontSize: 50, color: Colors.white),
+              style: const TextStyle(fontSize: 25, color: Colors.black54),
             ),
           ),
         ),
@@ -214,7 +196,7 @@ class _EvenNumberExamplesPageState extends State<EvenNumberExamplesPage> {
           height: 150,
           width: MediaQuery.of(context).size.width * 0.8, // Adjust width
           decoration: BoxDecoration(
-            color: Colors.amber.shade500,
+            color: Colors.grey.shade200,
             borderRadius: BorderRadius.circular(15.0),
           ),
           child: Center(
@@ -222,7 +204,7 @@ class _EvenNumberExamplesPageState extends State<EvenNumberExamplesPage> {
               padding: const EdgeInsets.all(10.0),
               child: Text(
                 description,
-                style: const TextStyle(fontSize: 25, color: Colors.white),
+                style: const TextStyle(fontSize: 25, color: Colors.black54),
                 textAlign: TextAlign.center,
               ),
             ),
