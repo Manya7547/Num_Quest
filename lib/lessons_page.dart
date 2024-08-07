@@ -9,7 +9,6 @@ import 'lessons/square_number_info_page.dart';
 import 'lessons/fibonacci_number_info_page.dart';
 import 'lessons/factors_info_page.dart';
 import 'lessons/cube_number_info_page.dart';
-import 'lessons/modulo_number_info_page.dart';
 
 class LessonsPage extends StatelessWidget {
   @override
@@ -122,15 +121,6 @@ class LessonsPage extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                             builder: (context) => CubeNumberInfoPage()));
-                  },
-                ),
-                LessonButton(
-                  title: 'Modulo Numbers',
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ModuloNumberInfoPage()));
                   },
                 ),
                 // Add more LessonButton widgets for each lesson
