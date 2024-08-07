@@ -37,6 +37,41 @@ class _EvenNumberExamplesPageState extends State<EvenNumberExamplesPage> {
       'description_es': '¡Es PAR! \n¡Ocho porciones de pizza, vamos a compartir!',
     },
     {
+      'number': '75',
+      'description_en': 'It\'s ODD! \n75 is not divisible by 2 and it ends with 5. \nRemember, odd numbers are not divisible by 2 and end with 1, 3, 5, 7, or 9.',
+      'description_es': '¡Es IMPAR! \n75 no es divisible por 2 y termina en 5. \nRecuerda, los números impares no son divisibles por 2 y terminan en 1, 3, 5, 7 o 9.'
+    },
+    {
+      'number': '45',
+      'description_en': 'It\'s ODD! \n45 is not divisible by 2 and it ends with 5. \nRemember, odd numbers are not divisible by 2 and end with 1, 3, 5, 7, or 9.',
+      'description_es': '¡Es IMPAR! \n45 no es divisible por 2 y termina en 5. \nRecuerda, los números impares no son divisibles por 2 y terminan en 1, 3, 5, 7 o 9.'
+    },
+    {
+      'number': '9',
+      'description_en': 'It\'s ODD! \n9 is not divisible by 2 and it ends with 9. \nRemember, odd numbers are not divisible by 2 and end with 1, 3, 5, 7, or 9.',
+      'description_es': '¡Es IMPAR! \n9 no es divisible por 2 y termina en 9. \nRecuerda, los números impares no son divisibles por 2 y terminan en 1, 3, 5, 7 o 9.'
+    },
+    {
+      'number': '15',
+      'description_en': 'It\'s ODD! \n15 is not divisible by 2 and it ends with 5. \nRemember, odd numbers are not divisible by 2 and end with 1, 3, 5, 7, or 9.',
+      'description_es': '¡Es IMPAR! \n15 no es divisible por 2 y termina en 5. \nRecuerda, los números impares no son divisibles por 2 y terminan en 1, 3, 5, 7 o 9.'
+    },
+    {
+      'number': '55',
+      'description_en': 'It\'s ODD! \n55 is not divisible by 2 and it ends with 5. \nRemember, odd numbers are not divisible by 2 and end with 1, 3, 5, 7, or 9.',
+      'description_es': '¡Es IMPAR! \n55 no es divisible por 2 y termina en 5. \nRecuerda, los números impares no son divisibles por 2 y terminan en 1, 3, 5, 7 o 9.'
+    },
+    {
+      'number': '9',
+      'description_en': 'It\'s ODD! \n9 is not divisible by 2 and it ends with 9. \nRemember, odd numbers are not divisible by 2 and end with 1, 3, 5, 7, or 9.',
+      'description_es': '¡Es IMPAR! \n9 no es divisible por 2 y termina en 9. \nRecuerda, los números impares no son divisibles por 2 y terminan en 1, 3, 5, 7 o 9.'
+    },
+    {
+      'number': '31',
+      'description_en': 'It\'s ODD! \n31 is not divisible by 2 and it ends with 1. \nRemember, odd numbers are not divisible by 2 and end with 1, 3, 5, 7, or 9.',
+      'description_es': '¡Es IMPAR! \n31 no es divisible por 2 y termina en 1. \nRecuerda, los números impares no son divisibles por 2 y terminan en 1, 3, 5, 7 o 9.'
+    },
+    {
       'number': '10',
       'description_en': 'It\'s EVEN! \n10 cookies: 5 for you and 5 for your friend!',
       'description_es': '¡Es PAR! \n10 galletas: ¡5 para ti y 5 para tu amigo!',
@@ -103,12 +138,13 @@ class _EvenNumberExamplesPageState extends State<EvenNumberExamplesPage> {
               children: <Widget>[
                 Text(
                   _isEnglish
-                      ? 'Tap on these numbers to reveal if they are even or odd'
+                      ? 'Tap on the number to reveal the answer'
                       : 'Pulsa estos números para revelar si son pares o impares.',
                   style: GoogleFonts.lato(
                     textStyle: TextStyle(
                       fontSize: 38,
                       color: Colors.black,
+                      fontFamily: 'Poppins',
                       fontWeight: FontWeight.bold,
                       shadows: [
                         Shadow(

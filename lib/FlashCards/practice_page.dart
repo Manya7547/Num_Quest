@@ -27,7 +27,7 @@ class PracticePage extends StatelessWidget {
               shrinkWrap: true,
               children: [
                 LessonButton(
-                  title: 'ODD & Even Numbers',
+                  title: 'ODD & EVEN\nNUMBERS',
                   onPressed: () {
                     Navigator.push(
                         context,
@@ -36,7 +36,7 @@ class PracticePage extends StatelessWidget {
                   },
                 ),
                 LessonButton(
-                  title: 'Prime Numbers',
+                  title: 'PRIME\nNUMBERS',
                   onPressed: () {
                     Navigator.push(
                         context,
@@ -45,7 +45,7 @@ class PracticePage extends StatelessWidget {
                   },
                 ),
                 LessonButton(
-                  title: 'Composite Numbers',
+                  title: 'COMPOSITE\nNUMBERS',
                   onPressed: () {
                     // Navigator.push(
                     //     context,
@@ -54,7 +54,7 @@ class PracticePage extends StatelessWidget {
                   },
                 ),
                 LessonButton(
-                  title: 'Perfect Numbers',
+                  title: 'PERFECT\nNUMBERS',
                   onPressed: () {
                     // Navigator.push(
                     //     context,
@@ -63,7 +63,7 @@ class PracticePage extends StatelessWidget {
                   },
                 ),
                 LessonButton(
-                  title: 'Square Numbers',
+                  title: 'SQUARE NUMBERS',
                   onPressed: () {
                     // Navigator.push(
                     //     context,
@@ -72,7 +72,7 @@ class PracticePage extends StatelessWidget {
                   },
                 ),
                 LessonButton(
-                  title: 'Factors',
+                  title: 'FACTORS',
                   onPressed: () {
                     // Navigator.push(
                     //     context,
@@ -81,7 +81,7 @@ class PracticePage extends StatelessWidget {
                   },
                 ),
                 LessonButton(
-                  title: 'Cube Numbers',
+                  title: 'CUBE\nNUMBERS',
                   onPressed: () {
                     // Navigator.push(
                     //     context,
@@ -90,7 +90,7 @@ class PracticePage extends StatelessWidget {
                   },
                 ),
                 LessonButton(
-                  title: 'Modulo Numbers',
+                  title: 'MODULO\nNUMBERS',
                   onPressed: () {
                     // Navigator.push(
                     //     context,
@@ -133,7 +133,8 @@ class LessonButton extends StatelessWidget {
             style: TextStyle(
               fontSize: 20, // Change font size
               fontWeight: FontWeight.bold, // Make text bold
-              fontFamily: 'Arial', // Change font family if needed
+              fontFamily: 'Poppins', // Change font family if needed
+              color: Colors.black,
             ),
           ),
         ),

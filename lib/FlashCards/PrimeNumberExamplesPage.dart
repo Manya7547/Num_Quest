@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flip_card/flip_card.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class PrimeNumberPracticePage extends StatefulWidget {
   @override
@@ -9,77 +9,59 @@ class PrimeNumberPracticePage extends StatefulWidget {
 
 class _PrimeNumberPracticePageState extends State<PrimeNumberPracticePage> {
   bool _isEnglish = true; // State to keep track of language
-  List<Map<String, String>> _examples = [];
-  final List<Map<String, String>> _allExamples = [
+  List<Map<String, dynamic>> _examples = [];
+  final List<Map<String, dynamic>> _allExamples = [
     {
-      'question_en': 'A prime number can be divided by...',
-      'answer_en': '1 and itself only',
-      'question_es': 'Un número primo puede ser dividido por...',
-      'answer_es': '1 y sí mismo solamente',
+      'question_en': 'Which of the following is a prime number?',
+      'question_es': '¿Cuál de los siguientes es un número primo?',
+      'options': ['4', '6', '2'],
+      'answer': '2',
     },
     {
-      'question_en': 'Which of the following is a prime number?\n13\n15\n21',
-      'answer_en': '13',
-      'question_es': '¿Cuál de los siguientes es un número primo?\n13\n15\n21',
-      'answer_es': '13',
+      'question_en': 'Which of the following is not a prime number?',
+      'question_es': '¿Cuál de los siguientes no es un número primo?',
+      'options': ['2', '3', '9'],
+      'answer': '9',
     },
     {
-      'question_en': 'Which of the following is a prime number?\n4\n6\n2',
-      'answer_en': '2',
-      'question_es': '¿Cuál de los siguientes es un número primo?\n4\n6\n2',
-      'answer_es': '2',
+      'question_en': 'How many prime numbers are there between 10 and 25?',
+      'question_es': '¿Cuántos números primos hay entre 10 y 25?',
+      'options': ['5', '4', '3'],
+      'answer': '5',
     },
     {
-      'question_en': 'Which of the following is not a prime number?\n2\n3\n9',
-      'answer_en': '9',
-      'question_es': '¿Cuál de los siguientes no es un número primo?\n2\n3\n9',
-      'answer_es': '9',
+      'question_en': 'Which of these is a list of prime numbers between 61 and 75?',
+      'question_es': '¿Cuál de estas es una lista de números primos entre 61 y 75?',
+      'options': ['61, 67, 71, 73', '67, 71, 73', '63, 67, 71'],
+      'answer': '67, 71, 73',
     },
     {
-      'question_en':
-          'Which of the following is the lowest prime number?\n1\n2\n3',
-      'answer_en': '2',
-      'question_es':
-          '¿Cuál de los siguientes es el número primo más bajo?\n1\n2\n3',
-      'answer_es': '2',
+      'question_en': 'How many prime numbers are there between 0 and 100?',
+      'question_es': '¿Cuántos números primos hay entre 0 y 100?',
+      'options': ['26', '24', '25'],
+      'answer': '25',
     },
     {
-      'question_en':
-          'Which of these is the best definition of a prime number?\nA number that wouldn’t be in any times table\nA number that has only 2 factors: 1 and itself\nAn odd number that doesn’t appear in any other times tables',
-      'answer_en': 'A number that has only 2 factors: 1 and itself',
-      'question_es':
-          '¿Cuál de estas es la mejor definición de un número primo?\nUn número que no estaría en ninguna tabla de multiplicar\nUn número que solo tiene 2 factores: 1 y sí mismo\nUn número impar que no aparece en ninguna otra tabla de multiplicar',
-      'answer_es': 'Un número que solo tiene 2 factores: 1 y sí mismo',
+      'question_en': 'English: What is the smallest prime number greater than 20?
+      'question_es': '¿Cuál es el número primo más pequeño mayor que 20?',
+      'options': ['23', '19', '21'],
+      'answer': '23',
     },
     {
-      'question_en': 'Which of these is a prime number?\n0\n1\n2',
-      'answer_en': '2',
-      'question_es': '¿Cuál de estos es un número primo?\n0\n1\n2',
-      'answer_es': '2',
+      'question_en': ' How many prime numbers are there between 50 and 60?',
+      'question_es': '¿Cuántos números primos hay entre 50 y 60?',
+      'options': ['2', '1', '3'],
+      'answer': '1',
     },
     {
-      'question_en':
-          'How many prime numbers are there between 10 and 25?\n5\n4\n11 and 17',
-      'answer_en': '5',
-      'question_es':
-          '¿Cuántos números primos hay entre 10 y 25?\n5\n4\n11 y 17',
-      'answer_es': '5',
+      'question_en': 'What is the sum of the first three prime numbers?',
+      'question_es': '¿Cuál es la suma de los primeros tres números primos?',
+      'options': ['10', '12', '17'],
+      'answer': '17',
     },
-    {
-      'question_en':
-          'Which of these is a list of prime numbers between 61 and 75?\n67, 71, 73\n61, 67, 71, 73\n63, 67, 71',
-      'answer_en': '67, 71, 73',
-      'question_es':
-          '¿Cuál de estas es una lista de números primos entre 61 y 75?\n67, 71, 73\n61, 67, 71, 73\n63, 67, 71',
-      'answer_es': '67, 71, 73',
-    },
-    {
-      'question_en':
-          'How many prime numbers are there between 0 and 100?\n24\n25\n26',
-      'answer_en': '25',
-      'question_es': '¿Cuántos números primos hay entre 0 y 100?\n24\n25\n26',
-      'answer_es': '25',
-    },
+
+
+    // Add more questions here
   ];
 
   @override
@@ -89,7 +71,25 @@ class _PrimeNumberPracticePageState extends State<PrimeNumberPracticePage> {
   }
 
   void _refreshExamples() {
-    _examples = (_allExamples.toList()..shuffle()).take(10).toList();
+    setState(() {
+      _examples = (_allExamples.toList()..shuffle()).take(3).toList();
+    });
+  }
+
+  void _checkAnswer(String selectedOption, String correctAnswer) {
+    final message = selectedOption == correctAnswer ? 'Correct!' : 'Try Again!';
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: Text(message),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text('OK'),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -101,10 +101,11 @@ class _PrimeNumberPracticePageState extends State<PrimeNumberPracticePage> {
             : 'Práctica de Números Primos'),
       ),
       body: Container(
+        width: double.infinity,
+        height: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage(
-                'assets/classboard.jpg'), // Set your background image here
+            image: AssetImage('background1.jpg'),
             fit: BoxFit.cover,
           ),
         ),
@@ -112,52 +113,62 @@ class _PrimeNumberPracticePageState extends State<PrimeNumberPracticePage> {
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
                   _isEnglish
-                      ? 'Tap on these questions to reveal the answer'
-                      : 'Pulsa estas preguntas para revelar la respuesta',
-                  style: TextStyle(
-                      fontSize: 28,
+                      ? 'Select the correct answer'
+                      : 'Selecciona la respuesta correcta',
+                  style: GoogleFonts.lato(
+                    textStyle: TextStyle(
+                      fontSize: 38,
                       color: Colors.black,
-                      fontWeight: FontWeight.bold),
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.bold,
+                      shadows: [
+                        Shadow(
+                          offset: const Offset(5.0, 5.0),
+                          blurRadius: 3.0,
+                          color: Colors.grey.withOpacity(0.5),
+                        ),
+                      ],
+                    ),
+                  ),
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 30),
                 Expanded(
                   child: ListView.builder(
                     itemCount: _examples.length,
                     itemBuilder: (context, index) {
-                      return _buildExampleCard(
+                      return _buildQuestionCard(
                         _examples[index]['question_en']!,
-                        _examples[index]['answer_en']!,
+                        _examples[index]['options'],
+                        _examples[index]['answer']!,
                         _examples[index]['question_es']!,
-                        _examples[index]['answer_es']!,
+                        _examples[index]['options'],
+                        _examples[index]['answer']!,
                       );
                     },
                   ),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 30),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          _refreshExamples();
-                        });
-                      },
+                      onPressed: _refreshExamples,
                       style: ElevatedButton.styleFrom(
                         padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                        backgroundColor: Colors.blue,
+                        EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                        backgroundColor: Colors.lightBlueAccent.shade200,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),
                       ),
                       child: Text(
                         _isEnglish ? 'More Examples' : 'Más ejemplos',
-                        style: TextStyle(fontSize: 18, color: Colors.white),
+                        style: TextStyle(fontSize: 20, color: Colors.white),
                       ),
                     ),
                     ElevatedButton(
@@ -168,15 +179,15 @@ class _PrimeNumberPracticePageState extends State<PrimeNumberPracticePage> {
                       },
                       style: ElevatedButton.styleFrom(
                         padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                        backgroundColor: Colors.green,
+                        EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                        backgroundColor: Colors.amber.shade700,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),
                       ),
                       child: Text(
                         _isEnglish ? 'Tap to Translate' : 'Toca para Traducir',
-                        style: TextStyle(fontSize: 18, color: Colors.white),
+                        style: TextStyle(fontSize: 20, color: Colors.white),
                       ),
                     ),
                   ],
@@ -189,43 +200,55 @@ class _PrimeNumberPracticePageState extends State<PrimeNumberPracticePage> {
     );
   }
 
-  Widget _buildExampleCard(
-      String questionEn, String answerEn, String questionEs, String answerEs) {
+  Widget _buildQuestionCard(
+      String questionEn,
+      List<String> options,
+      String answer,
+      String questionEs,
+      List<String> optionsEs,
+      String answerEs,
+      ) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
-      child: FlipCard(
-        direction: FlipDirection.HORIZONTAL,
-        front: Container(
-          height: 250,
+      child: Center(
+        child: Container(
+          height: 200,
+          width: MediaQuery.of(context).size.width * 0.8, // Adjust width to be smaller
           decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 161, 190, 242),
-            borderRadius: BorderRadius.circular(10.0),
+            color: Colors.white70,
+            borderRadius: BorderRadius.circular(15.0),
           ),
-          child: Center(
-            child: Text(
-              _isEnglish ? questionEn : questionEs,
-              style: const TextStyle(
-                  fontSize: 30, color: Color.fromARGB(255, 16, 4, 4)),
-              textAlign: TextAlign.center,
-            ),
-          ),
-        ),
-        back: Container(
-          height: 250,
-          decoration: BoxDecoration(
-            color: Colors.orangeAccent,
-            borderRadius: BorderRadius.circular(10.0),
-          ),
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Text(
-                _isEnglish ? answerEn : answerEs,
-                style: const TextStyle(
-                    fontSize: 30, color: Color.fromARGB(255, 14, 4, 4)),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                _isEnglish ? questionEn : questionEs,
+                style: const TextStyle(fontSize: 25, color: Colors.black54),
                 textAlign: TextAlign.center,
               ),
-            ),
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: options.map((option) {
+                  return ElevatedButton(
+                    onPressed: () {
+                      _checkAnswer(option, answer);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      backgroundColor: Colors.lightBlueAccent.shade200,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    child: Text(
+                      option,
+                      style: TextStyle(fontSize: 20, color: Colors.white),
+                    ),
+                  );
+                }).toList(),
+              ),
+            ],
           ),
         ),
       ),
