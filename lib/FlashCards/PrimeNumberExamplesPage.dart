@@ -30,8 +30,10 @@ class _PrimeNumberPracticePageState extends State<PrimeNumberPracticePage> {
       'answer': '5',
     },
     {
-      'question_en': 'Which of these is a list of prime numbers between 61 and 75?',
-      'question_es': '¿Cuál de estas es una lista de números primos entre 61 y 75?',
+      'question_en':
+          'Which of these is a list of prime numbers between 61 and 75?',
+      'question_es':
+          '¿Cuál de estas es una lista de números primos entre 61 y 75?',
       'options': ['61, 67, 71, 73', '67, 71, 73', '63, 67, 71'],
       'answer': '67, 71, 73',
     },
@@ -42,7 +44,8 @@ class _PrimeNumberPracticePageState extends State<PrimeNumberPracticePage> {
       'answer': '25',
     },
     {
-      'question_en': 'English: What is the smallest prime number greater than 20?',
+      'question_en':
+          'English: What is the smallest prime number greater than 20?',
       'question_es': '¿Cuál es el número primo más pequeño mayor que 20?',
       'options': ['23', '19', '21'],
       'answer': '23',
@@ -59,7 +62,6 @@ class _PrimeNumberPracticePageState extends State<PrimeNumberPracticePage> {
       'options': ['10', '12', '17'],
       'answer': '17',
     },
-
 
     // Add more questions here
   ];
@@ -105,7 +107,7 @@ class _PrimeNumberPracticePageState extends State<PrimeNumberPracticePage> {
         height: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('background1.jpg'),
+            image: AssetImage('assets/background1.jpg'),
             fit: BoxFit.cover,
           ),
         ),
@@ -160,7 +162,7 @@ class _PrimeNumberPracticePageState extends State<PrimeNumberPracticePage> {
                       onPressed: _refreshExamples,
                       style: ElevatedButton.styleFrom(
                         padding:
-                        EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                            EdgeInsets.symmetric(horizontal: 30, vertical: 15),
                         backgroundColor: Colors.lightBlueAccent.shade200,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
@@ -179,7 +181,7 @@ class _PrimeNumberPracticePageState extends State<PrimeNumberPracticePage> {
                       },
                       style: ElevatedButton.styleFrom(
                         padding:
-                        EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                            EdgeInsets.symmetric(horizontal: 30, vertical: 15),
                         backgroundColor: Colors.amber.shade700,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
@@ -201,19 +203,20 @@ class _PrimeNumberPracticePageState extends State<PrimeNumberPracticePage> {
   }
 
   Widget _buildQuestionCard(
-      String questionEn,
-      List<String> options,
-      String answer,
-      String questionEs,
-      List<String> optionsEs,
-      String answerEs,
-      ) {
+    String questionEn,
+    List<String> options,
+    String answer,
+    String questionEs,
+    List<String> optionsEs,
+    String answerEs,
+  ) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: Center(
         child: Container(
           height: 200,
-          width: MediaQuery.of(context).size.width * 0.8, // Adjust width to be smaller
+          width: MediaQuery.of(context).size.width *
+              0.8, // Adjust width to be smaller
           decoration: BoxDecoration(
             color: Colors.white70,
             borderRadius: BorderRadius.circular(15.0),
@@ -235,7 +238,8 @@ class _PrimeNumberPracticePageState extends State<PrimeNumberPracticePage> {
                       _checkAnswer(option, answer);
                     },
                     style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
                       backgroundColor: Colors.yellow.shade500,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),

@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flip_card/flip_card.dart';
 import "package:google_fonts/google_fonts.dart";
 
-
-
-
-
 class SquaresExamplePage extends StatefulWidget {
   const SquaresExamplePage({super.key});
 
@@ -33,19 +29,17 @@ class _SquaresExamplePageState extends State<SquaresExamplePage> {
       'Back_es': '9',
     },
     {
-    'Front_en': 'True or False: 144 is a square number.',
-    'Front_es': ' Verdadero o Falso: 144 es un número cuadrado.',
-    'Back_en': 'True\n(12 × 12 = 144)',
-    'Back_es': 'Verdadero\n(12 × 12 = 144)',
+      'Front_en': 'True or False: 144 is a square number.',
+      'Front_es': ' Verdadero o Falso: 144 es un número cuadrado.',
+      'Back_en': 'True\n(12 × 12 = 144)',
+      'Back_es': 'Verdadero\n(12 × 12 = 144)',
     },
     {
       'Front_en': 'What is the smallest two-digit square number?',
       'Front_es': '¿Cuál es el menor número cuadrado de dos dígitos?',
       'Back_en': '16',
       'Back_es': '16',
-
     },
-
   ];
 
   @override
@@ -64,22 +58,26 @@ class _SquaresExamplePageState extends State<SquaresExamplePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_isEnglish ? 'Square Number Practice' : 'Práctica de Números Cuadrados'),
+        title: Text(_isEnglish
+            ? 'Square Number Practice'
+            : 'Práctica de Números Cuadrados'),
       ),
       body: Container(
         width: double.infinity,
         height: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('background1.jpg'),
+            image: AssetImage('assets/background1.jpg'),
             fit: BoxFit.cover,
           ),
         ),
-        child: Center( // Wrap the entire content in a Center widget
+        child: Center(
+          // Wrap the entire content in a Center widget
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center, // Center the column vertically
+              mainAxisAlignment:
+                  MainAxisAlignment.center, // Center the column vertically
               children: <Widget>[
                 Text(
                   _isEnglish
@@ -107,14 +105,19 @@ class _SquaresExamplePageState extends State<SquaresExamplePage> {
                 // Center the ListView.builder and reduce its width
                 Center(
                   child: SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.8, // Limit width of the ListView
+                    width: MediaQuery.of(context).size.width *
+                        0.8, // Limit width of the ListView
                     child: ListView.builder(
                       shrinkWrap: true,
                       itemCount: _examples.length,
                       itemBuilder: (context, index) {
                         return _buildExampleCard(
-                          _isEnglish ? _examples[index]['Front_en']! : _examples[index]['Front_es']!,
-                          _isEnglish ? _examples[index]['Back_en']! : _examples[index]['Back_es']!,
+                          _isEnglish
+                              ? _examples[index]['Front_en']!
+                              : _examples[index]['Front_es']!,
+                          _isEnglish
+                              ? _examples[index]['Back_en']!
+                              : _examples[index]['Back_es']!,
                         );
                       },
                     ),
@@ -131,7 +134,8 @@ class _SquaresExamplePageState extends State<SquaresExamplePage> {
                       ElevatedButton(
                         onPressed: _refreshExamples,
                         style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 30, vertical: 15),
                           backgroundColor: Colors.lightBlueAccent.shade200,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
@@ -149,14 +153,17 @@ class _SquaresExamplePageState extends State<SquaresExamplePage> {
                           });
                         },
                         style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 30, vertical: 15),
                           backgroundColor: Colors.amber.shade700,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
                         ),
                         child: Text(
-                          _isEnglish ? 'Tap to Translate' : 'Toca para Traducir',
+                          _isEnglish
+                              ? 'Tap to Translate'
+                              : 'Toca para Traducir',
                           style: TextStyle(fontSize: 20, color: Colors.white),
                         ),
                       ),
@@ -170,8 +177,6 @@ class _SquaresExamplePageState extends State<SquaresExamplePage> {
       ),
     );
   }
-
-
 
   Widget _buildExampleCard(String number, String description) {
     return Padding(
