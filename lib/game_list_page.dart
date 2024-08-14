@@ -98,7 +98,7 @@ class GameListPage extends StatelessWidget {
                 },
               ),
               GameButton(
-                title: 'GCF & LCM Match',
+                title: 'LCM Match',
                 onPressed: () {
                   Navigator.push(
                     context,
