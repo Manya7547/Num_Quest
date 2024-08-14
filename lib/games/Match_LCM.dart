@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:num_quest/game_list_page.dart';
 
 void main() => runApp(LCMGame());
 
@@ -60,6 +61,16 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         centerTitle: true,
         title: Text('LCM Matching Game'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                  builder: (context) =>
+                      GameListPage()), // Replace `PreviousScreen` with your previous screen widget
+            );
+          },
+        ),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(8.0),
