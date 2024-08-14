@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
     initGame();
   }
 
-  initGame() {
+  void initGame() {
     gameOver = false;
     score = 0;
     items = [
@@ -66,8 +66,8 @@ class _HomePageState extends State<HomePage> {
           onPressed: () {
             Navigator.of(context).pushReplacement(
               MaterialPageRoute(
-                  builder: (context) =>
-                      GameListPage()), // Replace `PreviousScreen` with your previous screen widget
+                builder: (context) => GameListPage(),
+              ),
             );
           },
         ),
@@ -76,16 +76,32 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: <Widget>[
+            // Game Instructions
+            Text(
+              "Drag the box with the LCM and drop it on the matching pair of numbers. "
+              "Each correct match adds 10 points to your score, while each incorrect match subtracts 5 points.",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 30.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 16.0), // Space between instructions and score
+
+            // Displaying Score
             Text.rich(TextSpan(children: [
               TextSpan(text: "Score: "),
               TextSpan(
-                  text: "$score",
-                  style: TextStyle(
-                    color: Colors.green,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 50.0,
-                  ))
+                text: "$score",
+                style: TextStyle(
+                  color: Colors.green,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 50.0,
+                ),
+              ),
             ])),
+
             if (!gameOver)
               Column(
                 children: <Widget>[
@@ -142,6 +158,7 @@ class _HomePageState extends State<HomePage> {
                     }).toList(),
                   ),
                   SizedBox(height: 40),
+
                   // Bottom Row with LCM boxes
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -201,9 +218,11 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
+
+            // Game Over Message
             if (gameOver)
               Text(
-                "GameOver",
+                "Game Over",
                 style: TextStyle(
                   color: Colors.red,
                   fontWeight: FontWeight.bold,
