@@ -119,7 +119,7 @@ class _EvenNumberExamplesPageState extends State<EvenNumberExamplesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_isEnglish ? 'Even Number Practice' : 'Ejemplos de Números Primos'),
+        title: Text(_isEnglish ? 'Odd-Even Number Practice' : 'Ejemplos de Números Primos'),
       ),
       body: Container(
         width: double.infinity,

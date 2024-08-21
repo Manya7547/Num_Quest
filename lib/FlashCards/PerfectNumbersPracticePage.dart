@@ -3,55 +3,77 @@ import 'package:flip_card/flip_card.dart';
 import "package:google_fonts/google_fonts.dart";
 
 
-class OddNumberExamplesPage extends StatefulWidget {
-  const OddNumberExamplesPage({super.key});
+
+
+
+class PerfectNumberPracticePage extends StatefulWidget {
+  const PerfectNumberPracticePage({super.key});
 
   @override
-  _OddNumberExamplesPageState createState() {
-    return _OddNumberExamplesPageState();
+  _PerfectNumberPracticePageState createState() {
+    return _PerfectNumberPracticePageState();
   }
 }
 
-class _OddNumberExamplesPageState extends State<OddNumberExamplesPage> {
+class _PerfectNumberPracticePageState extends State<PerfectNumberPracticePage> {
   bool _isEnglish = true; // State to keep track of language
   List<Map<String, String>> _examples = [];
   final List<Map<String, String>> _allExamples = [
+    //
     {
-      'number': '75',
-      'description_en': 'It\'s ODD! \n75 is not divisible by 2 and it ends with 5. \nRemember, odd numbers are not divisible by 2 and end with 1, 3, 5, 7, or 9.',
-      'description_es': '¡Es IMPAR! \n75 no es divisible por 2 y termina en 5. \nRecuerda, los números impares no son divisibles por 2 y terminan en 1, 3, 5, 7 o 9.'
+      'Front_en': 'What is the smallest perfect number?',
+      'Front_es': '¿Cuál es el número perfecto más pequeño?',
+      'Back_en': ' The smallest perfect number is 6.\nA perfect number is a number that is equal to the sum of its proper divisors (excluding itself). For 6: 1 + 2 + 3 = 6.',
+      'Back_es': 'El número perfecto más pequeño es 6.\nUn número perfecto es un número que es igual a la suma de sus divisores propios (excluyendo a sí mismo). Para 6: 1 + 2 + 3 = 6.',
     },
     {
-      'number': '45',
-      'description_en': 'It\'s ODD! \n45 is not divisible by 2 and it ends with 5. \nRemember, odd numbers are not divisible by 2 and end with 1, 3, 5, 7, or 9.',
-      'description_es': '¡Es IMPAR! \n45 no es divisible por 2 y termina en 5. \nRecuerda, los números impares no son divisibles por 2 y terminan en 1, 3, 5, 7 o 9.'
+      'Front_en': 'What is the second perfect number?',
+      'Front_es': '¿Cuál es el segundo número perfecto?',
+      'Back_en': 'The second perfect number is 28.\nFor 28: 1 + 2 + 4 + 7 + 14 = 28.',
+      'Back_es': ' El segundo número perfecto es 28.\nPara 28: 1 + 2 + 4 + 7 + 14 = 28.',
     },
     {
-      'number': '9',
-      'description_en': 'It\'s ODD! \n9 is not divisible by 2 and it ends with 9. \nRemember, odd numbers are not divisible by 2 and end with 1, 3, 5, 7, or 9.',
-      'description_es': '¡Es IMPAR! \n9 no es divisible por 2 y termina en 9. \nRecuerda, los números impares no son divisibles por 2 y terminan en 1, 3, 5, 7 o 9.'
+      'Front_en': 'Is 496 a perfect number?',
+      'Front_es': '¿Es 496 un número perfecto?',
+      'Back_en': 'Yes, 496 is a perfect number.\nThe divisors of 496 (excluding itself) are 1, 2, 4, 8, 16, 31, 62, 124, and 248. Their sum is 496.',
+      'Back_es': 'Sí, 496 es un número perfecto.\nLos divisores de 496 (excluyendo a sí mismo) son 1, 2, 4, 8, 16, 31, 62, 124, y 248. Su suma es 496.',
     },
     {
-      'number': '15',
-      'description_en': 'It\'s ODD! \n15 is not divisible by 2 and it ends with 5. \nRemember, odd numbers are not divisible by 2 and end with 1, 3, 5, 7, or 9.',
-      'description_es': '¡Es IMPAR! \n15 no es divisible por 2 y termina en 5. \nRecuerda, los números impares no son divisibles por 2 y terminan en 1, 3, 5, 7 o 9.'
+      'Front_en': 'What is the next perfect number after 28?',
+      'Front_es': '¿Cuál es el siguiente número perfecto después de 28?',
+      'Back_en': 'The next perfect number after 28 is 496.\nPerfect numbers increase rapidly; 496 is the third perfect number.',
+      'Back_es': 'El siguiente número perfecto después de 28 es 496\nLos números perfectos aumentan rápidamente; 496 es el tercer número perfecto.',
     },
     {
-      'number': '55',
-      'description_en': 'It\'s ODD! \n55 is not divisible by 2 and it ends with 5. \nRemember, odd numbers are not divisible by 2 and end with 1, 3, 5, 7, or 9.',
-      'description_es': '¡Es IMPAR! \n55 no es divisible por 2 y termina en 5. \nRecuerda, los números impares no son divisibles por 2 y terminan en 1, 3, 5, 7 o 9.'
+      'Front_en': 'Is 8128 a perfect number?',
+      'Front_es': '¿Es 8128 un número perfecto?',
+      'Back_en': 'Yes, 8128 is a perfect number.\nThe divisors of 8128 (excluding itself) sum to 8128.',
+      'Back_es': 'Sí, 8128 es un número perfecto.\nLos divisores de 8128 (excluyendo a sí mismo) suman 8128.',
     },
     {
-      'number': '9',
-      'description_en': 'It\'s ODD! \n9 is not divisible by 2 and it ends with 9. \nRemember, odd numbers are not divisible by 2 and end with 1, 3, 5, 7, or 9.',
-      'description_es': '¡Es IMPAR! \n9 no es divisible por 2 y termina en 9. \nRecuerda, los números impares no son divisibles por 2 y terminan en 1, 3, 5, 7 o 9.'
+      'Front_en': 'Is 28 the only perfect number less than 100?',
+      'Front_es': '¿Es 28 el único número perfecto menor que 100?',
+      'Back_en': 'Yes, 28 is the only perfect number less than 100.\nThe only perfect numbers less than 100 are 6 and 28.',
+      'Back_es': 'Sí, 28 es el único número perfecto menor que 100.\nLos únicos números perfectos menores que 100 son 6 y 28.',
     },
     {
-      'number': '31',
-      'description_en': 'It\'s ODD! \n31 is not divisible by 2 and it ends with 1. \nRemember, odd numbers are not divisible by 2 and end with 1, 3, 5, 7, or 9.',
-      'description_es': '¡Es IMPAR! \n31 no es divisible por 2 y termina en 1. \nRecuerda, los números impares no son divisibles por 2 y terminan en 1, 3, 5, 7 o 9.'
+      'Front_en': 'What is the fourth perfect number?',
+      'Front_es': '¿Cuál es el cuarto número perfecto?',
+      'Back_en': 'The fourth perfect number is 8128.\nThe perfect numbers in order are 6, 28, 496, and 8128.',
+      'Back_es': 'El cuarto número perfecto es 8128.\nLos números perfectos en orden son 6, 28, 496 y 8128.',
     },
-    // Add more odd number examples here
+    {
+      'Front_en': 'Is there a perfect number larger than 8128?',
+      'Front_es': '¿Hay un número perfecto mayor que 8128?',
+      'Back_en': 'Yes, the next perfect number after 8128 is 33,550,336\nPerfect numbers grow rapidly; 33,550,336 is the fifth perfect number.',
+      'Back_es': 'Sí, el siguiente número perfecto después de 8128 es 33,550,336.\nLos números perfectos crecen rápidamente; 33,550,336 es el quinto número perfecto.',
+    },
+    {
+      'Front_en': 'What is the sum of the proper divisors of 28?',
+      'Front_es': '¿Cuál es la suma de los divisores propios de 28?',
+      'Back_en': 'The sum of the proper divisors of 28 is 28\nThe divisors of 28 are 1, 2, 4, 7, and 14. Their sum is 28.',
+      'Back_es': ' La suma de los divisores propios de 28 es 28.\nLos divisores de 28 son 1, 2, 4, 7, y 14. Su suma es 28.',
+    },
   ];
 
   @override
@@ -70,14 +92,14 @@ class _OddNumberExamplesPageState extends State<OddNumberExamplesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_isEnglish ? 'Even Number Examples' : 'Ejemplos de Números Pares'),
+        title: Text(_isEnglish ? 'Perfect Number Practice' : 'Práctica de Números perfecto'),
       ),
       body: Container(
         width: double.infinity,
         height: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/demo1.jpg'),
+            image: AssetImage('background1.jpg'),
             fit: BoxFit.cover,
           ),
         ),
@@ -89,12 +111,13 @@ class _OddNumberExamplesPageState extends State<OddNumberExamplesPage> {
               children: <Widget>[
                 Text(
                   _isEnglish
-                      ? 'Tap on these numbers to reveal if they are even or odd'
-                      : 'Pulsa estos números para revelar si son pares o impares.',
+                      ? 'Tap on the card to reveal the answer'
+                      : 'Toca la tarjeta para revelar la respuesta',
                   style: GoogleFonts.lato(
                     textStyle: TextStyle(
                       fontSize: 38,
                       color: Colors.black,
+                      fontFamily: 'Poppins',
                       fontWeight: FontWeight.bold,
                       shadows: [
                         Shadow(
@@ -118,8 +141,8 @@ class _OddNumberExamplesPageState extends State<OddNumberExamplesPage> {
                       itemCount: _examples.length,
                       itemBuilder: (context, index) {
                         return _buildExampleCard(
-                          _examples[index]['number']!,
-                          _isEnglish ? _examples[index]['description_en']! : _examples[index]['description_es']!,
+                          _isEnglish ? _examples[index]['Front_en']! : _examples[index]['Front_es']!,
+                          _isEnglish ? _examples[index]['Back_en']! : _examples[index]['Back_es']!,
                         );
                       },
                     ),
@@ -137,7 +160,7 @@ class _OddNumberExamplesPageState extends State<OddNumberExamplesPage> {
                         onPressed: _refreshExamples,
                         style: ElevatedButton.styleFrom(
                           padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                          backgroundColor: Colors.blue,
+                          backgroundColor: Colors.lightBlueAccent.shade200,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
@@ -155,7 +178,7 @@ class _OddNumberExamplesPageState extends State<OddNumberExamplesPage> {
                         },
                         style: ElevatedButton.styleFrom(
                           padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                          backgroundColor: Colors.green,
+                          backgroundColor: Colors.amber.shade700,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
@@ -177,6 +200,7 @@ class _OddNumberExamplesPageState extends State<OddNumberExamplesPage> {
   }
 
 
+
   Widget _buildExampleCard(String number, String description) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
@@ -186,13 +210,13 @@ class _OddNumberExamplesPageState extends State<OddNumberExamplesPage> {
           height: 150,
           width: MediaQuery.of(context).size.width * 0.8, // Adjust width
           decoration: BoxDecoration(
-            color: Colors.teal.shade500,
+            color: Colors.white70,
             borderRadius: BorderRadius.circular(15.0),
           ),
           child: Center(
             child: Text(
               number,
-              style: const TextStyle(fontSize: 50, color: Colors.white),
+              style: const TextStyle(fontSize: 25, color: Colors.black54),
             ),
           ),
         ),
@@ -200,7 +224,7 @@ class _OddNumberExamplesPageState extends State<OddNumberExamplesPage> {
           height: 150,
           width: MediaQuery.of(context).size.width * 0.8, // Adjust width
           decoration: BoxDecoration(
-            color: Colors.amber.shade500,
+            color: Colors.grey.shade200,
             borderRadius: BorderRadius.circular(15.0),
           ),
           child: Center(
@@ -208,7 +232,7 @@ class _OddNumberExamplesPageState extends State<OddNumberExamplesPage> {
               padding: const EdgeInsets.all(10.0),
               child: Text(
                 description,
-                style: const TextStyle(fontSize: 25, color: Colors.white),
+                style: const TextStyle(fontSize: 25, color: Colors.black54),
                 textAlign: TextAlign.center,
               ),
             ),
