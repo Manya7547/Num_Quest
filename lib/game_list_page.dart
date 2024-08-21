@@ -3,6 +3,7 @@ import 'games/even_odd_sort.dart'; // Import the game widgets
 import 'games/choose_factors_game.dart';
 import 'games/word_problem_game.dart';
 import 'games/prime_number_game.dart';
+import 'games/Match_LCM.dart';
 
 class GameListPage extends StatelessWidget {
   @override
@@ -97,8 +98,12 @@ class GameListPage extends StatelessWidget {
                 },
               ),
               GameButton(
-                title: 'Fibonacci Sequence Puzzle',
+                title: 'LCM Match',
                 onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => LCMGame()),
+                  );
                   // Add navigation logic for Fibonacci Sequence Puzzle Game
                 },
               ),
