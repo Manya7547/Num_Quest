@@ -1,62 +1,62 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class PrimeNumberPracticePage extends StatefulWidget {
+class CompositeNumberPracticePage extends StatefulWidget {
   @override
-  _PrimeNumberPracticePageState createState() =>
-      _PrimeNumberPracticePageState();
+  _CompositeNumberPracticePageState createState() =>
+      _CompositeNumberPracticePageState();
 }
 
-class _PrimeNumberPracticePageState extends State<PrimeNumberPracticePage> {
+class _CompositeNumberPracticePageState extends State<CompositeNumberPracticePage> {
   bool _isEnglish = true; // State to keep track of language
   List<Map<String, dynamic>> _examples = [];
   final List<Map<String, dynamic>> _allExamples = [
     {
-      'question_en': 'Which of the following is a prime number?',
-      'question_es': '¿Cuál de los siguientes es un número primo?',
-      'options': ['4', '6', '2'],
-      'answer': '2',
+      'question_en': 'Which of the following is a composite number?',
+      'question_es': '¿Cuál de los siguientes es un número compuesto?',
+      'options': ['7', '11', '15'],
+      'answer': '15',
     },
     {
-      'question_en': 'Which of the following is not a prime number?',
-      'question_es': '¿Cuál de los siguientes no es un número primo?',
-      'options': ['2', '3', '9'],
-      'answer': '9',
+      'question_en': 'Which number is not a composite number?',
+      'question_es': ' ¿Qué número no es un número compuesto?',
+      'options': ['4', '13', '12'],
+      'answer': '13',
     },
     {
-      'question_en': 'How many prime numbers are there between 10 and 25?',
-      'question_es': '¿Cuántos números primos hay entre 10 y 25?',
-      'options': ['5', '4', '3'],
-      'answer': '5',
+      'question_en': 'What are the factors of the composite number 18?',
+      'question_es': '¿Cuáles son los factores del número compuesto 18?',
+      'options': ['1,18', '2,3,6,9', '1,2,3,6,9,18'],
+      'answer': '1,2,3,6,9,18',
     },
     {
-      'question_en': 'Which of these is a list of prime numbers between 61 and 75?',
-      'question_es': '¿Cuál de estas es una lista de números primos entre 61 y 75?',
-      'options': ['61, 67, 71, 73', '67, 71, 73', '63, 67, 71'],
-      'answer': '67, 71, 73',
+      'question_en': 'Which of the following numbers has more than two factors?',
+      'question_es': '¿Cuál de los siguientes números tiene más de dos factores?',
+      'options': ['24', '19', '13'],
+      'answer': '24',
     },
     {
-      'question_en': 'How many prime numbers are there between 0 and 100?',
-      'question_es': '¿Cuántos números primos hay entre 0 y 100?',
-      'options': ['26', '24', '25'],
-      'answer': '25',
+      'question_en': 'Which of these numbers is a composite number because it has factors other than 1 and itself?',
+      'question_es': '¿Cuál de estos números es un número compuesto porque tiene factores diferentes de 1 y de sí mismo?',
+      'options': ['6', '7', '5'],
+      'answer': '6',
     },
     {
-      'question_en': 'What is the smallest prime number greater than 20?',
-      'question_es': '¿Cuál es el número primo más pequeño mayor que 20?',
-      'options': ['23', '19', '21'],
-      'answer': '23',
+      'question_en': 'Identify the composite number that is a product of 2 and 5:',
+      'question_es': 'Identifica el número compuesto que es producto de 2 y 5:',
+      'options': ['15', '10', '25'],
+      'answer': '10',
     },
     {
-      'question_en': ' How many prime numbers are there between 50 and 60?',
-      'question_es': '¿Cuántos números primos hay entre 50 y 60?',
-      'options': ['2', '1', '3'],
-      'answer': '1',
+      'question_en': ' Which of the following is the smallest composite number?',
+      'question_es': '¿Cuál de los siguientes es el número compuesto más pequeño?',
+      'options': ['2', '1', '4'],
+      'answer': '4',
     },
     {
-      'question_en': 'What is the sum of the first three prime numbers?',
-      'question_es': '¿Cuál es la suma de los primeros tres números primos?',
-      'options': ['10', '12', '17'],
+      'question_en': 'Which number is composite because it can be factored into smaller prime numbers??',
+      'question_es': '¿Qué número es compuesto porque se puede factorizar en números primos más pequeños?',
+      'options': ['57', '51', '49'],
       'answer': '17',
     },
 
@@ -97,8 +97,8 @@ class _PrimeNumberPracticePageState extends State<PrimeNumberPracticePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(_isEnglish
-            ? 'Prime Number Practice'
-            : 'Práctica de Números Primos'),
+            ? 'Composite Number Practice'
+            : 'Práctica de Números compuesto'),
       ),
       body: Container(
         width: double.infinity,

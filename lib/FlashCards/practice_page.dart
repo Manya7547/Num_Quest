@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'PrimeNumberExamplesPage.dart';
 import 'EvenNumberExamplesPage.dart';
 import 'SquaresPracticePage.dart';
+import 'CompositeNumberPracticePage.dart';
+import 'PerfectNumbersPracticePage.dart';
 
 class PracticePage extends StatelessWidget {
   @override
@@ -50,21 +52,21 @@ class PracticePage extends StatelessWidget {
               LessonButton(
                 title: 'COMPOSITE\nNUMBERS',
                 onPressed: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => CompositeNumberExamplePage(),
-                  //   ),
-                  // );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CompositeNumberPracticePage(),
+                    ),
+                  );
                 },
               ),
               LessonButton(
                 title: 'PERFECT\nNUMBERS',
                 onPressed: () {
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (context) => PerfectNumberInfoPage()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => PerfectNumberPracticePage()));
                 },
               ),
               LessonButton(
