@@ -11,6 +11,20 @@ import 'lessons/factors_info_page.dart';
 import 'lessons/cube_number_info_page.dart';
 
 class LessonsPage extends StatelessWidget {
+  final List<Map<String, dynamic>> lessons = [
+    {'title': 'Even Numbers', 'page': EvenNumberInfoPage()},
+    {'title': 'Odd Numbers', 'page': OddNumberInfoPage()},
+    {'title': 'Prime Numbers', 'page': PrimeNumberInfoPage()},
+    {'title': 'Composite Numbers', 'page': CompositeNumberInfoPage()},
+    {'title': 'Triangular Numbers', 'page': TriangularNumberInfoPage()},
+    {'title': 'Perfect Numbers', 'page': PerfectNumberInfoPage()},
+    {'title': 'Square Numbers', 'page': SquareNumberInfoPage()},
+    {'title': 'Fibonacci Numbers', 'page': FibonacciNumberInfoPage()},
+    {'title': 'Factors', 'page': FactorsInfoPage()},
+    {'title': 'Cube Numbers', 'page': CubeNumberInfoPage()},
+    // Add more lessons if needed
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,99 +46,19 @@ class LessonsPage extends StatelessWidget {
               crossAxisSpacing: 20.0,
               mainAxisSpacing: 20.0,
               shrinkWrap: true,
-              children: [
-                LessonButton(
-                  title: 'Even Numbers',
+              physics:
+                  NeverScrollableScrollPhysics(), // Disable GridView scroll
+              children: lessons.map((lesson) {
+                return LessonButton(
+                  title: lesson['title'],
                   onPressed: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => EvenNumberInfoPage()));
+                      context,
+                      MaterialPageRoute(builder: (context) => lesson['page']),
+                    );
                   },
-                ),
-                LessonButton(
-                  title: 'Odd Numbers',
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => OddNumberInfoPage()));
-                  },
-                ),
-                LessonButton(
-                  title: 'Prime Numbers',
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => PrimeNumberInfoPage()));
-                  },
-                ),
-                LessonButton(
-                  title: 'Composite Numbers',
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => CompositeNumberInfoPage()));
-                  },
-                ),
-                LessonButton(
-                  title: 'Triangular Numbers',
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => TriangularNumberInfoPage()));
-                  },
-                ),
-                LessonButton(
-                  title: 'Perfect Numbers',
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => PerfectNumberInfoPage()));
-                  },
-                ),
-                LessonButton(
-                  title: 'Square Numbers',
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => SquareNumberInfoPage()));
-                  },
-                ),
-                LessonButton(
-                  title: 'Fibonacci Numbers',
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => FibonacciNumberInfoPage()));
-                  },
-                ),
-                LessonButton(
-                  title: 'Factors',
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => FactorsInfoPage()));
-                  },
-                ),
-                LessonButton(
-                  title: 'Cube Numbers',
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => CubeNumberInfoPage()));
-                  },
-                ),
-                // Add more LessonButton widgets for each lesson
-              ],
+                );
+              }).toList(),
             ),
           ),
         ),
