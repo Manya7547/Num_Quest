@@ -37,6 +37,11 @@ class _NumberPatternMatchGameState extends State<NumberPatternMatchGame> {
       'correctNumbers': [36],
       'options': [35, 36, 37, 38, 39],
     },
+    {
+      'category': 'Prime',
+      'correctNumbers': [11],
+      'options': [15, 10, 12, 11, 18],
+    },
   ];
 
   int currentQuestionIndex = 0;
