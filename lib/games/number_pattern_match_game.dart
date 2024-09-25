@@ -19,7 +19,7 @@ class _NumberPatternMatchGameState extends State<NumberPatternMatchGame> {
     },
     {
       'category': 'Square',
-      'correctNumbers': [4],
+      'correctNumbers': [9],
       'options': [7, 55, 9, 15, 26],
     },
     {
@@ -48,6 +48,7 @@ class _NumberPatternMatchGameState extends State<NumberPatternMatchGame> {
   List<int> draggedNumbers = [];
   String message = '';
   bool isCorrect = false;
+  int score = 0; // Track the score
 
   List<int> _getCorrectNumbers() {
     return questions[currentQuestionIndex]['correctNumbers'];
@@ -59,13 +60,16 @@ class _NumberPatternMatchGameState extends State<NumberPatternMatchGame> {
 
   void checkAnswer() {
     List<int> correctNumbers = _getCorrectNumbers();
-    bool hasCorrectAnswer = draggedNumbers.any((number) => correctNumbers.contains(number));
-    bool hasWrongAnswer = draggedNumbers.any((number) => !correctNumbers.contains(number));
+    bool hasCorrectAnswer =
+        draggedNumbers.any((number) => correctNumbers.contains(number));
+    bool hasWrongAnswer =
+        draggedNumbers.any((number) => !correctNumbers.contains(number));
 
     setState(() {
       if (hasCorrectAnswer && !hasWrongAnswer) {
         message = 'Correct!';
         isCorrect = true;
+        score++; // Increase score when the answer is correct
       } else {
         message = 'Try Again!';
         isCorrect = false;
@@ -86,7 +90,7 @@ class _NumberPatternMatchGameState extends State<NumberPatternMatchGame> {
       });
     } else {
       setState(() {
-        message = 'You have completed all questions!';
+        message = 'You have completed all questions! Final score: $score';
       });
     }
   }
@@ -102,12 +106,21 @@ class _NumberPatternMatchGameState extends State<NumberPatternMatchGame> {
         backgroundColor: Colors.teal,
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: isTablet ? 40.0 : 16.0, vertical: 20.0),
+        padding: EdgeInsets.symmetric(
+            horizontal: isTablet ? 40.0 : 16.0, vertical: 20.0),
         child: Column(
           children: [
             Text(
               'Category: ${questions[currentQuestionIndex]['category']}',
-              style: TextStyle(fontSize: isTablet ? 24 : 18, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: isTablet ? 24 : 18, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 20),
+
+            Text(
+              'Score: $score', // Display the current score
+              style: TextStyle(
+                  fontSize: isTablet ? 24 : 18, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 20),
 
@@ -131,12 +144,17 @@ class _NumberPatternMatchGameState extends State<NumberPatternMatchGame> {
                         decoration: BoxDecoration(
                           color: Colors.blueAccent,
                           borderRadius: BorderRadius.circular(10),
-                          boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 8)],
+                          boxShadow: [
+                            BoxShadow(color: Colors.black26, blurRadius: 8)
+                          ],
                         ),
                         child: Center(
                           child: Text(
                             '$number',
-                            style: TextStyle(fontSize: 24, color: Colors.white, fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                fontSize: 24,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
                           ),
                         ),
                       ),
@@ -157,7 +175,10 @@ class _NumberPatternMatchGameState extends State<NumberPatternMatchGame> {
                       child: Center(
                         child: Text(
                           '$number',
-                          style: TextStyle(fontSize: 24, color: Colors.white, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              fontSize: 24,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
                         ),
                       ),
                     ),
@@ -169,10 +190,13 @@ class _NumberPatternMatchGameState extends State<NumberPatternMatchGame> {
             SizedBox(height: 20),
 
             DragTarget<int>(
-              builder: (BuildContext context, List<int?> accepted, List<dynamic> rejected) {
+              builder: (BuildContext context, List<int?> accepted,
+                  List<dynamic> rejected) {
                 return Container(
-                  height: 150,
+                  height: 200, // Expanded height for the drag target
                   width: double.infinity,
+                  padding:
+                      EdgeInsets.all(20), // Added padding for a larger hit area
                   decoration: BoxDecoration(
                     color: Colors.greenAccent,
                     borderRadius: BorderRadius.circular(10),
@@ -181,25 +205,27 @@ class _NumberPatternMatchGameState extends State<NumberPatternMatchGame> {
                   child: Center(
                     child: draggedNumbers.isNotEmpty
                         ? ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: draggedNumbers
-                          .map((number) => Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          padding: EdgeInsets.all(16),
-                          color: Colors.white,
-                          child: Text(
-                            '$number',
-                            style: TextStyle(fontSize: 24),
-                          ),
-                        ),
-                      ))
-                          .toList(),
-                    )
+                            scrollDirection: Axis.horizontal,
+                            children: draggedNumbers
+                                .map((number) => Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Container(
+                                        padding: EdgeInsets.all(16),
+                                        color: Colors.white,
+                                        child: Text(
+                                          '$number',
+                                          style: TextStyle(fontSize: 24),
+                                        ),
+                                      ),
+                                    ))
+                                .toList(),
+                          )
                         : Text(
-                      'Drop numbers here',
-                      style: TextStyle(fontSize: isTablet ? 24 : 18, fontWeight: FontWeight.bold),
-                    ),
+                            'Drop numbers here',
+                            style: TextStyle(
+                                fontSize: isTablet ? 24 : 18,
+                                fontWeight: FontWeight.bold),
+                          ),
                   ),
                 );
               },
@@ -225,7 +251,8 @@ class _NumberPatternMatchGameState extends State<NumberPatternMatchGame> {
               ),
               child: Text(
                 'Submit',
-                style: TextStyle(fontSize: isTablet ? 22 : 16, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontSize: isTablet ? 22 : 16, fontWeight: FontWeight.bold),
               ),
             ),
 
@@ -250,7 +277,8 @@ class _NumberPatternMatchGameState extends State<NumberPatternMatchGame> {
               ),
               child: Text(
                 'Next Question',
-                style: TextStyle(fontSize: isTablet ? 22 : 16, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontSize: isTablet ? 22 : 16, fontWeight: FontWeight.bold),
               ),
             ),
           ],
