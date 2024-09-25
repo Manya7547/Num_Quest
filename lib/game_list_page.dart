@@ -11,106 +11,84 @@ class GameListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('ARCADE'),
+        title: Text("PRACTICE"),
       ),
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage(
-                'assets/Bigschooldesk_generated.jpg'), // Set the background image
+            image: AssetImage('assets/background1.jpg'),
             fit: BoxFit.cover,
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(100, 50, 100, 50),
+          padding: const EdgeInsets.all(100.0), // Adjust padding as needed
           child: GridView.count(
-            crossAxisCount: 3, // Number of columns in the grid
-            crossAxisSpacing: 40.0,
-            mainAxisSpacing: 40.0,
-            children: <Widget>[
+            crossAxisCount: 4, // Number of columns
+            crossAxisSpacing: 10.0, // Space between columns
+            mainAxisSpacing: 10.0, // Space between rows
+            childAspectRatio: 1.2, // Aspect ratio for smaller buttons
+            children: [
               GameButton(
-                title: 'Number Placement Game',
-                onPressed: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //       builder: (context) => NumberGuessingGame()),
-                  // );
-                  // // Add navigation logic for Number Placement Game
-                },
+                title: 'Number Placement\nGame',
+                // onPressed: () {
+                //   Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //       builder: (context) => EvenNumberExamplesPage(),
+                //     ),
+                //   );
+                // },
               ),
               GameButton(
-                title: 'Number Pattern Match',
+                title: 'Number Pattern\nMatch',
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => NumberPatternMatchGame()),
+                    MaterialPageRoute(
+                      builder: (context) => NumberPatternMatchGame(),
+                    ),
                   );
                 },
               ),
               GameButton(
-                title: 'Even and Odd Sort',
+                title: 'Even-Odd Sort\nGame ',
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => EvenOddSortPage()),
+                    MaterialPageRoute(
+                      builder: (context) => EvenOddSortPage(),
+                    ),
                   );
                 },
               ),
               GameButton(
                 title: 'Triangle Tower Builder',
                 onPressed: () {
-                  // Add navigation logic for Triangle Tower Builder Game
-                },
-              ),
-              GameButton(
-                title: 'Solve Some Fun Word Problems',
-                onPressed: () {
                   Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => WordProblemsGame()),
-                  );
-                  // Add navigation logic for Solve Some Fun Word Problems Game
-                },
-              ),
-              GameButton(
-                title: 'Perfect Number Challenge',
-                onPressed: () {
-                  // Add navigation logic for Perfect Number Challenge Game
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => WordProblemsGame()));
                 },
               ),
               GameButton(
                 title: 'Prime Explorer',
                 onPressed: () {
                   Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => PrimeNumberGame()),
-                  );
-                  // Add navigation logic for Prime Explorer Game
-                },
-              ),
-              GameButton(
-                title: 'Choose Factors',
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ChooseFactorsGame()),
-                  );
-                  // Add navigation logic for Factor Trees Game
-                  // Add navigation logic for Factor Trees Game
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ChooseFactorsGame()));
                 },
               ),
               GameButton(
                 title: 'LCM Match',
                 onPressed: () {
-                  Navigator.push(
+                Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => LCMGame()),
-                  );
-                  // Add navigation logic for Fibonacci Sequence Puzzle Game
+                    MaterialPageRoute(
+                        builder: (context) => LCMGame()));
                 },
               ),
+
             ],
           ),
         ),
@@ -127,22 +105,27 @@ class GameButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
+    return Container(
+      padding: EdgeInsets.all(20), // Ensure minimal padding
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
+          elevation: 3, // Remove button shadow
+          backgroundColor: Colors.white70,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
         ),
-        child: Text(
-          title,
-          textAlign: TextAlign.center, // Align text in the center
-          style: TextStyle(
-            fontSize: 30, // Change font size
-            fontWeight: FontWeight.bold, // Make text bold
-            fontFamily: 'Arial', // Change font family if needed
+        child: Center(
+          child: Text(
+            title,
+            textAlign: TextAlign.center, // Align text in the center
+            style: TextStyle(
+              fontSize: 30, // Reduce font size for smaller buttons
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Poppins',
+              color: Colors.black,
+            ),
           ),
         ),
       ),
