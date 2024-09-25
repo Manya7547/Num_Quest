@@ -26,23 +26,30 @@ class _EvenOddSortPageState extends State<EvenOddSortPage> {
   List<int> bottomNumbers =
       List.generate(6, (index) => Random().nextInt(99) + 1);
   bool? isCorrect;
+  int score = 0; // Track the score
 
   void checkNumbers() {
     // Check if all bottom numbers are sorted correctly
+    bool allEvenSorted = evenNumbers.every((number) => number.isEven);
+    bool allOddSorted = oddNumbers.every((number) => !number.isEven);
+
     isCorrect = bottomNumbers.every((number) => number.isEven)
-        ? evenNumbers.every((number) => number.isEven) &&
-            oddNumbers.every((number) => !number.isEven)
-        : evenNumbers.every((number) => !number.isEven) &&
-            oddNumbers.every((number) => number.isEven);
+        ? allEvenSorted && allOddSorted
+        : !allEvenSorted && !allOddSorted;
+
+    if (isCorrect == true) {
+      score += 10; // Increment score if the sorting is correct
+    }
+
     setState(() {});
   }
 
-  void resetGame() {
+  void newGame() {
     setState(() {
       evenNumbers.clear();
       oddNumbers.clear();
       bottomNumbers = List.generate(6, (index) => Random().nextInt(99) + 1);
-      isCorrect = null;
+      isCorrect = null; // Reset correctness status
     });
   }
 
@@ -62,7 +69,11 @@ class _EvenOddSortPageState extends State<EvenOddSortPage> {
         children: [
           SizedBox(height: 50),
           Text(
-            'Drag and drop each number to its correct group. ',
+            'Drag and drop each number to its correct group.',
+            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+          ),
+          Text(
+            'Score: $score',
             style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 20),
@@ -178,6 +189,14 @@ class _EvenOddSortPageState extends State<EvenOddSortPage> {
                 ),
               ),
             ),
+          // New Game button
+          SizedBox(height: 20), // Add spacing
+          ElevatedButton(
+            onPressed: () {
+              newGame();
+            },
+            child: Text('Next Game', style: TextStyle(fontSize: 40)),
+          ),
         ],
       ),
     );
