@@ -5,6 +5,7 @@ import 'games/word_problem_game.dart';
 import 'games/prime_number_game.dart';
 import 'games/number_pattern_match_game.dart';
 import 'games/Match_LCM.dart';
+import 'games/Squares_Game.dart';
 
 class GameListPage extends StatelessWidget {
   @override
@@ -29,15 +30,15 @@ class GameListPage extends StatelessWidget {
             childAspectRatio: 1.2, // Aspect ratio for smaller buttons
             children: [
               GameButton(
-                title: 'Number Placement\nGame',
-                // onPressed: () {
-                //   Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //       builder: (context) => EvenNumberExamplesPage(),
-                //     ),
-                //   );
-                // },
+                title: 'Perfect Square\nGame',
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SquareFinderGame(),
+                    ),
+                  );
+                },
               ),
               GameButton(
                 title: 'Number Pattern\nMatch',

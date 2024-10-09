@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class NumberPatternMatchGame extends StatefulWidget {
   @override
@@ -61,9 +62,9 @@ class _NumberPatternMatchGameState extends State<NumberPatternMatchGame> {
   void checkAnswer() {
     List<int> correctNumbers = _getCorrectNumbers();
     bool hasCorrectAnswer =
-        draggedNumbers.any((number) => correctNumbers.contains(number));
+    draggedNumbers.any((number) => correctNumbers.contains(number));
     bool hasWrongAnswer =
-        draggedNumbers.any((number) => !correctNumbers.contains(number));
+    draggedNumbers.any((number) => !correctNumbers.contains(number));
 
     setState(() {
       if (hasCorrectAnswer && !hasWrongAnswer) {
@@ -101,187 +102,250 @@ class _NumberPatternMatchGameState extends State<NumberPatternMatchGame> {
     final isTablet = size.width > 600;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Number Pattern Match Game'),
-        backgroundColor: Colors.teal,
-      ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(
-            horizontal: isTablet ? 40.0 : 16.0, vertical: 20.0),
-        child: Column(
-          children: [
-            Text(
-              'Category: ${questions[currentQuestionIndex]['category']}',
-              style: TextStyle(
-                  fontSize: isTablet ? 24 : 18, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 20),
-
-            Text(
-              'Score: $score', // Display the current score
-              style: TextStyle(
-                  fontSize: isTablet ? 24 : 18, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 20),
-
-            // Number options for dragging
-            Expanded(
-              child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: isTablet ? 5 : 3,
-                  crossAxisSpacing: 16.0,
-                  mainAxisSpacing: 16.0,
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('background1.jpg'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'Category: ${questions[currentQuestionIndex]['category']}',
+                  style: GoogleFonts.lato(
+                    textStyle: TextStyle(
+                      fontSize: isTablet ? 36 : 24,
+                      color: Colors.black,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.bold,
+                      shadows: [
+                        Shadow(
+                          offset: const Offset(5.0, 5.0),
+                          blurRadius: 3.0,
+                          color: Colors.grey.withOpacity(0.5),
+                        ),
+                      ],
+                    ),
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                itemCount: _getOptions().length,
-                itemBuilder: (context, index) {
-                  final number = _getOptions()[index];
-                  return Draggable<int>(
-                    data: number,
-                    feedback: Material(
-                      color: Colors.transparent,
-                      child: Container(
-                        padding: EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          color: Colors.blueAccent,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(color: Colors.black26, blurRadius: 8)
-                          ],
+                SizedBox(height: 30),
+
+                Text(
+                  'Score: $score', // Display the current score
+                  style: GoogleFonts.lato(
+                    textStyle: TextStyle(
+                      fontSize: isTablet ? 28 : 20,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      shadows: [
+                        Shadow(
+                          offset: const Offset(5.0, 5.0),
+                          blurRadius: 3.0,
+                          color: Colors.grey.withOpacity(0.5),
                         ),
-                        child: Center(
-                          child: Text(
-                            '$number',
-                            style: TextStyle(
-                                fontSize: 24,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(height: 30),
+
+                // Number options for dragging
+                Expanded(
+                  child: GridView.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: isTablet ? 5 : 3,
+                      crossAxisSpacing: 16.0,
+                      mainAxisSpacing: 16.0,
+                    ),
+                    itemCount: _getOptions().length,
+                    itemBuilder: (context, index) {
+                      final number = _getOptions()[index];
+                      return Draggable<int>(
+                        data: number,
+                        feedback: Material(
+                          color: Colors.transparent,
+                          child: Container(
+                            padding: EdgeInsets.all(16),
+                            decoration: BoxDecoration(
+                              color: Colors.blueAccent,
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: [
+                                BoxShadow(color: Colors.black26, blurRadius: 8)
+                              ],
+                            ),
+                            child: Center(
+                              child: Text(
+                                '$number',
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                    childWhenDragging: Container(
-                      padding: EdgeInsets.all(16),
-                      color: Colors.grey,
-                      child: Center(
-                        child: Text(
-                          '$number',
-                          style: TextStyle(fontSize: 24, color: Colors.white),
+                        childWhenDragging: Container(
+                          width: 20,  // Set the width to a smaller value
+                          height: 20,
+                          padding: EdgeInsets.all(16),
+                          color: Colors.grey,
+                          child: Center(
+                            child: Text(
+                              '$number',
+                              style: TextStyle(fontSize: 24, color: Colors.white),
+                            ),
+                          ),
                         ),
+                          child: Container(
+                            padding: EdgeInsets.all(16),
+                            decoration: BoxDecoration(
+                              color: Colors.grey.shade50.withOpacity(0.7),
+                              // borderRadius: BorderRadius.circular(10), // Adding border radius
+                              // border: Border.all(color: Colors.grey, width: 2), // Optional: adding a border
+                            ),
+                            child: Center(
+                              child: Text(
+                                '$number',
+                                style: TextStyle(
+                                  fontSize: 35,
+                                  color: Colors.black38,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                      );
+                    },
+                  ),
+                ),
+                SizedBox(height: 20),
+
+                // Drag target
+                DragTarget<int>(
+                  builder: (BuildContext context, List<int?> accepted,
+                      List<dynamic> rejected) {
+                    return Container(
+                      height: 200, // Expanded height for the drag target
+                      width: double.infinity,
+                      padding: EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        color: Colors.greenAccent,
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: Colors.green, width: 2),
                       ),
-                    ),
-                    child: Container(
-                      padding: EdgeInsets.all(16),
-                      color: Colors.lightBlueAccent,
                       child: Center(
-                        child: Text(
-                          '$number',
-                          style: TextStyle(
-                              fontSize: 24,
+                        child: draggedNumbers.isNotEmpty
+                            ? ListView(
+                          scrollDirection: Axis.horizontal,
+                          children: draggedNumbers
+                              .map((number) => Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              padding: EdgeInsets.all(16),
                               color: Colors.white,
-                              fontWeight: FontWeight.bold),
+                              child: Text(
+                                '$number',
+                                style: TextStyle(fontSize: 24),
+                              ),
+                            ),
+                          ))
+                              .toList(),
+                        )
+                            : Text(
+                          'Drop numbers here',
+                          style: GoogleFonts.lato(
+                            textStyle: TextStyle(
+                              fontSize: isTablet ? 28 : 22,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
                       ),
+                    );
+                  },
+                  onAccept: (int number) {
+                    setState(() {
+                      if (!draggedNumbers.contains(number)) {
+                        draggedNumbers.add(number);
+                      }
+                    });
+                  },
+                  onWillAccept: (data) {
+                    return true;
+                  },
+                ),
+                SizedBox(height: 20),
+
+                // Submit button
+                ElevatedButton(
+                  onPressed: checkAnswer,
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 30.0),
+                    backgroundColor: Colors.teal,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
                     ),
-                  );
-                },
-              ),
-            ),
-
-            SizedBox(height: 20),
-
-            DragTarget<int>(
-              builder: (BuildContext context, List<int?> accepted,
-                  List<dynamic> rejected) {
-                return Container(
-                  height: 200, // Expanded height for the drag target
-                  width: double.infinity,
-                  padding:
-                      EdgeInsets.all(20), // Added padding for a larger hit area
-                  decoration: BoxDecoration(
-                    color: Colors.greenAccent,
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Colors.green, width: 2),
                   ),
-                  child: Center(
-                    child: draggedNumbers.isNotEmpty
-                        ? ListView(
-                            scrollDirection: Axis.horizontal,
-                            children: draggedNumbers
-                                .map((number) => Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Container(
-                                        padding: EdgeInsets.all(16),
-                                        color: Colors.white,
-                                        child: Text(
-                                          '$number',
-                                          style: TextStyle(fontSize: 24),
-                                        ),
-                                      ),
-                                    ))
-                                .toList(),
-                          )
-                        : Text(
-                            'Drop numbers here',
-                            style: TextStyle(
-                                fontSize: isTablet ? 24 : 18,
-                                fontWeight: FontWeight.bold),
-                          ),
+                  child: Text(
+                    'Submit',
+                    style: GoogleFonts.lato(
+                      textStyle: TextStyle(
+                        fontSize: isTablet ? 24 : 18,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
-                );
-              },
-              onAccept: (int number) {
-                setState(() {
-                  if (!draggedNumbers.contains(number)) {
-                    draggedNumbers.add(number);
-                  }
-                });
-              },
-              onWillAccept: (data) {
-                return true;
-              },
+                ),
+                SizedBox(height: 20),
+
+                // Message text
+                Text(
+                  message,
+                  style: GoogleFonts.lato(
+                    textStyle: TextStyle(
+                      fontSize: isTablet ? 28 : 22,
+                      color: isCorrect ? Colors.green : Colors.red,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20),
+
+                // Next Question button
+                ElevatedButton(
+                  onPressed: nextQuestion,
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 30.0),
+                    backgroundColor: Colors.orange,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  child: Text(
+                    'Next Question',
+                    style: GoogleFonts.lato(
+                      textStyle: TextStyle(
+                        fontSize: isTablet ? 24 : 18,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-
-            SizedBox(height: 20),
-
-            ElevatedButton(
-              onPressed: checkAnswer,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.teal,
-                padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 30.0),
-              ),
-              child: Text(
-                'Submit',
-                style: TextStyle(
-                    fontSize: isTablet ? 22 : 16, fontWeight: FontWeight.bold),
-              ),
-            ),
-
-            SizedBox(height: 20),
-
-            Text(
-              message,
-              style: TextStyle(
-                fontSize: isTablet ? 24 : 18,
-                fontWeight: FontWeight.bold,
-                color: isCorrect ? Colors.green : Colors.red,
-              ),
-            ),
-
-            SizedBox(height: 20),
-
-            ElevatedButton(
-              onPressed: nextQuestion,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.teal,
-                padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 30.0),
-              ),
-              child: Text(
-                'Next Question',
-                style: TextStyle(
-                    fontSize: isTablet ? 22 : 16, fontWeight: FontWeight.bold),
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );
