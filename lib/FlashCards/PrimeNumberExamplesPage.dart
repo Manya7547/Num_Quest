@@ -14,54 +14,55 @@ class _PrimeNumberPracticePageState extends State<PrimeNumberPracticePage> {
     {
       'question_en': 'Which of the following is a prime number?',
       'question_es': '¿Cuál de los siguientes es un número primo?',
-      'options': ['4', '6', '2'],
-      'answer': '2',
+      'options': ['4 (four)', '6 (six)', '2 (two)'],
+      'answer': '2 (two)',
     },
     {
       'question_en': 'Which of the following is not a prime number?',
       'question_es': '¿Cuál de los siguientes no es un número primo?',
-      'options': ['2', '3', '9'],
-      'answer': '9',
+      'options': ['2 (two)', '3 (three)', '9 (nine)'],
+      'answer': '9 (nine)',
     },
     {
       'question_en': 'How many prime numbers are there between 10 and 25?',
       'question_es': '¿Cuántos números primos hay entre 10 y 25?',
-      'options': ['5', '4', '3'],
-      'answer': '5',
+      'options': ['5 (five)', '4 (four)', '3 (three)'],
+      'answer': '5 (five)',
     },
     {
-      'question_en': 'Which of these is a list of prime numbers between 61 and 75?',
-      'question_es': '¿Cuál de estas es una lista de números primos entre 61 y 75?',
+      'question_en':
+          'Which of these is a list of prime numbers between 61 and 75?',
+      'question_es':
+          '¿Cuál de estas es una lista de números primos entre 61 y 75?',
       'options': ['61, 67, 71, 73', '67, 71, 73', '63, 67, 71'],
       'answer': '67, 71, 73',
     },
     {
       'question_en': 'How many prime numbers are there between 0 and 100?',
       'question_es': '¿Cuántos números primos hay entre 0 y 100?',
-      'options': ['26', '24', '25'],
-      'answer': '25',
+      'options': ['26 (twenty-six)', '24 (twenty-four)', '25 (twenty-five)'],
+      'answer': '25 (twenty-five)',
     },
     {
       'question_en': 'What is the smallest prime number greater than 20?',
       'question_es': '¿Cuál es el número primo más pequeño mayor que 20?',
-      'options': ['23', '19', '21'],
-      'answer': '23',
+      'options': ['23 (twenty-three)', '19 (nineteen)', '21 (twenty-one)'],
+      'answer': '23 (twenty-three)',
     },
     {
-      'question_en': ' How many prime numbers are there between 50 and 60?',
+      'question_en': 'How many prime numbers are there between 50 and 60?',
       'question_es': '¿Cuántos números primos hay entre 50 y 60?',
-      'options': ['2', '1', '3'],
-      'answer': '1',
+      'options': ['2 (two)', '1 (one)', '3 (three)'],
+      'answer': '1 (one)',
     },
     {
       'question_en': 'What is the sum of the first three prime numbers?',
       'question_es': '¿Cuál es la suma de los primeros tres números primos?',
-      'options': ['10', '12', '17'],
-      'answer': '17',
+      'options': ['10 (ten)', '12 (twelve)', '17 (seventeen)'],
+      'answer': '17 (seventeen)',
     },
 
-
-    // Add more questions here
+    // Add more questions here with the same format
   ];
 
   @override
@@ -105,7 +106,7 @@ class _PrimeNumberPracticePageState extends State<PrimeNumberPracticePage> {
         height: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('background1.jpg'),
+            image: AssetImage('assets/background1.jpg'),
             fit: BoxFit.cover,
           ),
         ),
@@ -160,7 +161,7 @@ class _PrimeNumberPracticePageState extends State<PrimeNumberPracticePage> {
                       onPressed: _refreshExamples,
                       style: ElevatedButton.styleFrom(
                         padding:
-                        EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                            EdgeInsets.symmetric(horizontal: 30, vertical: 15),
                         backgroundColor: Colors.lightBlueAccent.shade200,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
@@ -179,7 +180,7 @@ class _PrimeNumberPracticePageState extends State<PrimeNumberPracticePage> {
                       },
                       style: ElevatedButton.styleFrom(
                         padding:
-                        EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                            EdgeInsets.symmetric(horizontal: 30, vertical: 15),
                         backgroundColor: Colors.amber.shade700,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
@@ -201,19 +202,20 @@ class _PrimeNumberPracticePageState extends State<PrimeNumberPracticePage> {
   }
 
   Widget _buildQuestionCard(
-      String questionEn,
-      List<String> options,
-      String answer,
-      String questionEs,
-      List<String> optionsEs,
-      String answerEs,
-      ) {
+    String questionEn,
+    List<String> options,
+    String answer,
+    String questionEs,
+    List<String> optionsEs,
+    String answerEs,
+  ) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: Center(
         child: Container(
           height: 200,
-          width: MediaQuery.of(context).size.width * 0.8, // Adjust width to be smaller
+          width: MediaQuery.of(context).size.width *
+              0.8, // Adjust width to be smaller
           decoration: BoxDecoration(
             color: Colors.white70,
             borderRadius: BorderRadius.circular(15.0),
@@ -235,7 +237,8 @@ class _PrimeNumberPracticePageState extends State<PrimeNumberPracticePage> {
                       _checkAnswer(option, answer);
                     },
                     style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
                       backgroundColor: Colors.yellow.shade500,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),

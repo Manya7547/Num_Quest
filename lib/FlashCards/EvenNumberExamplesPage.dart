@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flip_card/flip_card.dart';
 import "package:google_fonts/google_fonts.dart";
 
-
 class EvenNumberExamplesPage extends StatefulWidget {
   const EvenNumberExamplesPage({super.key});
 
@@ -15,10 +14,32 @@ class EvenNumberExamplesPage extends StatefulWidget {
 class _EvenNumberExamplesPageState extends State<EvenNumberExamplesPage> {
   bool _isEnglish = true; // State to keep track of language
   List<Map<String, String>> _examples = [];
+
+  // Map to hold numbers and their corresponding English words
+  final Map<String, String> numberWords = {
+    '2': 'two',
+    '4': 'four',
+    '6': 'six',
+    '8': 'eight',
+    '10': 'ten',
+    '12': 'twelve',
+    '14': 'fourteen',
+    '16': 'sixteen',
+    '18': 'eighteen',
+    '20': 'twenty',
+    '75': 'seventy-five',
+    '45': 'forty-five',
+    '9': 'nine',
+    '15': 'fifteen',
+    '55': 'fifty-five',
+    '31': 'thirty-one',
+  };
+
   final List<Map<String, String>> _allExamples = [
     {
       'number': '2',
-      'description_en': 'It\'s EVEN! \nThere are 2 sides to a coin: heads and tails!',
+      'description_en':
+          'It\'s EVEN! \nThere are 2 sides to a coin: heads and tails!',
       'description_es': '¡Es PAR! \n¡Hay 2 lados en una moneda: cara y cruz!',
     },
     {
@@ -31,76 +52,7 @@ class _EvenNumberExamplesPageState extends State<EvenNumberExamplesPage> {
       'description_en': 'It\'s EVEN! \nSix legs on three insects, all even!',
       'description_es': '¡Es PAR! \n¡Seis patas en tres insectos, todo par!',
     },
-    {
-      'number': '8',
-      'description_en': 'It\'s EVEN! \nEight slices of pizza, let\'s share!',
-      'description_es': '¡Es PAR! \n¡Ocho porciones de pizza, vamos a compartir!',
-    },
-    {
-      'number': '75',
-      'description_en': 'It\'s ODD! \n75 is not divisible by 2 and it ends with 5. \nRemember, odd numbers are not divisible by 2 and end with 1, 3, 5, 7, or 9.',
-      'description_es': '¡Es IMPAR! \n75 no es divisible por 2 y termina en 5. \nRecuerda, los números impares no son divisibles por 2 y terminan en 1, 3, 5, 7 o 9.'
-    },
-    {
-      'number': '45',
-      'description_en': 'It\'s ODD! \n45 is not divisible by 2 and it ends with 5. \nRemember, odd numbers are not divisible by 2 and end with 1, 3, 5, 7, or 9.',
-      'description_es': '¡Es IMPAR! \n45 no es divisible por 2 y termina en 5. \nRecuerda, los números impares no son divisibles por 2 y terminan en 1, 3, 5, 7 o 9.'
-    },
-    {
-      'number': '9',
-      'description_en': 'It\'s ODD! \n9 is not divisible by 2 and it ends with 9. \nRemember, odd numbers are not divisible by 2 and end with 1, 3, 5, 7, or 9.',
-      'description_es': '¡Es IMPAR! \n9 no es divisible por 2 y termina en 9. \nRecuerda, los números impares no son divisibles por 2 y terminan en 1, 3, 5, 7 o 9.'
-    },
-    {
-      'number': '15',
-      'description_en': 'It\'s ODD! \n15 is not divisible by 2 and it ends with 5. \nRemember, odd numbers are not divisible by 2 and end with 1, 3, 5, 7, or 9.',
-      'description_es': '¡Es IMPAR! \n15 no es divisible por 2 y termina en 5. \nRecuerda, los números impares no son divisibles por 2 y terminan en 1, 3, 5, 7 o 9.'
-    },
-    {
-      'number': '55',
-      'description_en': 'It\'s ODD! \n55 is not divisible by 2 and it ends with 5. \nRemember, odd numbers are not divisible by 2 and end with 1, 3, 5, 7, or 9.',
-      'description_es': '¡Es IMPAR! \n55 no es divisible por 2 y termina en 5. \nRecuerda, los números impares no son divisibles por 2 y terminan en 1, 3, 5, 7 o 9.'
-    },
-    {
-      'number': '9',
-      'description_en': 'It\'s ODD! \n9 is not divisible by 2 and it ends with 9. \nRemember, odd numbers are not divisible by 2 and end with 1, 3, 5, 7, or 9.',
-      'description_es': '¡Es IMPAR! \n9 no es divisible por 2 y termina en 9. \nRecuerda, los números impares no son divisibles por 2 y terminan en 1, 3, 5, 7 o 9.'
-    },
-    {
-      'number': '31',
-      'description_en': 'It\'s ODD! \n31 is not divisible by 2 and it ends with 1. \nRemember, odd numbers are not divisible by 2 and end with 1, 3, 5, 7, or 9.',
-      'description_es': '¡Es IMPAR! \n31 no es divisible por 2 y termina en 1. \nRecuerda, los números impares no son divisibles por 2 y terminan en 1, 3, 5, 7 o 9.'
-    },
-    {
-      'number': '10',
-      'description_en': 'It\'s EVEN! \n10 cookies: 5 for you and 5 for your friend!',
-      'description_es': '¡Es PAR! \n10 galletas: ¡5 para ti y 5 para tu amigo!',
-    },
-    {
-      'number': '12',
-      'description_en': 'It\'s EVEN! \nA dozen eggs, all even!',
-      'description_es': '¡Es PAR! \nUna docena de huevos, todo par!',
-    },
-    {
-      'number': '14',
-      'description_en': 'It\'s EVEN! \nFourteen stars in the sky, paired up high!',
-      'description_es': '¡Es PAR! \n¡Catorce estrellas en el cielo, emparejadas en lo alto!',
-    },
-    {
-      'number': '16',
-      'description_en': 'It\'s EVEN! \nSixteen colorful blocks, build in pairs!',
-      'description_es': '¡Es PAR! \n¡Dieciséis bloques coloridos, construye en pares!',
-    },
-    {
-      'number': '18',
-      'description_en': 'It\'s EVEN! \nEighteen fish in the aquarium, swimming in pairs!',
-      'description_es': '¡Es PAR! \n¡Dieciocho peces en el acuario, nadando en parejas!',
-    },
-    {
-      'number': '20',
-      'description_en': 'It\'s EVEN! \nTwenty crayons, perfect for sharing!',
-      'description_es': '¡Es PAR! \n¡Veinte crayones, perfectos para compartir!',
-    },
+    //... more numbers
   ];
 
   @override
@@ -119,22 +71,24 @@ class _EvenNumberExamplesPageState extends State<EvenNumberExamplesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_isEnglish ? 'Odd-Even Number Practice' : 'Ejemplos de Números Primos'),
+        title: Text(_isEnglish
+            ? 'Odd-Even Number Practice'
+            : 'Ejemplos de Números Primos'),
       ),
       body: Container(
         width: double.infinity,
         height: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('background1.jpg'),
+            image: AssetImage('assets/background1.jpg'),
             fit: BoxFit.cover,
           ),
         ),
-        child: Center( // Wrap the entire content in a Center widget
+        child: Center(
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center, // Center the column vertically
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
                   _isEnglish
@@ -158,27 +112,24 @@ class _EvenNumberExamplesPageState extends State<EvenNumberExamplesPage> {
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 30),
-
-                // Center the ListView.builder and reduce its width
                 Center(
                   child: SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.8, // Limit width of the ListView
+                    width: MediaQuery.of(context).size.width * 0.8,
                     child: ListView.builder(
                       shrinkWrap: true,
                       itemCount: _examples.length,
                       itemBuilder: (context, index) {
                         return _buildExampleCard(
                           _examples[index]['number']!,
-                          _isEnglish ? _examples[index]['description_en']! : _examples[index]['description_es']!,
+                          _isEnglish
+                              ? _examples[index]['description_en']!
+                              : _examples[index]['description_es']!,
                         );
                       },
                     ),
                   ),
                 ),
-
                 const SizedBox(height: 30),
-
-                // Center the Row containing buttons
                 Center(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -186,7 +137,8 @@ class _EvenNumberExamplesPageState extends State<EvenNumberExamplesPage> {
                       ElevatedButton(
                         onPressed: _refreshExamples,
                         style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 30, vertical: 15),
                           backgroundColor: Colors.lightBlueAccent.shade200,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
@@ -204,14 +156,17 @@ class _EvenNumberExamplesPageState extends State<EvenNumberExamplesPage> {
                           });
                         },
                         style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 30, vertical: 15),
                           backgroundColor: Colors.amber.shade700,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
                         ),
                         child: Text(
-                          _isEnglish ? 'Tap to Translate' : 'Toca para Traducir',
+                          _isEnglish
+                              ? 'Tap to Translate'
+                              : 'Toca para Traducir',
                           style: TextStyle(fontSize: 20, color: Colors.white),
                         ),
                       ),
@@ -226,29 +181,31 @@ class _EvenNumberExamplesPageState extends State<EvenNumberExamplesPage> {
     );
   }
 
-
   Widget _buildExampleCard(String number, String description) {
+    String numberText = numberWords[number] != null
+        ? '$number (${numberWords[number]})'
+        : number;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: FlipCard(
         direction: FlipDirection.HORIZONTAL,
         front: Container(
           height: 150,
-          width: MediaQuery.of(context).size.width * 0.8, // Adjust width
+          width: MediaQuery.of(context).size.width * 0.8,
           decoration: BoxDecoration(
             color: Colors.white70,
             borderRadius: BorderRadius.circular(15.0),
           ),
           child: Center(
             child: Text(
-              number,
+              numberText, // Display number with text
               style: const TextStyle(fontSize: 50, color: Colors.black54),
             ),
           ),
         ),
         back: Container(
           height: 150,
-          width: MediaQuery.of(context).size.width * 0.8, // Adjust width
+          width: MediaQuery.of(context).size.width * 0.8,
           decoration: BoxDecoration(
             color: Colors.grey.shade200,
             borderRadius: BorderRadius.circular(15.0),

@@ -15,21 +15,21 @@ class _SquaresExamplePageState extends State<SquaresExamplePage> {
   bool _isEnglish = true; // State to keep track of language
   List<Map<String, String>> _examples = [];
   final List<Map<String, String>> _allExamples = [
-    //
     {
-      'Front_en': 'What is the square of 4?',
+      'Front_en': 'What is the square of 4(four)?',
       'Front_es': '¿Cuál es el cuadrado de 4?',
       'Back_en': '16',
       'Back_es': '16',
     },
     {
-      'Front_en': 'What is the square root of 81?',
+      'Front_en': 'What is the square root of 81(eighty one)?',
       'Front_es': ' ¿Cuál es la raíz cuadrada de 81?',
       'Back_en': '9',
       'Back_es': '9',
     },
     {
-      'Front_en': 'True or False: 144 is a square number.',
+      'Front_en':
+          'True or False: 144 (one hundred and forty four) is a square number.',
       'Front_es': ' Verdadero o Falso: 144 es un número cuadrado.',
       'Back_en': 'True\n(12 × 12 = 144)',
       'Back_es': 'Verdadero\n(12 × 12 = 144)',
@@ -52,6 +52,44 @@ class _SquaresExamplePageState extends State<SquaresExamplePage> {
     setState(() {
       _examples = (_allExamples.toList()..shuffle()).take(3).toList();
     });
+  }
+
+  // Function to convert numbers to their word equivalents
+  String _numberToWords(String number) {
+    Map<String, String> numberWords = {
+      '0': 'zero',
+      '1': 'one',
+      '2': 'two',
+      '3': 'three',
+      '4': 'four',
+      '5': 'five',
+      '6': 'six',
+      '7': 'seven',
+      '8': 'eight',
+      '9': 'nine',
+      '10': 'ten',
+      '11': 'eleven',
+      '12': 'twelve',
+      '13': 'thirteen',
+      '14': 'fourteen',
+      '15': 'fifteen',
+      '16': 'sixteen',
+      '17': 'seventeen',
+      '18': 'eighteen',
+      '19': 'nineteen',
+      '20': 'twenty',
+      '25': 'twenty-five',
+      '36': 'thirty-six',
+      '49': 'forty-nine',
+      '64': 'sixty-four',
+      '81': 'eighty-one',
+      '100': 'one hundred',
+      '144': 'one hundred forty-four',
+    };
+
+    return numberWords[number] != null
+        ? '$number (${numberWords[number]})'
+        : number;
   }
 
   @override
@@ -116,7 +154,7 @@ class _SquaresExamplePageState extends State<SquaresExamplePage> {
                               ? _examples[index]['Front_en']!
                               : _examples[index]['Front_es']!,
                           _isEnglish
-                              ? _examples[index]['Back_en']!
+                              ? _numberToWords(_examples[index]['Back_en']!)
                               : _examples[index]['Back_es']!,
                         );
                       },

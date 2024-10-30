@@ -22,7 +22,6 @@ class LessonsPage extends StatelessWidget {
     {'title': 'Fibonacci Numbers', 'page': FibonacciNumberInfoPage()},
     {'title': 'Factors', 'page': FactorsInfoPage()},
     {'title': 'Cube Numbers', 'page': CubeNumberInfoPage()},
-    // Add more lessons if needed
   ];
 
   @override

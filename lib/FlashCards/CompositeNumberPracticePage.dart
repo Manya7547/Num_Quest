@@ -7,7 +7,8 @@ class CompositeNumberPracticePage extends StatefulWidget {
       _CompositeNumberPracticePageState();
 }
 
-class _CompositeNumberPracticePageState extends State<CompositeNumberPracticePage> {
+class _CompositeNumberPracticePageState
+    extends State<CompositeNumberPracticePage> {
   bool _isEnglish = true; // State to keep track of language
   List<Map<String, dynamic>> _examples = [];
   final List<Map<String, dynamic>> _allExamples = [
@@ -24,45 +25,95 @@ class _CompositeNumberPracticePageState extends State<CompositeNumberPracticePag
       'answer': '13',
     },
     {
-      'question_en': 'What are the factors of the composite number 18?',
-      'question_es': '¿Cuáles son los factores del número compuesto 18?',
+      'question_en':
+          'What are the factors of the composite number 18 (eighteen)?',
+      'question_es': '¿Cuáles son los factores del número compuesto 18 ?',
       'options': ['1,18', '2,3,6,9', '1,2,3,6,9,18'],
       'answer': '1,2,3,6,9,18',
     },
     {
-      'question_en': 'Which of the following numbers has more than two factors?',
-      'question_es': '¿Cuál de los siguientes números tiene más de dos factores?',
+      'question_en':
+          'Which of the following numbers has more than two factors?',
+      'question_es':
+          '¿Cuál de los siguientes números tiene más de dos factores?',
       'options': ['24', '19', '13'],
       'answer': '24',
     },
     {
-      'question_en': 'Which of these numbers is a composite number because it has factors other than 1 and itself?',
-      'question_es': '¿Cuál de estos números es un número compuesto porque tiene factores diferentes de 1 y de sí mismo?',
+      'question_en':
+          'Which of these numbers is a composite number because it has factors other than 1 and itself?',
+      'question_es':
+          '¿Cuál de estos números es un número compuesto porque tiene factores diferentes de 1 y de sí mismo?',
       'options': ['6', '7', '5'],
       'answer': '6',
     },
     {
-      'question_en': 'Identify the composite number that is a product of 2 and 5:',
+      'question_en':
+          'Identify the composite number that is a product of 2 and 5:',
       'question_es': 'Identifica el número compuesto que es producto de 2 y 5:',
       'options': ['15', '10', '25'],
       'answer': '10',
     },
     {
-      'question_en': ' Which of the following is the smallest composite number?',
-      'question_es': '¿Cuál de los siguientes es el número compuesto más pequeño?',
+      'question_en': 'Which of the following is the smallest composite number?',
+      'question_es':
+          '¿Cuál de los siguientes es el número compuesto más pequeño?',
       'options': ['2', '1', '4'],
       'answer': '4',
     },
     {
-      'question_en': 'Which number is composite because it can be factored into smaller prime numbers??',
-      'question_es': '¿Qué número es compuesto porque se puede factorizar en números primos más pequeños?',
+      'question_en':
+          'Which number is composite because it can be factored into smaller prime numbers?',
+      'question_es':
+          '¿Qué número es compuesto porque se puede factorizar en números primos más pequeños?',
       'options': ['57', '51', '49'],
-      'answer': '17',
+      'answer': '57',
     },
-
-
-    // Add more questions here
   ];
+
+  // Helper function to convert a number to its English text
+  String _numberToWords(String number) {
+    switch (number) {
+      case '1':
+        return 'one';
+      case '2':
+        return 'two';
+      case '3':
+        return 'three';
+      case '4':
+        return 'four';
+      case '5':
+        return 'five';
+      case '6':
+        return 'six';
+      case '7':
+        return 'seven';
+      case '8':
+        return 'eight';
+      case '9':
+        return 'nine';
+      case '10':
+        return 'ten';
+      case '11':
+        return 'eleven';
+      case '12':
+        return 'twelve';
+      case '13':
+        return 'thirteen';
+      case '15':
+        return 'fifteen';
+      case '18':
+        return 'eighteen';
+      case '19':
+        return 'nineteen';
+      case '24':
+        return 'twenty-four';
+      case '57':
+        return 'fifty-seven';
+      default:
+        return '';
+    }
+  }
 
   @override
   void initState() {
@@ -105,7 +156,7 @@ class _CompositeNumberPracticePageState extends State<CompositeNumberPracticePag
         height: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('background1.jpg'),
+            image: AssetImage('assets/background1.jpg'),
             fit: BoxFit.cover,
           ),
         ),
@@ -160,7 +211,7 @@ class _CompositeNumberPracticePageState extends State<CompositeNumberPracticePag
                       onPressed: _refreshExamples,
                       style: ElevatedButton.styleFrom(
                         padding:
-                        EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                            EdgeInsets.symmetric(horizontal: 30, vertical: 15),
                         backgroundColor: Colors.lightBlueAccent.shade200,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
@@ -179,7 +230,7 @@ class _CompositeNumberPracticePageState extends State<CompositeNumberPracticePag
                       },
                       style: ElevatedButton.styleFrom(
                         padding:
-                        EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                            EdgeInsets.symmetric(horizontal: 30, vertical: 15),
                         backgroundColor: Colors.amber.shade700,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
@@ -201,19 +252,20 @@ class _CompositeNumberPracticePageState extends State<CompositeNumberPracticePag
   }
 
   Widget _buildQuestionCard(
-      String questionEn,
-      List<String> options,
-      String answer,
-      String questionEs,
-      List<String> optionsEs,
-      String answerEs,
-      ) {
+    String questionEn,
+    List<String> options,
+    String answer,
+    String questionEs,
+    List<String> optionsEs,
+    String answerEs,
+  ) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: Center(
         child: Container(
           height: 200,
-          width: MediaQuery.of(context).size.width * 0.8, // Adjust width to be smaller
+          width: MediaQuery.of(context).size.width *
+              0.8, // Adjust width to be smaller
           decoration: BoxDecoration(
             color: Colors.white70,
             borderRadius: BorderRadius.circular(15.0),
@@ -230,20 +282,22 @@ class _CompositeNumberPracticePageState extends State<CompositeNumberPracticePag
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: options.map((option) {
+                  final optionWithText = '$option (${_numberToWords(option)})';
                   return ElevatedButton(
                     onPressed: () {
                       _checkAnswer(option, answer);
                     },
                     style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
                       backgroundColor: Colors.yellow.shade500,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
                     child: Text(
-                      option,
-                      style: TextStyle(fontSize: 20, color: Colors.white),
+                      optionWithText,
+                      style: TextStyle(fontSize: 20, color: Colors.black87),
                     ),
                   );
                 }).toList(),
