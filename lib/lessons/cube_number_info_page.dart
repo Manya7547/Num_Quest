@@ -60,7 +60,7 @@ class CubeNumberInfoPage extends StatelessWidget {
                         SizedBox(height: 50),
                         Text(
                           isEnglish
-                              ? 'For example, the number 27 is a cube number because it can be written as 3 × 3 × 3. ). Here, 3 is the integer that has been multiplied by itself twice to produce 27.'
+                              ? 'For example, the number 27 (twenty seven) is a cube number because it can be written as 3 × 3 × 3. ). Here, 3 is the integer that has been multiplied by itself twice to produce 27.'
                               : 'Por ejemplo, el número 27 es un número cúbico porque se puede escribir como 3 × 3 × 3. Aquí, 3 es el número entero que se ha multiplicado por sí mismo dos veces para producir 27.',
                           style: TextStyle(
                             fontSize: 30,
@@ -109,7 +109,7 @@ class CubeNumberInfoPage extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           isEnglish
-                              ? 'To cube a number all you do is multiply it and by itself and then itself again. This works for all numbers. So for example 11 cubed is 11³ or 11 x 11 x 11 which is 1331. Another example could be 256³ or 256 x 256 x 256 which is 16,777,216 As you can see when you cube a whole number, you’ll find the numbers get very big very quickly!'
+                              ? 'To cube a number all you do is multiply it and by itself and then itself again. This works for all numbers. So for example 11 (eleven) cubed is 11³ or 11 x 11 x 11 which is 1331. Another example could be 256³ (two hundred fifty six cube) or 256 x 256 x 256 which is 16,777,216 As you can see when you cube a whole number, you’ll find the numbers get very big very quickly!'
                               : 'Para elevar un número al cubo, todo lo que tienes que hacer es multiplicarlo por sí mismo y luego por sí mismo otra vez. Esto funciona para todos los números. Por ejemplo, 11 al cubo es 11³ o 11 x 11 x 11, lo cual es 1331. Otro ejemplo podría ser 256³ o 256 x 256 x 256, lo cual es 16,777,216. ¡Como puedes ver, cuando elevas un número entero al cubo, los números se vuelven muy grandes muy rápido!',
                           style: TextStyle(
                             fontSize: 30,

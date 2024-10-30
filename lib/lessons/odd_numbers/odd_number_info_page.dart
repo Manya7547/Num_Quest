@@ -33,8 +33,8 @@ class OddNumberInfoPage extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           isEnglish
-                              ? 'Odd numbers, like even numbers can be small or they can be very big. If a number ends in a 1, 3, 5, 7 or 9 it is an odd number.'
-                              : 'Los números impares, al igual que los pares, pueden ser pequeños o muy grandes. Si un número termina en 1, 3, 5, 7 o 9 es un número impar.',
+                              ? 'Odd numbers, like even numbers can be small or they can be very big. If a number ends in a 1 (one), 3 (three), 5 (five), 7 (seven) or 9 (nine) it is an odd number.'
+                              : 'Los números impares, al igual que los pares, pueden ser pequeños o muy grandes. Si un número termina en 1 (uno), 3 (tres), 5 (cinco), 7 (siete) o 9 (nueve) es un número impar.',
                           style: TextStyle(
                             fontSize: 30,
                             color: Color.fromARGB(255, 18, 3, 48),
@@ -106,8 +106,8 @@ class OddNumberInfoPage extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           isEnglish
-                              ? 'Suppose you have 7 candies. Let\'s make pairs, we see that after pairing the candies, there is one candy left over. That means 7 is an odd number! Odd numbers can\'t be halved exactly, there\'s always one left over.'
-                              : 'Supongamos que tienes 7 caramelos. Hagamos parejas, vemos que después de emparejar los caramelos queda un caramelo. ¡Eso significa que 7 es un número impar! Los números impares no se pueden dividir exactamente por la mitad, siempre sobra uno.',
+                              ? 'Suppose you have 7 (seven) candies. Let\'s make pairs, we see that after pairing the candies, there is one candy left over. That means 7 (seven) is an odd number! Odd numbers can\'t be halved exactly, there\'s always one left over.'
+                              : 'Supongamos que tienes 7 (siete) caramelos. Hagamos parejas, vemos que después de emparejar los caramelos queda un caramelo. ¡Eso significa que 7 (siete) es un número impar! Los números impares no se pueden dividir exactamente por la mitad, siempre sobra uno.',
                           style: TextStyle(
                             fontSize: 30,
                             color: Color.fromARGB(255, 18, 3, 48),
@@ -195,20 +195,22 @@ class OddNumberInfoPage extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           isEnglish
-                              ? 'Now that you know what odd numbers are let\'s go ahead and solve some fun problems.'
-                              : 'Ahora que sabes qué son los números impares, sigamos adelante y resolvamos algunos problemas divertidos.',
+                              ? 'Now that you know what odd numbers are let\'s practice finding them in the next section!'
+                              : 'Ahora que sabes qué son los números impares, ¡practiquemos encontrándolos en la siguiente sección!',
                           style: TextStyle(
                             fontSize: 30,
                             color: Color.fromARGB(255, 18, 3, 48),
                           ),
+                          textAlign: TextAlign.center,
                         ),
+                        SizedBox(height: 10),
                         IconButton(
                           icon: Icon(Icons.play_arrow),
                           onPressed: () {
                             speak(
                               isEnglish
-                                  ? 'Now that you know what odd numbers are let\'s go ahead and solve some fun problems.'
-                                  : 'Ahora que sabes qué son los números impares, sigamos adelante y resolvamos algunos problemas divertidos.',
+                                  ? 'Now that you know what odd numbers are let\'s practice finding them in the next section!'
+                                  : 'Ahora que sabes qué son los números impares, ¡practiquemos encontrándolos en la siguiente sección!',
                               isEnglish,
                             );
                           },
@@ -217,8 +219,6 @@ class OddNumberInfoPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 40),
-                Image.asset('assets/practice.png', height: 500),
                 SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
@@ -229,15 +229,18 @@ class OddNumberInfoPage extends StatelessWidget {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                    backgroundColor: Colors.orange,
+                    backgroundColor: Color.fromARGB(255, 18, 3, 48),
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                   child: Text(
-                    isEnglish ? 'Quiz' : 'examen',
-                    style: TextStyle(fontSize: 20, color: Colors.white),
+                    isEnglish ? 'Start Practice' : 'Comenzar práctica',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ],
@@ -245,10 +248,4 @@ class OddNumberInfoPage extends StatelessWidget {
       ],
     );
   }
-}
-
-void main() {
-  runApp(MaterialApp(
-    home: OddNumberInfoPage(),
-  ));
 }

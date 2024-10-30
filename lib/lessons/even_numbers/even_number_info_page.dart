@@ -33,7 +33,7 @@ class EvenNumberInfoPage extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           isEnglish
-                              ? 'Even numbers can be small or they can be very big. If a number ends in a 0, 2, 4, 6 or 8, it is an even number.'
+                              ? 'Even numbers can be small or they can be very big. If a number ends in a 0 (zero), 2 (two), 4 (four), 6 (six), or 8 (eight), it is an even number.'
                               : 'Los números pares pueden ser pequeños o muy grandes. Si un número termina en 0, 2, 4, 6 u 8, es un número par.',
                           style: TextStyle(
                             fontSize: 30,
@@ -106,7 +106,7 @@ class EvenNumberInfoPage extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           isEnglish
-                              ? 'Suppose you have 6 candies. Let\'s make pairs, we see that all the candies are in pairs, and there are no candies left over. That means 6 is an even number! Even Numbers can be halved with no remainders left over.'
+                              ? 'Suppose you have 6 (six) candies. Let\'s make pairs, and we see that all the candies are in pairs, with no candies left over. That means 6 (six) is an even number! Even numbers can be halved with no remainders left over.'
                               : 'Supongamos que tienes 6 caramelos. Hagamos parejas, vemos que todos los caramelos están emparejados y no queda ningún caramelo sobrante. ¡Eso significa que 6 es un número par! Los números pares se pueden dividir por la mitad sin dejar restos.',
                           style: TextStyle(
                             fontSize: 30,

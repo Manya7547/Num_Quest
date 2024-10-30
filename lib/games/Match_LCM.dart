@@ -36,18 +36,18 @@ class _HomePageState extends State<HomePage> {
     gameOver = false;
     score = 0;
     items = [
-      ItemModel(name: "12 and 8", value: "24"),
-      ItemModel(name: "18 and 9", value: "18"),
-      ItemModel(name: "20 and 5", value: "20"),
-      ItemModel(name: "15 and 6", value: "30"),
-      ItemModel(name: "7 and 14", value: "14"),
+      ItemModel(name: "12 and 8 (twelve and eight)", value: "24"),
+      ItemModel(name: "18 and 9 (eighteen and nine)", value: "18"),
+      ItemModel(name: "20 and 5 (twenty and five)", value: "20"),
+      ItemModel(name: "15 and 6 (fifteen and six)", value: "30"),
+      ItemModel(name: "7 and 14 (seven and fourteen)", value: "14"),
     ];
     items2 = [
-      ItemModel(name: "24", value: "24"),
-      ItemModel(name: "18", value: "18"),
-      ItemModel(name: "20", value: "20"),
-      ItemModel(name: "30", value: "30"),
-      ItemModel(name: "14", value: "14"),
+      ItemModel(name: "24 (twenty-four)", value: "24"),
+      ItemModel(name: "18 (eighteen)", value: "18"),
+      ItemModel(name: "20 (twenty)", value: "20"),
+      ItemModel(name: "30 (thirty)", value: "30"),
+      ItemModel(name: "14 (fourteen)", value: "14"),
     ];
     items.shuffle();
     items2.shuffle();
@@ -133,43 +133,32 @@ class _HomePageState extends State<HomePage> {
                                     items.remove(item);
                                     items2.remove(receivedItem);
                                     score += 10;
-                                    item.accepting = false;
                                   });
                                 } else {
                                   setState(() {
                                     score -= 5;
-                                    item.accepting = false;
                                   });
                                 }
                               },
-                              onLeave: (receivedItem) {
-                                setState(() {
-                                  item.accepting = false;
-                                });
-                              },
-                              onWillAccept: (receivedItem) {
-                                setState(() {
-                                  item.accepting = true;
-                                });
-                                return true;
-                              },
-                              builder: (context, acceptedItems, rejectedItem) =>
-                                  Container(
-                                color: item.accepting
-                                    ? Colors.red
-                                    : Colors.orange[900],
-                                height: 150,
-                                width: 150,
-                                alignment: Alignment.center,
-                                margin: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  item.name,
-                                  style: TextStyle(
+                              onLeave: (receivedItem) {},
+                              onWillAccept: (receivedItem) => true,
+                              builder: (context, acceptedItems, rejectedItem) {
+                                return Container(
+                                  color: Colors.orange[900],
+                                  height: 170,
+                                  width: 170,
+                                  alignment: Alignment.center,
+                                  margin: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    item.name,
+                                    style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 30.0),
-                                ),
-                              ),
+                                      fontSize: 30.0,
+                                    ),
+                                  ),
+                                );
+                              },
                             ),
                           );
                         }).toList(),
@@ -183,15 +172,15 @@ class _HomePageState extends State<HomePage> {
                           return Draggable<ItemModel>(
                             data: item,
                             childWhenDragging: Container(
-                              height: 150,
-                              width: 150,
+                              height: 170,
+                              width: 170,
                               color: Colors.grey,
                               child: Center(
                                 child: Text(
                                   item.name,
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 50.0,
+                                    fontSize: 30.0,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -200,15 +189,15 @@ class _HomePageState extends State<HomePage> {
                             feedback: Material(
                               color: Colors.transparent,
                               child: Container(
-                                height: 150,
-                                width: 150,
+                                height: 170,
+                                width: 170,
                                 color: Colors.orange[900],
                                 child: Center(
                                   child: Text(
                                     item.name,
                                     style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: 50.0,
+                                      fontSize: 30.0,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -216,15 +205,15 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                             child: Container(
-                              height: 150,
-                              width: 150,
+                              height: 170,
+                              width: 170,
                               color: Colors.orange[900],
                               child: Center(
                                 child: Text(
                                   item.name,
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 50.0,
+                                    fontSize: 30.0,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -272,11 +261,9 @@ class _HomePageState extends State<HomePage> {
 class ItemModel {
   final String name;
   final String value;
-  bool accepting;
 
   ItemModel({
     required this.name,
     required this.value,
-    this.accepting = false,
   });
 }

@@ -38,7 +38,7 @@ class PrimeNumberInfoPage extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           isEnglish
-                              ? 'A prime number can be defined as a natural number greater than 1 whose only factors are 1 and the number itself.'
+                              ? 'A prime number can be defined as a natural number greater than 1 (one) whose only factors are 1 (one) and the number itself.'
                               : 'Un número primo se puede definir como un número natural mayor que 1 cuyos únicos factores son 1 y el propio número.',
                           style: TextStyle(
                             fontSize: 30,
@@ -60,7 +60,7 @@ class PrimeNumberInfoPage extends StatelessWidget {
                         SizedBox(height: 50),
                         Text(
                           isEnglish
-                              ? 'For example, 7 has only 2 factors, 1 and 7 itself. So, it is a prime number. However, 6 has four factors, 1, 2, 3 and 6. Therefore, it is not a prime number. It is a composite number. We will learn about composite numbers in the next lesson.'
+                              ? 'For example, 7 (seven) has only 2 (two) factors, 1 (one) and 7 (seven) itself. So, it is a prime number. However, 6 (six) has four factors, 1 (one), 2 (two), 3 (three) and 6 (six). Therefore, it is not a prime number. It is a composite number. We will learn about composite numbers in the next lesson.'
                               : 'Por ejemplo, 7 tiene solo 2 factores, 1 y 7. Por lo tanto, es un número primo. Sin embargo, 6 tiene cuatro factores, 1, 2, 3 y 6. Por lo tanto, no es un número primo. Es un número compuesto. Aprenderemos sobre los números compuestos en la próxima lección.',
                           style: TextStyle(
                             fontSize: 30,
@@ -153,7 +153,7 @@ class PrimeNumberInfoPage extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           isEnglish
-                              ? 'The chart below shows the prime numbers up to 100, represented in coloured boxes.'
+                              ? 'The chart below shows the prime numbers up to 100 (one hundred), represented in coloured boxes.'
                               : 'El cuadro de abajo muestra los números primos hasta 100, representados en cuadros de colores.',
                           style: TextStyle(
                             fontSize: 30,
