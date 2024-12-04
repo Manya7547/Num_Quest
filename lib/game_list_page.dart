@@ -22,12 +22,12 @@ class GameListPage extends StatelessWidget {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(100.0), // Adjust padding as needed
+          padding: const EdgeInsets.all(100.0), 
           child: GridView.count(
-            crossAxisCount: 4, // Number of columns
-            crossAxisSpacing: 10.0, // Space between columns
-            mainAxisSpacing: 10.0, // Space between rows
-            childAspectRatio: 1.2, // Aspect ratio for smaller buttons
+            crossAxisCount: 4, 
+            crossAxisSpacing: 10.0, 
+            mainAxisSpacing: 10.0, 
+            childAspectRatio: 1.2, 
             children: [
               GameButton(
                 title: 'Perfect Square\nGame',

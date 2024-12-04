@@ -34,7 +34,7 @@ class _MultipageContainerState extends State<MultipageContainer> {
           return Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/classboard.jpg'),
+                image: AssetImage('assets/word_problem.jpg'),
                 fit: BoxFit.cover,
               ),
             ),

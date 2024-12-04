@@ -3,20 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import '../widgets/MultipageContainer.dart';
-import 'practice_even.dart';
+import 'practice_odd.dart'; // Create a practice page for odd numbers
 
-class EvenNumberInfoPage extends StatefulWidget {
+class OddNumberInfoPage extends StatefulWidget {
   @override
-  _EvenNumberInfoPageState createState() => _EvenNumberInfoPageState();
+  _OddNumberInfoPageState createState() => _OddNumberInfoPageState();
 }
 
-class _EvenNumberInfoPageState extends State<EvenNumberInfoPage> {
+class _OddNumberInfoPageState extends State<OddNumberInfoPage> {
   final FlutterTts flutterTts = FlutterTts();
   List<dynamic> lessonData = [];
 
   Future<void> loadLessonData() async {
     final String jsonData =
-        await rootBundle.loadString('assets/even_lessons.json');
+        await rootBundle.loadString('assets/odd_lessons.json');
     setState(() {
       lessonData = json.decode(jsonData)['pages'];
     });
@@ -132,6 +132,6 @@ class _EvenNumberInfoPageState extends State<EvenNumberInfoPage> {
 
 void main() {
   runApp(MaterialApp(
-    home: EvenNumberInfoPage(),
+    home: OddNumberInfoPage(),
   ));
 }

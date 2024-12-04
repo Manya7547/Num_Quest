@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'lessons/even_numbers/even_number_info_page.dart';
-import 'lessons/odd_numbers/odd_number_info_page.dart';
-import 'lessons/prime_numbers/prime_number_info_page.dart';
-import 'lessons/composite_numbers/composite_number_info_page.dart';
+import 'lessons/even_number_info_page.dart';
+import 'lessons/odd_number_info_page.dart';
+import 'lessons/prime_number_info_page.dart';
+import 'lessons/composite_number_info_page.dart';
 import 'lessons/triangular_number_info_page.dart';
 import 'lessons/perfect_number_info_page.dart';
 import 'lessons/square_number_info_page.dart';
