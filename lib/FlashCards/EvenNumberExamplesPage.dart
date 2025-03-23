@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flip_card/flip_card.dart';
 import "package:google_fonts/google_fonts.dart";
+import 'package:num_quest/translation_service.dart';
 
 class EvenNumberExamplesPage extends StatefulWidget {
   const EvenNumberExamplesPage({super.key});
@@ -14,6 +15,8 @@ class EvenNumberExamplesPage extends StatefulWidget {
 class _EvenNumberExamplesPageState extends State<EvenNumberExamplesPage> {
   bool _isEnglish = true; // State to keep track of language
   List<Map<String, String>> _examples = [];
+  final TranslationService _translationService = TranslationService(); // Translation service instance
+  Map<String, String> _translatedTexts = {}; // Cache for translated texts
 
   // Map to hold numbers and their corresponding English words
   final Map<String, String> numberWords = {
@@ -27,12 +30,6 @@ class _EvenNumberExamplesPageState extends State<EvenNumberExamplesPage> {
     '16': 'sixteen',
     '18': 'eighteen',
     '20': 'twenty',
-    '75': 'seventy-five',
-    '45': 'forty-five',
-    '9': 'nine',
-    '15': 'fifteen',
-    '55': 'fifty-five',
-    '31': 'thirty-one',
   };
 
   final List<Map<String, String>> _allExamples = [
@@ -40,17 +37,14 @@ class _EvenNumberExamplesPageState extends State<EvenNumberExamplesPage> {
       'number': '2',
       'description_en':
           'It\'s EVEN! \nThere are 2 sides to a coin: heads and tails!',
-      'description_es': '¡Es PAR! \n¡Hay 2 lados en una moneda: cara y cruz!',
     },
     {
       'number': '4',
       'description_en': 'It\'s EVEN! \nFour wheels on a car make it even!',
-      'description_es': '¡Es PAR! \n¡Cuatro ruedas en un coche lo hacen par!',
     },
     {
       'number': '6',
       'description_en': 'It\'s EVEN! \nSix legs on three insects, all even!',
-      'description_es': '¡Es PAR! \n¡Seis patas en tres insectos, todo par!',
     },
     //... more numbers
   ];
@@ -58,6 +52,7 @@ class _EvenNumberExamplesPageState extends State<EvenNumberExamplesPage> {
   @override
   void initState() {
     super.initState();
+    _translationService.loadModel(); // Load the translation model
     _refreshExamples();
   }
 
@@ -67,13 +62,27 @@ class _EvenNumberExamplesPageState extends State<EvenNumberExamplesPage> {
     });
   }
 
+  Future<String> _translateText(String text) async {
+    if (_isEnglish) {
+      return text; // No translation needed for English
+    }
+    if (_translatedTexts.containsKey(text)) {
+      return _translatedTexts[text]!; // Return cached translation
+    }
+    final translated = await _translationService.translateText(text);
+    setState(() {
+      _translatedTexts[text] = translated; // Cache the translation
+    });
+    return translated;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(_isEnglish
-            ? 'Odd-Even Number Practice'
-            : 'Ejemplos de Números Primos'),
+            ? 'Even Number Practice'
+            : 'Práctica de Números Pares'),
       ),
       body: Container(
         width: double.infinity,
@@ -119,11 +128,23 @@ class _EvenNumberExamplesPageState extends State<EvenNumberExamplesPage> {
                       shrinkWrap: true,
                       itemCount: _examples.length,
                       itemBuilder: (context, index) {
-                        return _buildExampleCard(
-                          _examples[index]['number']!,
-                          _isEnglish
-                              ? _examples[index]['description_en']!
-                              : _examples[index]['description_es']!,
+                        return FutureBuilder(
+                          future: _translateText(
+                              _examples[index]['description_en']!),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            }
+                            final description =
+                                snapshot.data ?? 'Translating...';
+                            return _buildExampleCard(
+                              _examples[index]['number']!,
+                              description,
+                            );
+                          },
                         );
                       },
                     ),
