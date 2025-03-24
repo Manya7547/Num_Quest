@@ -9,8 +9,9 @@ class CompositeNumberPracticePage extends StatefulWidget {
 
 class _CompositeNumberPracticePageState
     extends State<CompositeNumberPracticePage> {
-  bool _isEnglish = true; // State to keep track of language
+  bool _isEnglish = true; // State to track language toggle
   List<Map<String, dynamic>> _examples = [];
+
   final List<Map<String, dynamic>> _allExamples = [
     {
       'question_en': 'Which of the following is a composite number?',
@@ -20,100 +21,35 @@ class _CompositeNumberPracticePageState
     },
     {
       'question_en': 'Which number is not a composite number?',
-      'question_es': ' ¿Qué número no es un número compuesto?',
+      'question_es': '¿Qué número no es un número compuesto?',
       'options': ['4', '13', '12'],
       'answer': '13',
     },
     {
-      'question_en':
-          'What are the factors of the composite number 18 (eighteen)?',
-      'question_es': '¿Cuáles son los factores del número compuesto 18 ?',
+      'question_en': 'What are the factors of the composite number 18?',
+      'question_es': '¿Cuáles son los factores del número compuesto 18?',
       'options': ['1,18', '2,3,6,9', '1,2,3,6,9,18'],
       'answer': '1,2,3,6,9,18',
     },
     {
-      'question_en':
-          'Which of the following numbers has more than two factors?',
-      'question_es':
-          '¿Cuál de los siguientes números tiene más de dos factores?',
+      'question_en': 'Which number has more than two factors?',
+      'question_es': '¿Qué número tiene más de dos factores?',
       'options': ['24', '19', '13'],
       'answer': '24',
     },
     {
-      'question_en':
-          'Which of these numbers is a composite number because it has factors other than 1 and itself?',
-      'question_es':
-          '¿Cuál de estos números es un número compuesto porque tiene factores diferentes de 1 y de sí mismo?',
-      'options': ['6', '7', '5'],
-      'answer': '6',
-    },
-    {
-      'question_en':
-          'Identify the composite number that is a product of 2 and 5:',
-      'question_es': 'Identifica el número compuesto que es producto de 2 y 5:',
+      'question_en': 'Identify the composite number (product of 2 and 5):',
+      'question_es': 'Identifica el número compuesto (producto de 2 y 5):',
       'options': ['15', '10', '25'],
       'answer': '10',
     },
     {
       'question_en': 'Which of the following is the smallest composite number?',
-      'question_es':
-          '¿Cuál de los siguientes es el número compuesto más pequeño?',
+      'question_es': '¿Cuál de los siguientes es el número compuesto más pequeño?',
       'options': ['2', '1', '4'],
       'answer': '4',
     },
-    {
-      'question_en':
-          'Which number is composite because it can be factored into smaller prime numbers?',
-      'question_es':
-          '¿Qué número es compuesto porque se puede factorizar en números primos más pequeños?',
-      'options': ['57', '51', '49'],
-      'answer': '57',
-    },
   ];
-
-  // Helper function to convert a number to its English text
-  String _numberToWords(String number) {
-    switch (number) {
-      case '1':
-        return 'one';
-      case '2':
-        return 'two';
-      case '3':
-        return 'three';
-      case '4':
-        return 'four';
-      case '5':
-        return 'five';
-      case '6':
-        return 'six';
-      case '7':
-        return 'seven';
-      case '8':
-        return 'eight';
-      case '9':
-        return 'nine';
-      case '10':
-        return 'ten';
-      case '11':
-        return 'eleven';
-      case '12':
-        return 'twelve';
-      case '13':
-        return 'thirteen';
-      case '15':
-        return 'fifteen';
-      case '18':
-        return 'eighteen';
-      case '19':
-        return 'nineteen';
-      case '24':
-        return 'twenty-four';
-      case '57':
-        return 'fifty-seven';
-      default:
-        return '';
-    }
-  }
 
   @override
   void initState() {
@@ -128,15 +64,21 @@ class _CompositeNumberPracticePageState
   }
 
   void _checkAnswer(String selectedOption, String correctAnswer) {
-    final message = selectedOption == correctAnswer ? 'Correct!' : 'Try Again!';
+    final bool isCorrect = selectedOption == correctAnswer;
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        title: Text(message),
+        title: Text(isCorrect ? '✅ Correct!' : '❌ Try Again!'),
+        content: Text(
+          isCorrect
+              ? 'Great job! You selected the correct composite number.'
+              : 'Oops! That’s not correct. Try again!',
+          style: TextStyle(fontSize: 18),
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: Text('OK'),
+            child: const Text('OK', style: TextStyle(fontSize: 18)),
           ),
         ],
       ),
@@ -145,11 +87,25 @@ class _CompositeNumberPracticePageState
 
   @override
   Widget build(BuildContext context) {
+    final double screenWidth = MediaQuery.of(context).size.width;
+    final double screenHeight = MediaQuery.of(context).size.height;
+    final bool isTablet = screenWidth > 600; // Adjust UI for tablets
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(_isEnglish
-            ? 'Composite Number Practice'
-            : 'Práctica de Números compuesto'),
+        title: Text(
+          _isEnglish ? 'Composite Number Practice' : 'Práctica de Números Compuestos',
+        ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.translate),
+            onPressed: () {
+              setState(() {
+                _isEnglish = !_isEnglish;
+              });
+            },
+          ),
+        ],
       ),
       body: Container(
         width: double.infinity,
@@ -162,7 +118,10 @@ class _CompositeNumberPracticePageState
         ),
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: EdgeInsets.symmetric(
+              horizontal: screenWidth * 0.05, // Scalable padding
+              vertical: screenHeight * 0.02,
+            ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -172,74 +131,46 @@ class _CompositeNumberPracticePageState
                       : 'Selecciona la respuesta correcta',
                   style: GoogleFonts.lato(
                     textStyle: TextStyle(
-                      fontSize: 38,
-                      color: Colors.black,
-                      fontFamily: 'Poppins',
+                      fontSize: isTablet ? 32 : 24,
                       fontWeight: FontWeight.bold,
-                      shadows: [
-                        Shadow(
-                          offset: const Offset(5.0, 5.0),
-                          blurRadius: 3.0,
-                          color: Colors.grey.withOpacity(0.5),
-                        ),
-                      ],
+                      color: Colors.black,
                     ),
                   ),
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(height: 30),
+                SizedBox(height: screenHeight * 0.02),
+
                 Expanded(
                   child: ListView.builder(
                     itemCount: _examples.length,
                     itemBuilder: (context, index) {
                       return _buildQuestionCard(
-                        _examples[index]['question_en']!,
-                        _examples[index]['options'],
-                        _examples[index]['answer']!,
-                        _examples[index]['question_es']!,
+                        _isEnglish ? _examples[index]['question_en']! : _examples[index]['question_es']!,
                         _examples[index]['options'],
                         _examples[index]['answer']!,
                       );
                     },
                   ),
                 ),
-                SizedBox(height: 30),
+
+                SizedBox(height: screenHeight * 0.02),
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    ElevatedButton(
-                      onPressed: _refreshExamples,
-                      style: ElevatedButton.styleFrom(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                        backgroundColor: Colors.lightBlueAccent.shade200,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                      ),
-                      child: Text(
-                        _isEnglish ? 'More Examples' : 'Más ejemplos',
-                        style: TextStyle(fontSize: 20, color: Colors.white),
-                      ),
+                    _buildButton(
+                      _isEnglish ? 'More Examples' : 'Más ejemplos',
+                      Colors.blueAccent,
+                      _refreshExamples,
                     ),
-                    ElevatedButton(
-                      onPressed: () {
+                    _buildButton(
+                      _isEnglish ? 'Tap to Translate' : 'Toca para Traducir',
+                      Colors.orange,
+                      () {
                         setState(() {
                           _isEnglish = !_isEnglish;
                         });
                       },
-                      style: ElevatedButton.styleFrom(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                        backgroundColor: Colors.amber.shade700,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                      ),
-                      child: Text(
-                        _isEnglish ? 'Tap to Translate' : 'Toca para Traducir',
-                        style: TextStyle(fontSize: 20, color: Colors.white),
-                      ),
                     ),
                   ],
                 ),
@@ -251,60 +182,66 @@ class _CompositeNumberPracticePageState
     );
   }
 
-  Widget _buildQuestionCard(
-    String questionEn,
-    List<String> options,
-    String answer,
-    String questionEs,
-    List<String> optionsEs,
-    String answerEs,
-  ) {
+  Widget _buildQuestionCard(String question, List<String> options, String answer) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
-      child: Center(
-        child: Container(
-          height: 200,
-          width: MediaQuery.of(context).size.width *
-              0.8, // Adjust width to be smaller
-          decoration: BoxDecoration(
-            color: Colors.white70,
-            borderRadius: BorderRadius.circular(15.0),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                _isEnglish ? questionEn : questionEs,
-                style: const TextStyle(fontSize: 25, color: Colors.black54),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: options.map((option) {
-                  final optionWithText = '$option (${_numberToWords(option)})';
-                  return ElevatedButton(
-                    onPressed: () {
-                      _checkAnswer(option, answer);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 10),
-                      backgroundColor: Colors.yellow.shade500,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    child: Text(
-                      optionWithText,
-                      style: TextStyle(fontSize: 20, color: Colors.black87),
-                    ),
-                  );
-                }).toList(),
-              ),
-            ],
-          ),
+      child: Container(
+        padding: const EdgeInsets.all(15),
+        decoration: BoxDecoration(
+          color: Colors.white70,
+          borderRadius: BorderRadius.circular(15),
+          boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.3), blurRadius: 5)],
         ),
+        child: Column(
+          children: [
+            Text(
+              question,
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 15),
+            Wrap(
+              spacing: 10,
+              runSpacing: 10,
+              alignment: WrapAlignment.center,
+              children: options.map((option) {
+                return ElevatedButton(
+                  onPressed: () {
+                    _checkAnswer(option, answer);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    backgroundColor: Colors.green.shade500,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  child: Text(
+                    option,
+                    style: const TextStyle(fontSize: 18, color: Colors.white),
+                  ),
+                );
+              }).toList(),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildButton(String text, Color color, VoidCallback onPressed) {
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+        backgroundColor: color,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+      ),
+      child: Text(
+        text,
+        style: const TextStyle(fontSize: 18, color: Colors.white),
       ),
     );
   }

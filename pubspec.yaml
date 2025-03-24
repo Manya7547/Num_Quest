@@ -30,12 +30,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  google_fonts: ^5.0.0
+  google_fonts: ^6.2.1
   flip_card: ^0.7.0
-  audioplayers: 6.0.0
-  flutter_tts: ^3.8.3
-  tflite_flutter: ^0.9.0
-  tflite_flutter_helper: ^0.3.1
+  audioplayers: ^6.4.0
+  flutter_tts: ^4.2.2
+  tflite_flutter: ^0.11.0
+  #tflite_flutter_helper: ^0.9.1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -46,12 +46,14 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^3.0.0
+  flutter_lints: ^5.0.0
+  path_provider: ^2.1.5
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -65,19 +67,22 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/marianmt_model.tflite
-    - assets/even_lessons.json
-    - assets/odd_lessons.json
-    - assets/prime_lessons.json
-    - assets/candies.png
-    - assets/candies2.png
-    - assets/Odd_candy.png
-    - assets/Odd_candy_2.png
-    - assets/odd_table.png
-    - assets/practice.png
-    - assets/prime1.png
-    - assets/prime2.png
-    - assets/prime3.png
+    # - assets/marianmt_model.tflite
+    # - assets/even_lessons.json
+    # - assets/odd_lessons.json
+    # - assets/prime_lessons.json
+    # - assets/candies.png
+    # - assets/candies2.png
+    # - assets/Odd_candy.png
+    # - assets/Odd_candy_2.png
+    # - assets/odd_table.png
+    # - assets/practice.png
+    # - assets/prime1.png
+    # - assets/prime2.png
+    # - assets/prime3.png
+    - assets/
+    - assets/background1.jpg
+    - assets/sounds/welcome.mp3
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

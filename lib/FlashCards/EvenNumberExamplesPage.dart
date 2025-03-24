@@ -27,12 +27,6 @@ class _EvenNumberExamplesPageState extends State<EvenNumberExamplesPage> {
     '16': 'sixteen',
     '18': 'eighteen',
     '20': 'twenty',
-    '75': 'seventy-five',
-    '45': 'forty-five',
-    '9': 'nine',
-    '15': 'fifteen',
-    '55': 'fifty-five',
-    '31': 'thirty-one',
   };
 
   final List<Map<String, String>> _allExamples = [
@@ -52,7 +46,6 @@ class _EvenNumberExamplesPageState extends State<EvenNumberExamplesPage> {
       'description_en': 'It\'s EVEN! \nSix legs on three insects, all even!',
       'description_es': '¡Es PAR! \n¡Seis patas en tres insectos, todo par!',
     },
-    //... more numbers
   ];
 
   @override
@@ -67,13 +60,34 @@ class _EvenNumberExamplesPageState extends State<EvenNumberExamplesPage> {
     });
   }
 
+  String _translateText(String text) {
+    Map<String, String> translations = {
+      'Odd-Even Number Practice': 'Ejemplos de Números Pares',
+      'Tap on the card to reveal the answer': 'Toca la tarjeta para revelar la respuesta',
+      'More Examples': 'Más Ejemplos',
+      'Tap to Translate': 'Toca para Traducir',
+    };
+    return _isEnglish ? text : (translations[text] ?? text);
+  }
+
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    bool isTablet = screenWidth > 600;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(_isEnglish
-            ? 'Odd-Even Number Practice'
-            : 'Ejemplos de Números Primos'),
+        title: Text(_translateText('Odd-Even Number Practice')),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.translate),
+            onPressed: () {
+              setState(() {
+                _isEnglish = !_isEnglish;
+              });
+            },
+          ),
+        ],
       ),
       body: Container(
         width: double.infinity,
@@ -84,128 +98,116 @@ class _EvenNumberExamplesPageState extends State<EvenNumberExamplesPage> {
             fit: BoxFit.cover,
           ),
         ),
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  _isEnglish
-                      ? 'Tap on the card to reveal the answer'
-                      : 'Toca la tarjeta para revelar la respuesta',
-                  style: GoogleFonts.lato(
-                    textStyle: TextStyle(
-                      fontSize: 38,
-                      color: Colors.black,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.bold,
-                      shadows: [
-                        Shadow(
-                          offset: const Offset(5.0, 5.0),
-                          blurRadius: 3.0,
-                          color: Colors.grey.withOpacity(0.5),
-                        ),
-                      ],
-                    ),
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(height: 30),
-                Center(
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.8,
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: _examples.length,
-                      itemBuilder: (context, index) {
-                        return _buildExampleCard(
-                          _examples[index]['number']!,
-                          _isEnglish
-                              ? _examples[index]['description_en']!
-                              : _examples[index]['description_es']!,
-                        );
-                      },
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 30),
-                Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      ElevatedButton(
-                        onPressed: _refreshExamples,
-                        style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 30, vertical: 15),
-                          backgroundColor: Colors.lightBlueAccent.shade200,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                        ),
-                        child: Text(
-                          _isEnglish ? 'More Examples' : 'Más ejemplos',
-                          style: TextStyle(fontSize: 20, color: Colors.white),
-                        ),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            _isEnglish = !_isEnglish;
-                          });
-                        },
-                        style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 30, vertical: 15),
-                          backgroundColor: Colors.amber.shade700,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                        ),
-                        child: Text(
-                          _isEnglish
-                              ? 'Tap to Translate'
-                              : 'Toca para Traducir',
-                          style: TextStyle(fontSize: 20, color: Colors.white),
-                        ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                _translateText('Tap on the card to reveal the answer'),
+                style: GoogleFonts.lato(
+                  textStyle: TextStyle(
+                    fontSize: isTablet ? 32 : 24,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    shadows: [
+                      Shadow(
+                        offset: const Offset(3.0, 3.0),
+                        blurRadius: 2.0,
+                        color: Colors.grey.withOpacity(0.5),
                       ),
                     ],
                   ),
                 ),
-              ],
-            ),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: screenWidth * 0.05),
+
+              // Flip Cards List
+              Expanded(
+                child: ListView.builder(
+                  itemCount: _examples.length,
+                  itemBuilder: (context, index) {
+                    return _buildExampleCard(
+                      _examples[index]['number']!,
+                      _isEnglish ? _examples[index]['description_en']! : _examples[index]['description_es']!,
+                      isTablet,
+                    );
+                  },
+                ),
+              ),
+              SizedBox(height: screenWidth * 0.05),
+
+              // Buttons
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(
+                    onPressed: _refreshExamples,
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(vertical: 15, horizontal: 30),
+                      backgroundColor: Colors.lightBlueAccent.shade200,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                    child: Text(
+                      _translateText('More Examples'),
+                      style: TextStyle(fontSize: isTablet ? 22 : 18, color: Colors.white),
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        _isEnglish = !_isEnglish;
+                      });
+                    },
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(vertical: 15, horizontal: 30),
+                      backgroundColor: Colors.amber.shade700,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                    child: Text(
+                      _translateText('Tap to Translate'),
+                      style: TextStyle(fontSize: isTablet ? 22 : 18, color: Colors.white),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: screenWidth * 0.05),
+            ],
           ),
         ),
       ),
     );
   }
 
-  Widget _buildExampleCard(String number, String description) {
-    String numberText = numberWords[number] != null
-        ? '$number (${numberWords[number]})'
-        : number;
+  Widget _buildExampleCard(String number, String description, bool isTablet) {
+    String numberText = numberWords[number] != null ? '$number (${numberWords[number]})' : number;
+
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10.0),
+      padding: EdgeInsets.symmetric(vertical: 10.0),
       child: FlipCard(
         direction: FlipDirection.HORIZONTAL,
         front: Container(
-          height: 150,
-          width: MediaQuery.of(context).size.width * 0.8,
+          height: isTablet ? 180 : 150,
+          width: double.infinity,
           decoration: BoxDecoration(
             color: Colors.white70,
             borderRadius: BorderRadius.circular(15.0),
           ),
           child: Center(
             child: Text(
-              numberText, // Display number with text
-              style: const TextStyle(fontSize: 50, color: Colors.black54),
+              numberText,
+              style: TextStyle(fontSize: isTablet ? 50 : 40, color: Colors.black54),
             ),
           ),
         ),
         back: Container(
-          height: 150,
-          width: MediaQuery.of(context).size.width * 0.8,
+          height: isTablet ? 180 : 150,
+          width: double.infinity,
           decoration: BoxDecoration(
             color: Colors.grey.shade200,
             borderRadius: BorderRadius.circular(15.0),
@@ -215,7 +217,7 @@ class _EvenNumberExamplesPageState extends State<EvenNumberExamplesPage> {
               padding: const EdgeInsets.all(10.0),
               child: Text(
                 description,
-                style: const TextStyle(fontSize: 25, color: Colors.black54),
+                style: TextStyle(fontSize: isTablet ? 26 : 20, color: Colors.black54),
                 textAlign: TextAlign.center,
               ),
             ),

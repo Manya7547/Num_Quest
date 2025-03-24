@@ -11,6 +11,8 @@ import 'lessons/factors_info_page.dart';
 import 'lessons/cube_number_info_page.dart';
 
 class LessonsPage extends StatelessWidget {
+  LessonsPage({Key? key}) : super(key: key);
+
   final List<Map<String, dynamic>> lessons = [
     {'title': 'Even Numbers', 'page': EvenNumberInfoPage()},
     {'title': 'Odd Numbers', 'page': OddNumberInfoPage()},
@@ -28,37 +30,35 @@ class LessonsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('LESSON PLAN'),
+        title: const Text('LESSON PLAN'), // No score needed
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/lesson_page.jpeg'),
             fit: BoxFit.cover,
           ),
         ),
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(100, 50, 100, 50),
-            child: GridView.count(
-              crossAxisCount: 4,
-              crossAxisSpacing: 20.0,
-              mainAxisSpacing: 20.0,
-              shrinkWrap: true,
-              physics:
-                  NeverScrollableScrollPhysics(), // Disable GridView scroll
-              children: lessons.map((lesson) {
-                return LessonButton(
-                  title: lesson['title'],
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => lesson['page']),
-                    );
-                  },
-                );
-              }).toList(),
-            ),
+        child: Padding(
+          padding: const EdgeInsets.all(30.0), // Reduced padding for better fit
+          child: GridView.count(
+            crossAxisCount: 2,       // Reduced to 2 columns for bigger buttons
+            crossAxisSpacing: 40.0,  // More spacing between buttons
+            mainAxisSpacing: 40.0,   // Increased vertical spacing
+            childAspectRatio: 1.3,   // Taller buttons for text visibility
+            children: lessons.map((lesson) {
+              return LessonButton(
+                title: lesson['title'],
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => lesson['page'],
+                    ),
+                  );
+                },
+              );
+            }).toList(),
           ),
         ),
       ),
@@ -68,34 +68,40 @@ class LessonsPage extends StatelessWidget {
 
 class LessonButton extends StatelessWidget {
   final String title;
-  final Function()? onPressed;
+  final VoidCallback? onPressed;
 
-  LessonButton({required this.title, this.onPressed});
+  const LessonButton({
+    Key? key,
+    required this.title,
+    this.onPressed,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: Colors.cyan.shade100,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: ElevatedButton(
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          elevation: 0, // Remove button shadow
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        elevation: 5,
+        backgroundColor: Colors.cyan.shade100,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
         ),
-        child: Center(
+        // Bigger button size for better text fitting
+        minimumSize: const Size(280, 130), 
+        padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 10),
+        textStyle: const TextStyle(
+          fontSize: 24, // Reduced size to fit all text
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      child: Center(
+        child: FittedBox(
+          fit: BoxFit.scaleDown, // Ensures text shrinks to fit the button
           child: Text(
             title,
-            textAlign: TextAlign.center, // Align text in the center
-            style: TextStyle(
-              fontSize: 30, // Change font size
-              fontWeight: FontWeight.bold, // Make text bold
-              fontFamily: 'Arial', // Change font family if needed
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              color: Colors.black,
             ),
           ),
         ),
@@ -103,3 +109,4 @@ class LessonButton extends StatelessWidget {
     );
   }
 }
+

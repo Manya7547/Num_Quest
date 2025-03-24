@@ -59,23 +59,23 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('LCM Matching Game'),
+        title: const Text('LCM Matching Game'),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
+            // Navigate back to game_list_page WITHOUT scoring
             Navigator.of(context).pushReplacement(
               MaterialPageRoute(
-                builder: (context) => GameListPage(),
+                builder: (context) => const GameListPage(),
               ),
             );
           },
         ),
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
-            image:
-                AssetImage("assets/LCM_bg.jpg"), // Replace with your image path
+            image: AssetImage("assets/LCM_bg.jpg"),
             fit: BoxFit.cover,
           ),
         ),
@@ -91,31 +91,36 @@ class _HomePageState extends State<HomePage> {
                   "Drag the box with the LCM and drop it on the matching pair of numbers. "
                   "Each correct match adds 10 points to your score, while each incorrect match subtracts 5 points.",
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 30.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 16.0), // Space between instructions and score
+                const SizedBox(height: 16.0),
 
                 // Displaying Score
-                Text.rich(TextSpan(children: [
-                  TextSpan(
-                      text: "Score: ",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 50.0,
-                      )),
-                  TextSpan(
-                    text: "$score",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 50.0,
-                    ),
+                RichText(
+                  text: TextSpan(
+                    children: [
+                      const TextSpan(
+                        text: "Score: ",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 50.0,
+                        ),
+                      ),
+                      TextSpan(
+                        text: "$score",
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 50.0,
+                        ),
+                      ),
+                    ],
                   ),
-                ])),
+                ),
 
                 if (!gameOver)
                   Column(
@@ -128,17 +133,15 @@ class _HomePageState extends State<HomePage> {
                             margin: const EdgeInsets.all(8.0),
                             child: DragTarget<ItemModel>(
                               onAccept: (receivedItem) {
-                                if (item.value == receivedItem.value) {
-                                  setState(() {
+                                setState(() {
+                                  if (item.value == receivedItem.value) {
                                     items.remove(item);
                                     items2.remove(receivedItem);
                                     score += 10;
-                                  });
-                                } else {
-                                  setState(() {
+                                  } else {
                                     score -= 5;
-                                  });
-                                }
+                                  }
+                                });
                               },
                               onLeave: (receivedItem) {},
                               onWillAccept: (receivedItem) => true,
@@ -151,7 +154,7 @@ class _HomePageState extends State<HomePage> {
                                   margin: const EdgeInsets.all(8.0),
                                   child: Text(
                                     item.name,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 30.0,
@@ -163,7 +166,7 @@ class _HomePageState extends State<HomePage> {
                           );
                         }).toList(),
                       ),
-                      SizedBox(height: 40),
+                      const SizedBox(height: 40),
 
                       // Bottom Row with LCM boxes
                       Row(
@@ -178,7 +181,7 @@ class _HomePageState extends State<HomePage> {
                               child: Center(
                                 child: Text(
                                   item.name,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 30.0,
                                     fontWeight: FontWeight.bold,
@@ -195,7 +198,7 @@ class _HomePageState extends State<HomePage> {
                                 child: Center(
                                   child: Text(
                                     item.name,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 30.0,
                                       fontWeight: FontWeight.bold,
@@ -211,7 +214,7 @@ class _HomePageState extends State<HomePage> {
                               child: Center(
                                 child: Text(
                                   item.name,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 30.0,
                                     fontWeight: FontWeight.bold,
@@ -225,9 +228,8 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
 
-                // Game Over Message
                 if (gameOver)
-                  Text(
+                  const Text(
                     "Game Over",
                     style: TextStyle(
                       color: Colors.red,
@@ -240,9 +242,9 @@ class _HomePageState extends State<HomePage> {
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.pink,
-                        textStyle: TextStyle(color: Colors.white),
+                        textStyle: const TextStyle(color: Colors.white),
                       ),
-                      child: Text("New Game"),
+                      child: const Text("New Game"),
                       onPressed: () {
                         initGame();
                         setState(() {});

@@ -1,35 +1,62 @@
 PODS:
   - audioplayers_darwin (0.0.1):
     - Flutter
+  - camera_avfoundation (0.0.1):
+    - Flutter
   - Flutter (1.0.0)
   - flutter_tts (0.0.1):
     - Flutter
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
+  - TensorFlowLiteC (2.11.0):
+    - TensorFlowLiteC/Core (= 2.11.0)
+  - TensorFlowLiteC/Core (2.11.0)
+  - tflite_flutter (0.1.0):
+    - Flutter
+  - tflite_flutter_helper (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
   - audioplayers_darwin (from `.symlinks/plugins/audioplayers_darwin/ios`)
+  - camera_avfoundation (from `.symlinks/plugins/camera_avfoundation/ios`)
   - Flutter (from `Flutter`)
   - flutter_tts (from `.symlinks/plugins/flutter_tts/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
+  - TensorFlowLiteC (~> 2.11.0)
+  - tflite_flutter (from `.symlinks/plugins/tflite_flutter/ios`)
+  - tflite_flutter_helper (from `.symlinks/plugins/tflite_flutter_helper/ios`)
+
+SPEC REPOS:
+  trunk:
+    - TensorFlowLiteC
 
 EXTERNAL SOURCES:
   audioplayers_darwin:
     :path: ".symlinks/plugins/audioplayers_darwin/ios"
+  camera_avfoundation:
+    :path: ".symlinks/plugins/camera_avfoundation/ios"
   Flutter:
     :path: Flutter
   flutter_tts:
     :path: ".symlinks/plugins/flutter_tts/ios"
   path_provider_foundation:
     :path: ".symlinks/plugins/path_provider_foundation/darwin"
+  tflite_flutter:
+    :path: ".symlinks/plugins/tflite_flutter/ios"
+  tflite_flutter_helper:
+    :path: ".symlinks/plugins/tflite_flutter_helper/ios"
 
 SPEC CHECKSUMS:
-  audioplayers_darwin: 877d9a4d06331c5c374595e46e16453ac7eafa40
+  audioplayers_darwin: ccf9c770ee768abb07e26d90af093f7bab1c12ab
+  camera_avfoundation: 04b44aeb14070126c6529e5ab82cc7c9fca107cf
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
-  flutter_tts: 0f492aab6accf87059b72354fcb4ba934304771d
-  path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
+  flutter_tts: b88dbc8655d3dc961bc4a796e4e16a4cc1795833
+  path_provider_foundation: 080d55be775b7414fd5a5ef3ac137b97b097e564
+  TensorFlowLiteC: 8a8cb6fa20ad74dff29b5e490d02c36a14d48148
+  tflite_flutter: 27ab8cdbff3d39db960b9d2fb337776cdff3c866
+  tflite_flutter_helper: 08124bba08490dc3656c11610a4c0a4af29fe77d
 
-PODFILE CHECKSUM: 819463e6a0290f5a72f145ba7cde16e8b6ef0796
+PODFILE CHECKSUM: 57143daf637a56f48bcc231ddfaa9ed5684ab8af
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.16.2

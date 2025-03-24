@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'games/even_odd_sort.dart'; // Import the game widgets
+import 'games/even_odd_sort.dart';
 import 'games/choose_factors_game.dart';
 import 'games/word_problem_game.dart';
 import 'games/prime_number_game.dart';
@@ -8,26 +8,28 @@ import 'games/Match_LCM.dart';
 import 'games/Squares_Game.dart';
 
 class GameListPage extends StatelessWidget {
+  const GameListPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("PRACTICE"),
+        title: const Text("PLAY"),
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/background1.jpg'),
+            image: AssetImage('assets/background1.jpg'), // Ensure asset exists
             fit: BoxFit.cover,
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(100.0), 
+          padding: const EdgeInsets.all(20.0), // Reduced padding to maximize space
           child: GridView.count(
-            crossAxisCount: 4, 
-            crossAxisSpacing: 10.0, 
-            mainAxisSpacing: 10.0, 
-            childAspectRatio: 1.2, 
+            crossAxisCount: 2,       // Keeps two columns for better spacing
+            crossAxisSpacing: 30.0,  // Increased spacing between buttons
+            mainAxisSpacing: 30.0,   // Increased vertical spacing
+            childAspectRatio: 1.1,   // Makes buttons taller for more text space
             children: [
               GameButton(
                 title: 'Perfect Square\nGame',
@@ -52,7 +54,7 @@ class GameListPage extends StatelessWidget {
                 },
               ),
               GameButton(
-                title: 'Even-Odd Sort\nGame ',
+                title: 'Even-Odd Sort\nGame',
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -63,33 +65,38 @@ class GameListPage extends StatelessWidget {
                 },
               ),
               GameButton(
-                title: 'Triangle Tower Builder',
+                title: 'Word Problem\nGame',
                 onPressed: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => WordProblemsGame()));
-                },
-              ),
-              GameButton(
-                title: 'Prime Explorer',
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ChooseFactorsGame()));
-                },
-              ),
-              GameButton(
-                title: 'LCM Match',
-                onPressed: () {
-                Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => LCMGame()));
+                      builder: (context) => WordProblemsGame(),
+                    ),
+                  );
                 },
               ),
-
+              GameButton(
+                title: 'Prime Number\nGame',
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PrimeNumberGame(),
+                    ),
+                  );
+                },
+              ),
+              GameButton(
+                title: 'Choose Factors\nGame',
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ChooseFactorsGame(),
+                    ),
+                  );
+                },
+              ),
             ],
           ),
         ),
@@ -100,33 +107,39 @@ class GameListPage extends StatelessWidget {
 
 class GameButton extends StatelessWidget {
   final String title;
-  final Function()? onPressed;
+  final VoidCallback? onPressed;
 
-  GameButton({required this.title, this.onPressed});
+  const GameButton({
+    Key? key,
+    required this.title,
+    this.onPressed,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(20), // Ensure minimal padding
-      child: ElevatedButton(
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          elevation: 3, // Remove button shadow
-          backgroundColor: Colors.white70,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        elevation: 5,
+        backgroundColor: Colors.white70,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
         ),
-        child: Center(
-          child: Text(
-            title,
-            textAlign: TextAlign.center, // Align text in the center
-            style: TextStyle(
-              fontSize: 30, // Reduce font size for smaller buttons
-              fontWeight: FontWeight.bold,
-              fontFamily: 'Poppins',
-              color: Colors.black,
-            ),
+        // Increased button size
+        minimumSize: const Size(200, 120),
+        padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+        // Bigger text for better readability
+        textStyle: const TextStyle(
+          fontSize: 30, // Adjusted font size for visibility
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      child: Center(
+        child: Text(
+          title,
+          textAlign: TextAlign.center,
+          style: const TextStyle(
+            color: Colors.black,
           ),
         ),
       ),

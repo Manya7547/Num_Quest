@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'dart:math';
+import 'package:flutter/material.dart';
 
 void main() => runApp(PerfectSquareFinder());
 
@@ -7,10 +7,7 @@ class PerfectSquareFinder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(title: Text('Perfect Square Finder')),
-        body: SquareFinderGame(),
-      ),
+      home: SquareFinderGame(),
     );
   }
 }
@@ -21,26 +18,24 @@ class SquareFinderGame extends StatefulWidget {
 }
 
 class _SquareFinderGameState extends State<SquareFinderGame> {
-  List<int> numbers = []; // Initialize as an empty list
+  List<int> numbers = [];
   List<int> draggedNumbers = [];
   int score = 0;
+  bool _isEnglish = true; // Language toggle state
 
   @override
   void initState() {
     super.initState();
-
-    // Add perfect squares to the list
-    List<int> perfectSquares = [1, 4, 9, 16, 25];
+    List<int> perfectSquares = [1, 4, 9, 16, 25, 36, 49];
     numbers.addAll(perfectSquares);
 
-    // Generate random numbers until the total count is 20
-    while (numbers.length < 20) {
-      int randomNum = Random().nextInt(25) + 1; // Random numbers from 1 to 25
+    while (numbers.length < 12) {
+      int randomNum = Random().nextInt(50) + 1;
       if (!numbers.contains(randomNum)) {
         numbers.add(randomNum);
       }
     }
-    numbers.shuffle(); // Shuffle the numbers for randomness
+    numbers.shuffle();
   }
 
   bool isPerfectSquare(int number) {
@@ -48,123 +43,154 @@ class _SquareFinderGameState extends State<SquareFinderGame> {
     return sqrtValue * sqrtValue == number;
   }
 
+  String _translateText(String text) {
+    Map<String, String> translations = {
+      'Perfect Square Finder': 'Buscador de Cuadrados Perfectos',
+      'Find and drop the perfect squares!': '¡Encuentra y suelta los cuadrados perfectos!',
+      'Score:': 'Puntuación:',
+      'Drop perfect squares here': 'Suelta los cuadrados perfectos aquí',
+      'Tap to Translate': 'Toca para Traducir',
+    };
+    return _isEnglish ? text : (translations[text] ?? text);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        // Background image
-        Positioned.fill(
-          child: Image.asset(
-            'assets/background1.jpg', // Add your background image here
-            fit: BoxFit.cover,
+    final double screenWidth = MediaQuery.of(context).size.width;
+    final double screenHeight = MediaQuery.of(context).size.height;
+    final bool isTablet = screenWidth > 600;
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(_translateText('Perfect Square Finder')),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.translate),
+            onPressed: () {
+              setState(() {
+                _isEnglish = !_isEnglish;
+              });
+            },
           ),
-        ),
-        Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                'Find and drop the perfect squares!',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black54),
-              ),
+        ],
+      ),
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: Image.asset(
+              'assets/background1.jpg',
+              fit: BoxFit.cover,
             ),
-            SizedBox(height: 20),
-            Text(
-              'Score: $score',
-              style: TextStyle(fontSize: 20, color: Colors.black54),
-            ),
-            Expanded(
-              child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 5, // More boxes in a row for smaller size
-                  crossAxisSpacing: 8,
-                  mainAxisSpacing: 8,
-                ),
-                itemCount: numbers.length,
-                itemBuilder: (context, index) {
-                  final number = numbers[index];
-                  return Draggable<int>(
-                    data: number,
-                    feedback: Material(
-                      child: Container(
-                        padding: EdgeInsets.all(4), // Reduced padding for smaller size
-                        constraints: BoxConstraints(
-                          maxHeight: 40.0, // Smaller height for draggable feedback
-                          maxWidth: 40.0,  // Smaller width
+          ),
+          Center(
+            child: Padding(
+              padding: EdgeInsets.all(screenWidth * 0.05),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    _translateText('Find and drop the perfect squares!'),
+                    style: TextStyle(fontSize: isTablet ? 36 : 24, fontWeight: FontWeight.bold, color: Colors.black54),
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(height: screenHeight * 0.02),
+                  Text(
+                    '${_translateText("Score:")} $score',
+                    style: TextStyle(fontSize: isTablet ? 30 : 20, color: Colors.black54),
+                  ),
+                  SizedBox(height: screenHeight * 0.02),
+
+                  // 🔹 Grid of numbers (fits perfectly)
+                  Wrap(
+                    spacing: screenWidth * 0.02,
+                    runSpacing: screenHeight * 0.02,
+                    children: numbers.map((number) {
+                      return Draggable<int>(
+                        data: number,
+                        feedback: Material(
+                          color: Colors.transparent,
+                          child: Container(
+                            width: isTablet ? 80 : 60,
+                            height: isTablet ? 80 : 60,
+                            decoration: BoxDecoration(
+                              color: Colors.blueAccent,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Center(
+                              child: Text(
+                                '$number',
+                                style: TextStyle(fontSize: isTablet ? 26 : 18, color: Colors.white),
+                              ),
+                            ),
+                          ),
                         ),
+                        childWhenDragging: Container(
+                          width: isTablet ? 80 : 60,
+                          height: isTablet ? 80 : 60,
+                          color: Colors.grey.shade300,
+                          child: Center(
+                            child: Text(
+                              '$number',
+                              style: TextStyle(fontSize: isTablet ? 26 : 18, color: Colors.black54),
+                            ),
+                          ),
+                        ),
+                        child: Container(
+                          width: isTablet ? 80 : 60,
+                          height: isTablet ? 80 : 60,
+                          decoration: BoxDecoration(
+                            color: Colors.white70,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Center(
+                            child: Text(
+                              '$number',
+                              style: TextStyle(fontSize: isTablet ? 26 : 18, color: Colors.black),
+                            ),
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                  SizedBox(height: screenHeight * 0.04),
+
+                  // 🔹 Drop area (Fully responsive)
+                  DragTarget<int>(
+                    onAccept: (int number) {
+                      if (isPerfectSquare(number)) {
+                        setState(() {
+                          draggedNumbers.add(number);
+                          numbers.remove(number);
+                          score++;
+                        });
+                      }
+                    },
+                    builder: (context, accepted, rejected) {
+                      return Container(
+                        height: screenHeight * 0.15,
+                        width: screenWidth * 0.8,
                         decoration: BoxDecoration(
-                          color: Colors.blueAccent,
-                          borderRadius: BorderRadius.circular(8),
+                          color: Colors.greenAccent.withOpacity(0.8),
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(color: Colors.white, width: 2),
+                          boxShadow: [BoxShadow(color: Colors.black45, blurRadius: 8)],
                         ),
                         child: Center(
                           child: Text(
-                            '$number',
-                            style: TextStyle(color: Colors.black54, fontSize: 18),
+                            _translateText('Drop perfect squares here'),
+                            style: TextStyle(fontSize: isTablet ? 30 : 22, color: Colors.white),
+                            textAlign: TextAlign.center,
                           ),
                         ),
-                      ),
-                    ),
-                    childWhenDragging: Container(
-                      color: Colors.grey,
-                      child: Center(
-                        child: Text('$number', style: TextStyle(fontSize: 20)),
-                      ),
-                    ),
-                    child: Container(
-                      padding: EdgeInsets.all(4), // Reduced padding
-                      constraints: BoxConstraints(
-                        maxHeight: 40.0, // Reduced height
-                        maxWidth: 40.0,  // Reduced width
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.white70.withOpacity(0.8),
-                        borderRadius: BorderRadius.circular(8), // Slightly reduced border radius
-                        boxShadow: [BoxShadow(color: Colors.black38, blurRadius: 3)], // Softer shadow
-                      ),
-                      child: Center(
-                        child: Text(
-                          '$number',
-                          style: TextStyle(fontSize: 18, color: Colors.black),
-                        ),
-                      ),
-                    ),
-                  );
-                },
+                      );
+                    },
+                  ),
+                ],
               ),
             ),
-            DragTarget<int>(
-              onAccept: (int number) {
-                if (isPerfectSquare(number)) {
-                  setState(() {
-                    draggedNumbers.add(number);
-                    numbers.remove(number);
-                    score++;
-                  });
-                }
-              },
-              builder: (context, accepted, rejected) {
-                return Container(
-                  height: 130, // Reduced height for drop box
-                  width: double.infinity,
-                  margin: EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Colors.greenAccent.withOpacity(0.8),
-                    borderRadius: BorderRadius.circular(20), // Rounded corners
-                    border: Border.all(color: Colors.white, width: 2), // White border
-                    boxShadow: [BoxShadow(color: Colors.black45, blurRadius: 8)], // Elevated shadow
-                  ),
-                  child: Center(
-                    child: Text(
-                      'Drop perfect squares here',
-                      style: TextStyle(fontSize: 22, color: Colors.white),
-                    ),
-                  ),
-                );
-              },
-            ),
-          ],
-        ),
-      ],
+          ),
+        ],
+      ),
     );
   }
 }

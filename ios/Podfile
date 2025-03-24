@@ -1,7 +1,5 @@
-# Uncomment this line to define a global platform for your project
-# platform :ios, '12.0'
+platform :ios, '12.0'  # or higher
 
-# CocoaPods analytics sends network stats synchronously affecting flutter build latency.
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
 
 project 'Runner', {
@@ -24,7 +22,6 @@ def flutter_root
 end
 
 require File.expand_path(File.join('packages', 'flutter_tools', 'bin', 'podhelper'), flutter_root)
-
 flutter_ios_podfile_setup
 
 target 'Runner' do
@@ -32,13 +29,23 @@ target 'Runner' do
   use_modular_headers!
 
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
+
+  # Install TensorFlow Lite C library
+  pod 'TensorFlowLiteC', '~> 2.11.0'
+
   target 'RunnerTests' do
     inherit! :search_paths
   end
 end
 
+# ------------------------------------------
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     flutter_additional_ios_build_settings(target)
+    
+    # EXCLUDE arm64 for iOS simulator on Apple Silicon
+    target.build_configurations.each do |config|
+      config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = 'arm64'
+    end
   end
 end

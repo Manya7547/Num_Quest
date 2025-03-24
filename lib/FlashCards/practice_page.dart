@@ -6,104 +6,86 @@ import 'CompositeNumberPracticePage.dart';
 import 'PerfectNumbersPracticePage.dart';
 
 class PracticePage extends StatelessWidget {
+  /// Only the Practice page uses global scoring
+  final int score;
+  final VoidCallback incrementScore;
+  final VoidCallback resetScore;
+
+  const PracticePage({
+    Key? key,
+    required this.score,
+    required this.incrementScore,
+    required this.resetScore,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    bool isTablet = screenWidth > 600;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text("PRACTICE"),
+        title: Text("PRACTICE - Score: $score"),
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/background1.jpg'),
+            image: AssetImage('assets/background1.jpg'), // Ensure this asset exists
             fit: BoxFit.cover,
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(100.0), // Adjust padding as needed
+          padding: EdgeInsets.all(screenWidth * 0.05), // Scales with screen size
           child: GridView.count(
-            crossAxisCount: 4, // Number of columns
-            crossAxisSpacing: 10.0, // Space between columns
-            mainAxisSpacing: 10.0, // Space between rows
-            childAspectRatio: 1.2, // Aspect ratio for smaller buttons
+            crossAxisCount: isTablet ? 3 : 2,  // Adapts for tablets
+            crossAxisSpacing: screenWidth * 0.05,  
+            mainAxisSpacing: screenWidth * 0.05,   
+            childAspectRatio: 1.2,  // Adjusted for better button size
             children: [
-              LessonButton(
+              PracticeButton(
                 title: 'ODD & EVEN\nNUMBERS',
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => EvenNumberExamplesPage(),
-                    ),
-                  );
-                },
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => EvenNumberExamplesPage(),
+                  ),
+                ),
               ),
-              LessonButton(
+              PracticeButton(
                 title: 'PRIME\nNUMBERS',
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => PrimeNumberPracticePage(),
-                    ),
-                  );
-                },
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PrimeNumberPracticePage(),
+                  ),
+                ),
               ),
-              LessonButton(
+              PracticeButton(
                 title: 'COMPOSITE\nNUMBERS',
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => CompositeNumberPracticePage(),
-                    ),
-                  );
-                },
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CompositeNumberPracticePage(),
+                  ),
+                ),
               ),
-              LessonButton(
+              PracticeButton(
                 title: 'PERFECT\nNUMBERS',
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => PerfectNumberPracticePage()));
-                },
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PerfectNumberPracticePage(),
+                  ),
+                ),
               ),
-              LessonButton(
+              PracticeButton(
                 title: 'SQUARE\nNUMBERS',
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => SquaresExamplePage()));
-                },
-              ),
-              LessonButton(
-                title: 'FACTORS',
-                onPressed: () {
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (context) => FactorsInfoPage()));
-                },
-              ),
-              LessonButton(
-                title: 'CUBE\nNUMBERS',
-                onPressed: () {
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (context) => CubeNumberInfoPage()));
-                },
-              ),
-              LessonButton(
-                title: 'MODULO\nNUMBERS',
-                onPressed: () {
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (context) => ModuloNumberInfoPage()));
-                },
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SquaresExamplePage(),
+                  ),
+                ),
               ),
             ],
           ),
@@ -113,35 +95,40 @@ class PracticePage extends StatelessWidget {
   }
 }
 
-class LessonButton extends StatelessWidget {
+class PracticeButton extends StatelessWidget {
   final String title;
-  final Function()? onPressed;
+  final VoidCallback? onPressed;
 
-  LessonButton({required this.title, this.onPressed});
+  const PracticeButton({
+    Key? key,
+    required this.title,
+    this.onPressed,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(20), // Ensure minimal padding
-      child: ElevatedButton(
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          elevation: 3, // Remove button shadow
-          backgroundColor: Colors.white70,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
+    double screenWidth = MediaQuery.of(context).size.width;
+    bool isTablet = screenWidth > 600;
+
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        elevation: 5,
+        backgroundColor: Colors.white70,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
         ),
-        child: Center(
-          child: Text(
-            title,
-            textAlign: TextAlign.center, // Align text in the center
-            style: TextStyle(
-              fontSize: 30, // Reduce font size for smaller buttons
-              fontWeight: FontWeight.bold,
-              fontFamily: 'Poppins',
-              color: Colors.black,
-            ),
+        minimumSize: Size(screenWidth * 0.4, isTablet ? 140 : 120), // Adapts button size
+        padding: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+      ),
+      child: Center(
+        child: Text(
+          title,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: isTablet ? 32 : 26, // Adjusts font size based on screen
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),

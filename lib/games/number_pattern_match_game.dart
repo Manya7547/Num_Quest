@@ -9,39 +9,22 @@ class NumberPatternMatchGame extends StatefulWidget {
 class _NumberPatternMatchGameState extends State<NumberPatternMatchGame> {
   List<Map<String, dynamic>> questions = [
     {
-      'category': 'Prime',
+      'category_en': 'Prime',
+      'category_es': 'Primo',
       'correctNumbers': [5],
       'options': [4, 5, 12, 25, 8],
     },
     {
-      'category': 'Composite',
+      'category_en': 'Composite',
+      'category_es': 'Compuesto',
       'correctNumbers': [4],
       'options': [4, 5, 3, 2, 7],
     },
     {
-      'category': 'Square',
+      'category_en': 'Square',
+      'category_es': 'Cuadrado',
       'correctNumbers': [9],
       'options': [7, 55, 9, 15, 26],
-    },
-    {
-      'category': 'Prime',
-      'correctNumbers': [13],
-      'options': [12, 13, 14, 15, 16],
-    },
-    {
-      'category': 'Composite',
-      'correctNumbers': [12],
-      'options': [11, 12, 13, 2, 7],
-    },
-    {
-      'category': 'Square',
-      'correctNumbers': [36],
-      'options': [35, 36, 37, 38, 39],
-    },
-    {
-      'category': 'Prime',
-      'correctNumbers': [11],
-      'options': [15, 10, 12, 11, 18],
     },
   ];
 
@@ -49,7 +32,8 @@ class _NumberPatternMatchGameState extends State<NumberPatternMatchGame> {
   List<int> draggedNumbers = [];
   String message = '';
   bool isCorrect = false;
-  int score = 0; // Track the score
+  int score = 0;
+  bool _isEnglish = true; // Toggle for translation
 
   List<int> _getCorrectNumbers() {
     return questions[currentQuestionIndex]['correctNumbers'];
@@ -62,20 +46,18 @@ class _NumberPatternMatchGameState extends State<NumberPatternMatchGame> {
   void checkAnswer() {
     List<int> correctNumbers = _getCorrectNumbers();
     bool hasCorrectAnswer =
-    draggedNumbers.any((number) => correctNumbers.contains(number));
+        draggedNumbers.any((number) => correctNumbers.contains(number));
     bool hasWrongAnswer =
-    draggedNumbers.any((number) => !correctNumbers.contains(number));
+        draggedNumbers.any((number) => !correctNumbers.contains(number));
 
     setState(() {
       if (hasCorrectAnswer && !hasWrongAnswer) {
-        message = 'Correct!';
+        message = _translateText('Correct!');
         isCorrect = true;
-        score++; // Increase score when the answer is correct
+        score += 10;
       } else {
-        message = 'Try Again!';
+        message = _translateText('Try Again!');
         isCorrect = false;
-
-        // Reset the dragged numbers to allow for another attempt
         draggedNumbers.clear();
       }
     });
@@ -91,9 +73,19 @@ class _NumberPatternMatchGameState extends State<NumberPatternMatchGame> {
       });
     } else {
       setState(() {
-        message = 'You have completed all questions! Final score: $score';
+        message = _translateText('You have completed all questions! Final score:') + ' $score';
       });
     }
+  }
+
+  String _translateText(String text) {
+    Map<String, String> translations = {
+      'Correct!': '¡Correcto!',
+      'Try Again!': '¡Inténtalo de nuevo!',
+      'You have completed all questions! Final score:': '¡Has completado todas las preguntas! Puntuación final:',
+      'Tap to Translate': 'Toca para Traducir',
+    };
+    return _isEnglish ? text : (translations[text] ?? text);
   }
 
   @override
@@ -102,12 +94,27 @@ class _NumberPatternMatchGameState extends State<NumberPatternMatchGame> {
     final isTablet = size.width > 600;
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text(_isEnglish
+            ? 'Number Pattern Match'
+            : 'Coincidencia de Patrones de Números'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.translate),
+            onPressed: () {
+              setState(() {
+                _isEnglish = !_isEnglish;
+              });
+            },
+          ),
+        ],
+      ),
       body: Container(
         width: double.infinity,
         height: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('background1.jpg'),
+            image: AssetImage('assets/background1.jpg'),
             fit: BoxFit.cover,
           ),
         ),
@@ -118,12 +125,11 @@ class _NumberPatternMatchGameState extends State<NumberPatternMatchGame> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  'Category: ${questions[currentQuestionIndex]['category']}',
+                  '${_isEnglish ? "Category" : "Categoría"}: ${_isEnglish ? questions[currentQuestionIndex]['category_en'] : questions[currentQuestionIndex]['category_es']}',
                   style: GoogleFonts.lato(
                     textStyle: TextStyle(
                       fontSize: isTablet ? 36 : 24,
                       color: Colors.black,
-                      fontFamily: 'Poppins',
                       fontWeight: FontWeight.bold,
                       shadows: [
                         Shadow(
@@ -136,28 +142,13 @@ class _NumberPatternMatchGameState extends State<NumberPatternMatchGame> {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(height: 30),
-
+                SizedBox(height: 20),
                 Text(
-                  'Score: $score', // Display the current score
-                  style: GoogleFonts.lato(
-                    textStyle: TextStyle(
-                      fontSize: isTablet ? 28 : 20,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      shadows: [
-                        Shadow(
-                          offset: const Offset(5.0, 5.0),
-                          blurRadius: 3.0,
-                          color: Colors.grey.withOpacity(0.5),
-                        ),
-                      ],
-                    ),
-                  ),
+                  '${_isEnglish ? "Score" : "Puntuación"}: $score',
+                  style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 30),
 
-                // Number options for dragging
                 Expanded(
                   child: GridView.builder(
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -177,9 +168,6 @@ class _NumberPatternMatchGameState extends State<NumberPatternMatchGame> {
                             decoration: BoxDecoration(
                               color: Colors.blueAccent,
                               borderRadius: BorderRadius.circular(10),
-                              boxShadow: [
-                                BoxShadow(color: Colors.black26, blurRadius: 8)
-                              ],
                             ),
                             child: Center(
                               child: Text(
@@ -193,83 +181,53 @@ class _NumberPatternMatchGameState extends State<NumberPatternMatchGame> {
                             ),
                           ),
                         ),
-                        childWhenDragging: Container(
-                          width: 20,  // Set the width to a smaller value
-                          height: 20,
+                        child: Container(
                           padding: EdgeInsets.all(16),
-                          color: Colors.grey,
+                          decoration: BoxDecoration(
+                            color: Colors.white70,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                           child: Center(
                             child: Text(
                               '$number',
-                              style: TextStyle(fontSize: 24, color: Colors.white),
+                              style: TextStyle(fontSize: 30),
                             ),
                           ),
                         ),
-                          child: Container(
-                            padding: EdgeInsets.all(16),
-                            decoration: BoxDecoration(
-                              color: Colors.grey.shade50.withOpacity(0.7),
-                              // borderRadius: BorderRadius.circular(10), // Adding border radius
-                              // border: Border.all(color: Colors.grey, width: 2), // Optional: adding a border
-                            ),
-                            child: Center(
-                              child: Text(
-                                '$number',
-                                style: TextStyle(
-                                  fontSize: 35,
-                                  color: Colors.black38,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ),
                       );
                     },
                   ),
                 ),
                 SizedBox(height: 20),
 
-                // Drag target
                 DragTarget<int>(
-                  builder: (BuildContext context, List<int?> accepted,
-                      List<dynamic> rejected) {
+                  builder: (context, accepted, rejected) {
                     return Container(
-                      height: 200, // Expanded height for the drag target
+                      height: 200,
                       width: double.infinity,
                       padding: EdgeInsets.all(20),
                       decoration: BoxDecoration(
-                        color: Colors.greenAccent,
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: Colors.green, width: 2),
+                        color: Colors.greenAccent.withOpacity(0.8),
+                        borderRadius: BorderRadius.circular(15),
                       ),
                       child: Center(
                         child: draggedNumbers.isNotEmpty
-                            ? ListView(
-                          scrollDirection: Axis.horizontal,
-                          children: draggedNumbers
-                              .map((number) => Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              padding: EdgeInsets.all(16),
-                              color: Colors.white,
-                              child: Text(
-                                '$number',
+                            ? Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: draggedNumbers
+                                    .map((number) => Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text(
+                                            '$number',
+                                            style: TextStyle(fontSize: 30),
+                                          ),
+                                        ))
+                                    .toList(),
+                              )
+                            : Text(
+                                _isEnglish ? 'Drop numbers here' : 'Suelta los números aquí',
                                 style: TextStyle(fontSize: 24),
                               ),
-                            ),
-                          ))
-                              .toList(),
-                        )
-                            : Text(
-                          'Drop numbers here',
-                          style: GoogleFonts.lato(
-                            textStyle: TextStyle(
-                              fontSize: isTablet ? 28 : 22,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
                       ),
                     );
                   },
@@ -280,67 +238,30 @@ class _NumberPatternMatchGameState extends State<NumberPatternMatchGame> {
                       }
                     });
                   },
-                  onWillAccept: (data) {
-                    return true;
-                  },
                 ),
                 SizedBox(height: 20),
 
-                // Submit button
                 ElevatedButton(
                   onPressed: checkAnswer,
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 30.0),
-                    backgroundColor: Colors.teal,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                  child: Text(
-                    'Submit',
-                    style: GoogleFonts.lato(
-                      textStyle: TextStyle(
-                        fontSize: isTablet ? 24 : 18,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
+                  child: Text(_translateText('Correct!'), style: TextStyle(fontSize: 24)),
                 ),
                 SizedBox(height: 20),
 
-                // Message text
                 Text(
                   message,
-                  style: GoogleFonts.lato(
-                    textStyle: TextStyle(
-                      fontSize: isTablet ? 28 : 22,
-                      color: isCorrect ? Colors.green : Colors.red,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  style: TextStyle(
+                    fontSize: 26,
+                    fontWeight: FontWeight.bold,
+                    color: isCorrect ? Colors.green : Colors.red,
                   ),
                 ),
                 SizedBox(height: 20),
 
-                // Next Question button
                 ElevatedButton(
                   onPressed: nextQuestion,
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 30.0),
-                    backgroundColor: Colors.orange,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
                   child: Text(
-                    'Next Question',
-                    style: GoogleFonts.lato(
-                      textStyle: TextStyle(
-                        fontSize: isTablet ? 24 : 18,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    _isEnglish ? 'Next Question' : 'Siguiente Pregunta',
+                    style: TextStyle(fontSize: 24),
                   ),
                 ),
               ],
