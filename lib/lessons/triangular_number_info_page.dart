@@ -129,8 +129,13 @@ class TriangularNumberInfoPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 100),
-                Image.asset('assets/triangular2.jpg', height: 400),
+                SizedBox(
+                  height: 350,
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 10),
+                    child: Image.asset('assets/triangular2.png'),
+                  ),
+                ),
               ],
             ),
         // Fourth Page Content

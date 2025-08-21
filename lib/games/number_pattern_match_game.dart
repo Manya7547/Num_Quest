@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:confetti/confetti.dart';
+import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 class NumberPatternMatchGame extends StatefulWidget {
   @override
@@ -7,6 +10,10 @@ class NumberPatternMatchGame extends StatefulWidget {
 }
 
 class _NumberPatternMatchGameState extends State<NumberPatternMatchGame> {
+  late ConfettiController _confettiController;
+  late final AudioPlayer _audioPlayer;
+  final FlutterTts _flutterTts = FlutterTts();
+
   List<Map<String, dynamic>> questions = [
     {
       'category': 'Prime',
@@ -49,36 +56,32 @@ class _NumberPatternMatchGameState extends State<NumberPatternMatchGame> {
   List<int> draggedNumbers = [];
   String message = '';
   bool isCorrect = false;
-  int score = 0; // Track the score
+  int score = 0;
 
-  List<int> _getCorrectNumbers() {
-    return questions[currentQuestionIndex]['correctNumbers'];
-  }
+  List<int> _getCorrectNumbers() => questions[currentQuestionIndex]['correctNumbers'];
+  List<int> _getOptions() => questions[currentQuestionIndex]['options'];
 
-  List<int> _getOptions() {
-    return questions[currentQuestionIndex]['options'];
-  }
-
-  void checkAnswer() {
+  Future<void> checkAnswer() async {
     List<int> correctNumbers = _getCorrectNumbers();
-    bool hasCorrectAnswer =
-    draggedNumbers.any((number) => correctNumbers.contains(number));
-    bool hasWrongAnswer =
-    draggedNumbers.any((number) => !correctNumbers.contains(number));
+    bool hasCorrectAnswer = draggedNumbers.any((n) => correctNumbers.contains(n));
+    bool hasWrongAnswer = draggedNumbers.any((n) => !correctNumbers.contains(n));
 
     setState(() {
       if (hasCorrectAnswer && !hasWrongAnswer) {
         message = 'Correct!';
         isCorrect = true;
-        score++; // Increase score when the answer is correct
+        score++;
       } else {
         message = 'Try Again!';
         isCorrect = false;
-
-        // Reset the dragged numbers to allow for another attempt
         draggedNumbers.clear();
       }
     });
+
+    // Voice feedback
+    await _flutterTts.setLanguage("en-US");
+    await _flutterTts.setPitch(1.0);
+    await _flutterTts.speak(message);
   }
 
   void nextQuestion() {
@@ -92,8 +95,29 @@ class _NumberPatternMatchGameState extends State<NumberPatternMatchGame> {
     } else {
       setState(() {
         message = 'You have completed all questions! Final score: $score';
+        _confettiController.play();
       });
+      _playCelebrationSound();
     }
+  }
+
+  void _playCelebrationSound() async {
+    await _audioPlayer.play(AssetSource('sounds/celebration.mp3'));
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _confettiController = ConfettiController(duration: const Duration(seconds: 3));
+    _audioPlayer = AudioPlayer();
+  }
+
+  @override
+  void dispose() {
+    _confettiController.dispose();
+    _audioPlayer.dispose();
+    _flutterTts.stop();
+    super.dispose();
   }
 
   @override
@@ -103,8 +127,6 @@ class _NumberPatternMatchGameState extends State<NumberPatternMatchGame> {
 
     return Scaffold(
       body: Container(
-        width: double.infinity,
-        height: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage('background1.jpg'),
@@ -115,59 +137,32 @@ class _NumberPatternMatchGameState extends State<NumberPatternMatchGame> {
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
+                SizedBox(height: 20),
                 Text(
                   'Category: ${questions[currentQuestionIndex]['category']}',
                   style: GoogleFonts.lato(
-                    textStyle: TextStyle(
-                      fontSize: isTablet ? 36 : 24,
-                      color: Colors.black,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.bold,
-                      shadows: [
-                        Shadow(
-                          offset: const Offset(5.0, 5.0),
-                          blurRadius: 3.0,
-                          color: Colors.grey.withOpacity(0.5),
-                        ),
-                      ],
-                    ),
+                    fontSize: isTablet ? 36 : 24,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
                   ),
-                  textAlign: TextAlign.center,
                 ),
-                SizedBox(height: 30),
-
+                SizedBox(height: 10),
                 Text(
-                  'Score: $score', // Display the current score
+                  'Score: $score',
                   style: GoogleFonts.lato(
-                    textStyle: TextStyle(
-                      fontSize: isTablet ? 28 : 20,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      shadows: [
-                        Shadow(
-                          offset: const Offset(5.0, 5.0),
-                          blurRadius: 3.0,
-                          color: Colors.grey.withOpacity(0.5),
-                        ),
-                      ],
-                    ),
+                    fontSize: isTablet ? 28 : 20,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 SizedBox(height: 30),
-
-                // Number options for dragging
                 Expanded(
-                  child: GridView.builder(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: isTablet ? 5 : 3,
-                      crossAxisSpacing: 16.0,
-                      mainAxisSpacing: 16.0,
-                    ),
-                    itemCount: _getOptions().length,
-                    itemBuilder: (context, index) {
-                      final number = _getOptions()[index];
+                  child: GridView.count(
+                    crossAxisCount: isTablet ? 5 : 3,
+                    crossAxisSpacing: 16.0,
+                    mainAxisSpacing: 16.0,
+                    children: _getOptions().map((number) {
                       return Draggable<int>(
                         data: number,
                         feedback: Material(
@@ -177,102 +172,76 @@ class _NumberPatternMatchGameState extends State<NumberPatternMatchGame> {
                             decoration: BoxDecoration(
                               color: Colors.blueAccent,
                               borderRadius: BorderRadius.circular(10),
-                              boxShadow: [
-                                BoxShadow(color: Colors.black26, blurRadius: 8)
-                              ],
                             ),
-                            child: Center(
-                              child: Text(
-                                '$number',
-                                style: TextStyle(
+                            child: Text(
+                              '$number',
+                              style: TextStyle(
                                   fontSize: 24,
                                   color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
+                                  fontWeight: FontWeight.bold),
                             ),
                           ),
                         ),
                         childWhenDragging: Container(
-                          width: 20,  // Set the width to a smaller value
-                          height: 20,
-                          padding: EdgeInsets.all(16),
                           color: Colors.grey,
+                          child: Center(
+                            child: Text('$number',
+                                style:
+                                    TextStyle(fontSize: 24, color: Colors.white)),
+                          ),
+                        ),
+                        child: Container(
+                          padding: EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            color: Colors.grey.shade50.withOpacity(0.7),
+                          ),
                           child: Center(
                             child: Text(
                               '$number',
-                              style: TextStyle(fontSize: 24, color: Colors.white),
-                            ),
-                          ),
-                        ),
-                          child: Container(
-                            padding: EdgeInsets.all(16),
-                            decoration: BoxDecoration(
-                              color: Colors.grey.shade50.withOpacity(0.7),
-                              // borderRadius: BorderRadius.circular(10), // Adding border radius
-                              // border: Border.all(color: Colors.grey, width: 2), // Optional: adding a border
-                            ),
-                            child: Center(
-                              child: Text(
-                                '$number',
-                                style: TextStyle(
-                                  fontSize: 35,
-                                  color: Colors.black38,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                              style: TextStyle(
+                                fontSize: 35,
+                                color: Colors.black38,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
+                        ),
                       );
-                    },
+                    }).toList(),
                   ),
                 ),
                 SizedBox(height: 20),
-
-                // Drag target
                 DragTarget<int>(
-                  builder: (BuildContext context, List<int?> accepted,
-                      List<dynamic> rejected) {
-                    return Container(
-                      height: 200, // Expanded height for the drag target
-                      width: double.infinity,
-                      padding: EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        color: Colors.greenAccent,
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: Colors.green, width: 2),
-                      ),
-                      child: Center(
-                        child: draggedNumbers.isNotEmpty
-                            ? ListView(
-                          scrollDirection: Axis.horizontal,
-                          children: draggedNumbers
-                              .map((number) => Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              padding: EdgeInsets.all(16),
-                              color: Colors.white,
-                              child: Text(
-                                '$number',
-                                style: TextStyle(fontSize: 24),
-                              ),
-                            ),
-                          ))
-                              .toList(),
-                        )
-                            : Text(
-                          'Drop numbers here',
-                          style: GoogleFonts.lato(
-                            textStyle: TextStyle(
-                              fontSize: isTablet ? 28 : 22,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ),
-                    );
-                  },
+                  builder: (context, accepted, rejected) => Container(
+                    height: 200,
+                    width: double.infinity,
+                    padding: EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      color: Colors.greenAccent,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Center(
+                      child: draggedNumbers.isNotEmpty
+                          ? ListView(
+                              scrollDirection: Axis.horizontal,
+                              children: draggedNumbers.map((number) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Container(
+                                    padding: EdgeInsets.all(16),
+                                    color: Colors.white,
+                                    child: Text('$number',
+                                        style: TextStyle(fontSize: 24)),
+                                  ),
+                                );
+                              }).toList(),
+                            )
+                          : Text('Drop numbers here',
+                              style: GoogleFonts.lato(
+                                  fontSize: isTablet ? 28 : 22,
+                                  fontWeight: FontWeight.bold)),
+                    ),
+                  ),
                   onAccept: (int number) {
                     setState(() {
                       if (!draggedNumbers.contains(number)) {
@@ -280,74 +249,70 @@ class _NumberPatternMatchGameState extends State<NumberPatternMatchGame> {
                       }
                     });
                   },
-                  onWillAccept: (data) {
-                    return true;
-                  },
                 ),
                 SizedBox(height: 20),
-
-                // Submit button
                 ElevatedButton(
                   onPressed: checkAnswer,
+                  child: Text('Submit',
+                      style: TextStyle(
+                          fontSize: isTablet ? 24 : 18, color: Colors.white)),
                   style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 30.0),
                     backgroundColor: Colors.teal,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                  child: Text(
-                    'Submit',
-                    style: GoogleFonts.lato(
-                      textStyle: TextStyle(
-                        fontSize: isTablet ? 24 : 18,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 30),
                   ),
                 ),
                 SizedBox(height: 20),
-
-                // Message text
                 Text(
                   message,
-                  style: GoogleFonts.lato(
-                    textStyle: TextStyle(
+                  style: TextStyle(
                       fontSize: isTablet ? 28 : 22,
                       color: isCorrect ? Colors.green : Colors.red,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                      fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 20),
-
-                // Next Question button
                 ElevatedButton(
                   onPressed: nextQuestion,
+                  child: Text('Next Question',
+                      style: TextStyle(
+                          fontSize: isTablet ? 24 : 18, color: Colors.white)),
                   style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 30.0),
                     backgroundColor: Colors.orange,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                  child: Text(
-                    'Next Question',
-                    style: GoogleFonts.lato(
-                      textStyle: TextStyle(
-                        fontSize: isTablet ? 24 : 18,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 30),
                   ),
                 ),
+                _buildConfetti(),
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildConfetti() {
+    return Stack(
+      children: [
+        Align(
+          alignment: Alignment.topCenter,
+          child: ConfettiWidget(
+            confettiController: _confettiController,
+            blastDirectionality: BlastDirectionality.explosive,
+            emissionFrequency: 0.03,
+            numberOfParticles: 30,
+            maxBlastForce: 20,
+            minBlastForce: 5,
+            gravity: 0.2,
+            colors: const [
+              Colors.red,
+              Colors.green,
+              Colors.blue,
+              Colors.orange,
+              Colors.purple,
+              Colors.yellow,
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

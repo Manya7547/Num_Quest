@@ -1,19 +1,65 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
-void main() => runApp(PerfectSquareFinder());
+void main() => runApp(MaterialApp(home: HomePage()));
+
+class HomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Home')),
+      body: Center(
+        child: ElevatedButton(
+          child: Text('Go to Game'),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => PerfectSquareFinder()),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class PerfectSquareFinder extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Perfect Square Finder'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () => Navigator.pop(context),
+        ),
+      ),
+      body: SquareFinderGame(),
+    );
+  }
+}
+
+
+/**void main() => runApp(PerfectSquareFinder());
 
 class PerfectSquareFinder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(title: Text('Perfect Square Finder')),
+        appBar: AppBar(title: Text('Perfect Square Finder'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context); // Navigate back to the previous page
+          },
+        ),
+        ),
         body: SquareFinderGame(),
       ),
     );
   }
-}
+}**/
 
 class SquareFinderGame extends StatefulWidget {
   @override

@@ -135,7 +135,7 @@ class _WordProblemsGameState extends State<WordProblemsGame> {
                                     currentQuestion['correctAnswerIndex']
                                 ? 'Correct! Explanation: ${currentQuestion['explanation']}'
                                 : 'Incorrect. Try again!',
-                            style: TextStyle(fontSize: 18, color: Colors.red),
+                            style: TextStyle(fontSize: 18, color: Colors.green),
                             textAlign: TextAlign.center,
                           ),
                         ],

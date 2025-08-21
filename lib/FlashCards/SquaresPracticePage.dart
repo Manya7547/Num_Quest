@@ -100,119 +100,113 @@ class _SquaresExamplePageState extends State<SquaresExamplePage> {
             ? 'Square Number Practice'
             : 'Práctica de Números Cuadrados'),
       ),
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/background1.jpg'),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: Center(
-          // Wrap the entire content in a Center widget
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              mainAxisAlignment:
-                  MainAxisAlignment.center, // Center the column vertically
-              children: <Widget>[
-                Text(
+  body: Container(
+  width: double.infinity,
+  height: double.infinity,
+  decoration: BoxDecoration(
+    image: DecorationImage(
+      image: AssetImage('assets/background1.jpg'),
+      fit: BoxFit.cover,
+    ),
+  ),
+  child: SafeArea(
+    child: SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              _isEnglish
+                  ? 'Tap on the card to reveal the answer'
+                  : 'Toca la tarjeta para revelar la respuesta',
+              style: GoogleFonts.lato(
+                textStyle: TextStyle(
+                  fontSize: 38,
+                  color: Colors.black,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.bold,
+                  shadows: [
+                    Shadow(
+                      offset: Offset(5.0, 5.0),
+                      blurRadius: 3.0,
+                      color: Colors.grey.withOpacity(0.5),
+                    ),
+                  ],
+                ),
+              ),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 30),
+
+            // Card list
+            ListView.builder(
+              itemCount: _examples.length,
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(), // Prevent nested scrolling
+              itemBuilder: (context, index) {
+                return _buildExampleCard(
                   _isEnglish
-                      ? 'Tap on the card to reveal the answer'
-                      : 'Toca la tarjeta para revelar la respuesta',
-                  style: GoogleFonts.lato(
-                    textStyle: TextStyle(
-                      fontSize: 38,
-                      color: Colors.black,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.bold,
-                      shadows: [
-                        Shadow(
-                          offset: const Offset(5.0, 5.0),
-                          blurRadius: 3.0,
-                          color: Colors.grey.withOpacity(0.5),
-                        ),
-                      ],
+                      ? _examples[index]['Front_en']!
+                      : _examples[index]['Front_es']!,
+                  _isEnglish
+                      ? _numberToWords(_examples[index]['Back_en']!)
+                      : _examples[index]['Back_es']!,
+                );
+              },
+            ),
+
+            SizedBox(height: 30),
+
+            // Button row
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  onPressed: _refreshExamples,
+                  style: ElevatedButton.styleFrom(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                    backgroundColor: Colors.lightBlueAccent.shade200,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
                     ),
                   ),
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(height: 30),
-
-                // Center the ListView.builder and reduce its width
-                Center(
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width *
-                        0.8, // Limit width of the ListView
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: _examples.length,
-                      itemBuilder: (context, index) {
-                        return _buildExampleCard(
-                          _isEnglish
-                              ? _examples[index]['Front_en']!
-                              : _examples[index]['Front_es']!,
-                          _isEnglish
-                              ? _numberToWords(_examples[index]['Back_en']!)
-                              : _examples[index]['Back_es']!,
-                        );
-                      },
-                    ),
+                  child: Text(
+                    _isEnglish ? 'More Examples' : 'Más ejemplos',
+                    style: TextStyle(fontSize: 20, color: Colors.white),
                   ),
                 ),
-
-                const SizedBox(height: 30),
-
-                // Center the Row containing buttons
-                Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      ElevatedButton(
-                        onPressed: _refreshExamples,
-                        style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 30, vertical: 15),
-                          backgroundColor: Colors.lightBlueAccent.shade200,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                        ),
-                        child: Text(
-                          _isEnglish ? 'More Examples' : 'Más ejemplos',
-                          style: TextStyle(fontSize: 20, color: Colors.white),
-                        ),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            _isEnglish = !_isEnglish;
-                          });
-                        },
-                        style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 30, vertical: 15),
-                          backgroundColor: Colors.amber.shade700,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                        ),
-                        child: Text(
-                          _isEnglish
-                              ? 'Tap to Translate'
-                              : 'Toca para Traducir',
-                          style: TextStyle(fontSize: 20, color: Colors.white),
-                        ),
-                      ),
-                    ],
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      _isEnglish = !_isEnglish;
+                    });
+                  },
+                  style: ElevatedButton.styleFrom(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                    backgroundColor: Colors.amber.shade700,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  child: Text(
+                    _isEnglish
+                        ? 'Tap to Translate'
+                        : 'Toca para Traducir',
+                    style: TextStyle(fontSize: 20, color: Colors.white),
                   ),
                 ),
               ],
             ),
-          ),
+          ],
         ),
       ),
+    ),
+  ),
+),
+
     );
   }
 
