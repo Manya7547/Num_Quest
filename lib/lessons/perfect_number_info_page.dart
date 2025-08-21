@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:num_quest/widgets/MultipageContainer.dart';
+import 'package:num_quest/FlashCards/PerfectNumbersPracticePage.dart';
 
 class PerfectNumberInfoPage extends StatelessWidget {
   final FlutterTts flutterTts = FlutterTts();
@@ -180,11 +181,11 @@ class PerfectNumberInfoPage extends StatelessWidget {
                 SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //       builder: (context) => WordProblemPractice()),
-                    // );
+                     Navigator.push(
+                       context,
+                       MaterialPageRoute(
+                           builder: (context) => PerfectNumberPracticePage()),
+                     );
                   },
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),

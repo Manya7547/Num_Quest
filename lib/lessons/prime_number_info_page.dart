@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import '../widgets/MultipageContainer.dart';
+import 'package:num_quest/FlashCards/PrimeNumberExamplesPage.dart';
 
 class PrimeNumberInfoPage extends StatefulWidget {
   @override
@@ -84,6 +85,27 @@ class _PrimeNumberInfoPageState extends State<PrimeNumberInfoPage> {
                 ),
                 SizedBox(height: 40),
                 Image.asset(page['image'], height: 400),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                     Navigator.push(
+                     context,
+                       MaterialPageRoute(
+                         builder: (context) => PrimeNumberPracticePage()),
+                     );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                    backgroundColor: Colors.orange,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  child: Text(
+                    isEnglish ? 'Quiz' : 'examen',
+                    style: TextStyle(fontSize: 20, color: Colors.white),
+                  ),
+                ),
               ],
             );
       }).toList(),

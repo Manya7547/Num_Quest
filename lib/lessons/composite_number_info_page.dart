@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:num_quest/widgets/MultipageContainer.dart';
+import 'package:num_quest/FlashCards/CompositeNumberPracticePage.dart';
 
 class CompositeNumberInfoPage extends StatelessWidget {
   final FlutterTts flutterTts = FlutterTts();
@@ -223,11 +224,11 @@ class CompositeNumberInfoPage extends StatelessWidget {
                 SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //       builder: (context) => WordProblemPractice()),
-                    // );
+                    Navigator.push(
+                       context,
+                       MaterialPageRoute(
+                           builder: (context) => CompositeNumberPracticePage()),
+                     );
                   },
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
@@ -239,6 +240,7 @@ class CompositeNumberInfoPage extends StatelessWidget {
                   child: Text(
                     isEnglish ? 'Quiz' : 'examen',
                     style: TextStyle(fontSize: 20, color: Colors.white),
+
                   ),
                 ),
               ],

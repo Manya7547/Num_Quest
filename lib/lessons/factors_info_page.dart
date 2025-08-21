@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import '../../widgets/MultipageContainer.dart';
+import 'package:num_quest/games/choose_factors_game.dart';
+import 'package:num_quest/FlashCards/FactorsNumberInfoPage.dart';
 
 class FactorsInfoPage extends StatelessWidget {
   final FlutterTts flutterTts = FlutterTts();
@@ -199,11 +201,11 @@ class FactorsInfoPage extends StatelessWidget {
                 SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
-                    // Navigator.push(
-                    //   // context,
-                    //   // MaterialPageRoute(
-                    //   //     builder: (context) => ()),
-                    // );
+                     Navigator.push(
+                     context,
+                       MaterialPageRoute(
+                         builder: (context) => FactorsPracticePage()),
+                     );
                   },
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),

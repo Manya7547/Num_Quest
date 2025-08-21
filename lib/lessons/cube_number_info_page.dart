@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import '../../widgets/MultipageContainer.dart';
+import 'package:num_quest/FlashCards/CubeNumberInfoPage.dart';
 
 class CubeNumberInfoPage extends StatelessWidget {
   final FlutterTts flutterTts = FlutterTts();
@@ -180,11 +181,11 @@ class CubeNumberInfoPage extends StatelessWidget {
                 SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
-                    // Navigator.push(
-                    //   // context,
-                    //   // MaterialPageRoute(
-                    //   //     builder: (context) => ()),
-                    // );
+                     Navigator.push(
+                     context,
+                     MaterialPageRoute(
+                         builder: (context) => CubesExamplePage()),
+                     );
                   },
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),

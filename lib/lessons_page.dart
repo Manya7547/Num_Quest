@@ -37,29 +37,52 @@ class LessonsPage extends StatelessWidget {
             fit: BoxFit.cover,
           ),
         ),
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(100, 50, 100, 50),
-            child: GridView.count(
-              crossAxisCount: 4,
-              crossAxisSpacing: 20.0,
-              mainAxisSpacing: 20.0,
-              shrinkWrap: true,
-              physics:
-                  NeverScrollableScrollPhysics(), // Disable GridView scroll
-              children: lessons.map((lesson) {
-                return LessonButton(
-                  title: lesson['title'],
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => lesson['page']),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            double screenWidth = constraints.maxWidth;
+            int crossAxisCount = 1;
+            double horizontalPadding = 20;
+
+            if (screenWidth >= 1200) {
+              crossAxisCount = 4;
+              horizontalPadding = 100;
+            } else if (screenWidth >= 800) {
+              crossAxisCount = 3;
+              horizontalPadding = 60;
+            } else if (screenWidth >= 600) {
+              crossAxisCount = 2;
+              horizontalPadding = 40;
+            } else {
+              crossAxisCount = 1;
+              horizontalPadding = 20;
+            }
+
+            return SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: horizontalPadding, vertical: 50),
+                child: GridView.count(
+                  crossAxisCount: crossAxisCount,
+                  crossAxisSpacing: 20.0,
+                  mainAxisSpacing: 20.0,
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  children: lessons.map((lesson) {
+                    return LessonButton(
+                      title: lesson['title'],
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => lesson['page']),
+                        );
+                      },
                     );
-                  },
-                );
-              }).toList(),
-            ),
-          ),
+                  }).toList(),
+                ),
+              ),
+            );
+          },
         ),
       ),
     );
@@ -74,6 +97,9 @@ class LessonButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize = screenWidth < 400 ? 18 : 24;
+
     return Container(
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
@@ -83,7 +109,8 @@ class LessonButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          elevation: 0, // Remove button shadow
+          backgroundColor: Colors.white,
+          elevation: 3,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
@@ -91,11 +118,12 @@ class LessonButton extends StatelessWidget {
         child: Center(
           child: Text(
             title,
-            textAlign: TextAlign.center, // Align text in the center
+            textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 30, // Change font size
-              fontWeight: FontWeight.bold, // Make text bold
-              fontFamily: 'Arial', // Change font family if needed
+              fontSize: fontSize,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Arial',
+              color: Colors.black87,
             ),
           ),
         ),
