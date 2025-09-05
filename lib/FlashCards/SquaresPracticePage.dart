@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flip_card/flip_card.dart';
 import "package:google_fonts/google_fonts.dart";
+import '../analytics_engine.dart';
 
 class SquaresExamplePage extends StatefulWidget {
   const SquaresExamplePage({super.key});
@@ -14,6 +15,8 @@ class SquaresExamplePage extends StatefulWidget {
 class _SquaresExamplePageState extends State<SquaresExamplePage> {
   bool _isEnglish = true; // State to keep track of language
   List<Map<String, String>> _examples = [];
+  final String practiceType = 'square_numbers';
+
   final List<Map<String, String>> _allExamples = [
     {
       'Front_en': 'What is the square of 4(four)?',
@@ -52,6 +55,26 @@ class _SquaresExamplePageState extends State<SquaresExamplePage> {
     setState(() {
       _examples = (_allExamples.toList()..shuffle()).take(3).toList();
     });
+    // Log "More Examples" button click
+    AnalyticsEngine.logMoreExamplesClick(practiceType);
+    print('More Examples clicked in Even/Odd Practice');
+  }
+
+  void _onCardFlip() {
+    // Log card flip interaction
+    AnalyticsEngine.logCardFlip(practiceType);
+    print('Card flipped in Even/Odd Practice');
+  }
+
+  void _onTranslatePressed() {
+    setState(() {
+      _isEnglish = !_isEnglish;
+    });
+    
+    // Log translate button click
+    String language = AnalyticsEngine.getLanguageString(_isEnglish);
+    AnalyticsEngine.logTranslateButtonClickPractice(language, practiceType);
+    print('Translate button clicked in Even/Odd Practice: $language');
   }
 
   // Function to convert numbers to their word equivalents
@@ -178,11 +201,7 @@ class _SquaresExamplePageState extends State<SquaresExamplePage> {
                   ),
                 ),
                 ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      _isEnglish = !_isEnglish;
-                    });
-                  },
+                  onPressed: _onTranslatePressed,
                   style: ElevatedButton.styleFrom(
                     padding:
                         EdgeInsets.symmetric(horizontal: 30, vertical: 10),
@@ -215,6 +234,7 @@ class _SquaresExamplePageState extends State<SquaresExamplePage> {
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: FlipCard(
         direction: FlipDirection.HORIZONTAL,
+        onFlip:_onCardFlip,
         front: Container(
           height: 150,
           width: MediaQuery.of(context).size.width * 0.8, // Adjust width

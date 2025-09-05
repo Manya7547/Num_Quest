@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../analytics_engine.dart'; // Import analytics engine
 
 class CompositeNumberPracticePage extends StatefulWidget {
+  CompositeNumberPracticePage({super.key});
+
   @override
   _CompositeNumberPracticePageState createState() =>
       _CompositeNumberPracticePageState();
@@ -9,25 +13,28 @@ class CompositeNumberPracticePage extends StatefulWidget {
 
 class _CompositeNumberPracticePageState
     extends State<CompositeNumberPracticePage> {
-  bool _isEnglish = true; // State to keep track of language
+  bool _isEnglish = true;
+  late FlutterTts flutterTts;
   List<Map<String, dynamic>> _examples = [];
+  final String practiceType = 'composite_numbers'; // Define practice type
+
   final List<Map<String, dynamic>> _allExamples = [
     {
       'question_en': 'Which of the following is a composite number?',
-      'question_es': '¿Cuál de los siguientes es un número compuesto?',
+      'question_es': 'Â¿CuÃ¡l de los siguientes es un nÃºmero compuesto?',
       'options': ['7', '11', '15'],
       'answer': '15',
     },
     {
       'question_en': 'Which number is not a composite number?',
-      'question_es': ' ¿Qué número no es un número compuesto?',
+      'question_es': ' Â¿QuÃ© nÃºmero no es un nÃºmero compuesto?',
       'options': ['4', '13', '12'],
       'answer': '13',
     },
     {
       'question_en':
           'What are the factors of the composite number 18 (eighteen)?',
-      'question_es': '¿Cuáles son los factores del número compuesto 18 ?',
+      'question_es': 'Â¿CuÃ¡les son los factores del nÃºmero compuesto 18 ?',
       'options': ['1,18', '2,3,6,9', '1,2,3,6,9,18'],
       'answer': '1,2,3,6,9,18',
     },
@@ -35,7 +42,7 @@ class _CompositeNumberPracticePageState
       'question_en':
           'Which of the following numbers has more than two factors?',
       'question_es':
-          '¿Cuál de los siguientes números tiene más de dos factores?',
+          'Â¿CuÃ¡l de los siguientes nÃºmeros tiene mÃ¡s de dos factores?',
       'options': ['24', '19', '13'],
       'answer': '24',
     },
@@ -43,21 +50,21 @@ class _CompositeNumberPracticePageState
       'question_en':
           'Which of these numbers is a composite number because it has factors other than 1 and itself?',
       'question_es':
-          '¿Cuál de estos números es un número compuesto porque tiene factores diferentes de 1 y de sí mismo?',
+          'Â¿CuÃ¡l de estos nÃºmeros es un nÃºmero compuesto porque tiene factores diferentes de 1 y de sÃ­ mismo?',
       'options': ['6', '7', '5'],
       'answer': '6',
     },
     {
       'question_en':
           'Identify the composite number that is a product of 2 and 5:',
-      'question_es': 'Identifica el número compuesto que es producto de 2 y 5:',
+      'question_es': 'Identifica el nÃºmero compuesto que es producto de 2 y 5:',
       'options': ['15', '10', '25'],
       'answer': '10',
     },
     {
       'question_en': 'Which of the following is the smallest composite number?',
       'question_es':
-          '¿Cuál de los siguientes es el número compuesto más pequeño?',
+          'Â¿CuÃ¡l de los siguientes es el nÃºmero compuesto mÃ¡s pequeÃ±o?',
       'options': ['2', '1', '4'],
       'answer': '4',
     },
@@ -65,13 +72,12 @@ class _CompositeNumberPracticePageState
       'question_en':
           'Which number is composite because it can be factored into smaller prime numbers?',
       'question_es':
-          '¿Qué número es compuesto porque se puede factorizar en números primos más pequeños?',
+          'Â¿QuÃ© nÃºmero es compuesto porque se puede factorizar en nÃºmeros primos mÃ¡s pequeÃ±os?',
       'options': ['57', '51', '49'],
       'answer': '57',
     },
   ];
 
-  // Helper function to convert a number to its English text
   String _numberToWords(String number) {
     switch (number) {
       case '1':
@@ -118,6 +124,7 @@ class _CompositeNumberPracticePageState
   @override
   void initState() {
     super.initState();
+    flutterTts = FlutterTts();
     _refreshExamples();
   }
 
@@ -125,21 +132,80 @@ class _CompositeNumberPracticePageState
     setState(() {
       _examples = (_allExamples.toList()..shuffle()).take(3).toList();
     });
+    
+    // Log "More Examples" button click
+    AnalyticsEngine.logMoreExamplesClick(practiceType);
+    print('More Examples clicked in Composite Practice');
   }
 
-  void _checkAnswer(String selectedOption, String correctAnswer) {
-    final message = selectedOption == correctAnswer ? 'Correct!' : 'Try Again!';
+  Future<void> speak(String text) async {
+    await flutterTts.setLanguage("en-US");
+    await flutterTts.setPitch(1.0);
+    await flutterTts.speak(text);
+  }
+
+  void _checkAnswer(String selected, String correctAnswer) {
+    bool isCorrect = selected == correctAnswer;
+    String message = isCorrect
+        ? (_isEnglish ? 'Correct!' : 'Â¡Correcto!')
+        : (_isEnglish ? 'Try Again.' : 'Intenta de nuevo.');
+
+    // Log practice answer
+    AnalyticsEngine.logPracticeAnswer(practiceType, isCorrect);
+    print('Practice Answer logged: ${isCorrect ? 'Correct' : 'Incorrect'}');
+
+    speak(message); // Speak result
+    showResultDialog(context, isCorrect);
+  }
+
+  void _onTranslatePressed() {
+    setState(() {
+      _isEnglish = !_isEnglish;
+    });
+    
+    // Log translate button click
+    String language = AnalyticsEngine.getLanguageString(_isEnglish);
+    AnalyticsEngine.logTranslateButtonClickPractice(language, practiceType);
+    print('Translate button clicked in Composite Practice: $language');
+  }
+
+  void showResultDialog(BuildContext context, bool isCorrect) {
+    String message = isCorrect
+        ? (_isEnglish ? 'Correct!' : 'Â¡Correcto!')
+        : (_isEnglish ? 'Try Again.' : 'Intenta de nuevo.');
+
     showDialog(
       context: context,
-      builder: (_) => AlertDialog(
-        title: Text(message),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: Text('OK'),
+      barrierDismissible: false,
+      builder: (BuildContext dialogContext) {
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          title: Text(
+            isCorrect
+                ? (_isEnglish ? 'Well Done!' : 'Â¡Bien hecho!')
+                : (_isEnglish ? 'Oops!' : 'Â¡Vaya!'),
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: isCorrect ? Colors.green : Colors.red,
+            ),
           ),
-        ],
-      ),
+          content: Text(message, style: const TextStyle(fontSize: 20)),
+          actions: [
+            TextButton(
+              child: Text(
+                _isEnglish ? 'OK' : 'Aceptar',
+                style: TextStyle(fontSize: 18),
+              ),
+              onPressed: () {
+                Navigator.of(dialogContext, rootNavigator: true).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -149,7 +215,7 @@ class _CompositeNumberPracticePageState
       appBar: AppBar(
         title: Text(_isEnglish
             ? 'Composite Number Practice'
-            : 'Práctica de Números compuesto'),
+            : 'PrÃ¡ctica de NÃºmeros compuesto'),
       ),
       body: Container(
         width: double.infinity,
@@ -218,16 +284,12 @@ class _CompositeNumberPracticePageState
                         ),
                       ),
                       child: Text(
-                        _isEnglish ? 'More Examples' : 'Más ejemplos',
+                        _isEnglish ? 'More Examples' : 'MÃ¡s ejemplos',
                         style: TextStyle(fontSize: 20, color: Colors.white),
                       ),
                     ),
                     ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          _isEnglish = !_isEnglish;
-                        });
-                      },
+                      onPressed: _onTranslatePressed,
                       style: ElevatedButton.styleFrom(
                         padding:
                             EdgeInsets.symmetric(horizontal: 30, vertical: 15),
@@ -264,8 +326,7 @@ class _CompositeNumberPracticePageState
       child: Center(
         child: Container(
           height: 200,
-          width: MediaQuery.of(context).size.width *
-              0.8, // Adjust width to be smaller
+          width: MediaQuery.of(context).size.width * 0.8,
           decoration: BoxDecoration(
             color: Colors.white70,
             borderRadius: BorderRadius.circular(15.0),

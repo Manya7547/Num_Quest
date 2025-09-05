@@ -1,5 +1,9 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
+import 'package:confetti/confetti.dart';
 import 'package:num_quest/game_list_page.dart';
+import '../analytics_engine.dart'; // Import analytics engine
 
 void main() => runApp(LCMGame());
 
@@ -22,237 +26,291 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late List<ItemModel> items;
   late List<ItemModel> items2;
+  late List<ItemModel> initialItems;
+  late List<ItemModel> initialItems2;
 
   late int score;
   late bool gameOver;
+  final String gameType = 'lcm_match'; // Define game type
+  int totalScore = 0; // Track total score for analytics
+
+  late FlutterTts flutterTts;
+  late ConfettiController _confettiController;
 
   @override
   void initState() {
     super.initState();
+    flutterTts = FlutterTts();
+    _confettiController = ConfettiController(duration: Duration(seconds: 3));
     initGame();
+    
+    // Log game start when game initializes
+    AnalyticsEngine.logGameStart(gameType);
   }
 
   void initGame() {
     gameOver = false;
     score = 0;
+
     items = [
-      ItemModel(name: "12 and 8 (twelve and eight)", value: "24"),
-      ItemModel(name: "18 and 9 (eighteen and nine)", value: "18"),
-      ItemModel(name: "20 and 5 (twenty and five)", value: "20"),
-      ItemModel(name: "15 and 6 (fifteen and six)", value: "30"),
-      ItemModel(name: "7 and 14 (seven and fourteen)", value: "14"),
+      ItemModel(name: "12 and 8", value: "24"),
+      ItemModel(name: "18 and 9", value: "18"),
+      ItemModel(name: "20 and 5", value: "20"),
+      ItemModel(name: "15 and 6", value: "30"),
+      ItemModel(name: "7 and 14", value: "14"),
     ];
     items2 = [
-      ItemModel(name: "24 (twenty-four)", value: "24"),
-      ItemModel(name: "18 (eighteen)", value: "18"),
-      ItemModel(name: "20 (twenty)", value: "20"),
-      ItemModel(name: "30 (thirty)", value: "30"),
-      ItemModel(name: "14 (fourteen)", value: "14"),
+      ItemModel(name: "24", value: "24"),
+      ItemModel(name: "18", value: "18"),
+      ItemModel(name: "20", value: "20"),
+      ItemModel(name: "30", value: "30"),
+      ItemModel(name: "14", value: "14"),
     ];
+
+    // Save original lists for Reset
+    initialItems = List.from(items);
+    initialItems2 = List.from(items2);
+
     items.shuffle();
     items2.shuffle();
+    setState(() {});
+  }
+
+  void resetGame() {
+    setState(() {
+      items = List.from(initialItems);
+      items2 = List.from(initialItems2);
+      score = 0;
+      gameOver = false;
+    });
+  }
+
+  void newGame() {
+    initGame();
+    // Log new game start
+    AnalyticsEngine.logGameStart(gameType);
+  }
+
+  Future<void> speak(String text) async {
+    await flutterTts.setLanguage("en-US");
+    await flutterTts.setPitch(1.0);
+    await flutterTts.speak(text);
+  }
+
+  void handleMatch(ItemModel topItem, ItemModel bottomItem) {
+    if (topItem.value == bottomItem.value) {
+      setState(() {
+        items.remove(topItem);
+        items2.remove(bottomItem);
+        score += 10;
+        totalScore += 10; // Add to total score for analytics
+        speak("Correct! Well done!");
+        _confettiController.play();
+        
+        if (items.isEmpty) {
+          gameOver = true;
+          // Log game completion with final score
+          AnalyticsEngine.logGameComplete(gameType, totalScore);
+        }
+      });
+    } else {
+      setState(() {
+        score -= 5;
+        totalScore -= 5; // Subtract from total score for analytics
+        speak("Oops! Try again!");
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    flutterTts.stop();
+    _confettiController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    if (items.isEmpty) gameOver = true;
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
         title: Text('LCM Matching Game'),
+        centerTitle: true,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                builder: (context) => GameListPage(),
-              ),
+              MaterialPageRoute(builder: (_) => GameListPage()),
             );
+          // Log game completion with final score
+           AnalyticsEngine.logGameCompleteInMiddle();
           },
         ),
       ),
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image:
-                AssetImage("assets/LCM_bg.jpg"), // Replace with your image path
-            fit: BoxFit.cover,
+      body: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/LCM_bg.jpg"),
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
-        ),
-        child: ConstrainedBox(
-          constraints:
-              BoxConstraints(minHeight: MediaQuery.of(context).size.height),
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(8.0),
+          ConfettiWidget(
+            confettiController: _confettiController,
+            blastDirectionality: BlastDirectionality.explosive,
+            shouldLoop: false,
+            colors: [Colors.yellow, Colors.red, Colors.green, Colors.blue, Colors.white70],
+            gravity: 0.3,
+          ),
+          SingleChildScrollView(
+            padding: EdgeInsets.all(16),
             child: Column(
-              children: <Widget>[
-                // Game Instructions
+              children: [
                 Text(
-                  "Drag the box with the LCM and drop it on the matching pair of numbers. "
-                  "Each correct match adds 10 points to your score, while each incorrect match subtracts 5 points.",
+                  "Drag the LCM to its matching pair!",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 30.0,
+                    fontSize: 28,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 16.0), // Space between instructions and score
-
-                // Displaying Score
-                Text.rich(TextSpan(children: [
-                  TextSpan(
-                      text: "Score: ",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 50.0,
-                      )),
-                  TextSpan(
-                    text: "$score",
-                    style: TextStyle(
+                SizedBox(height: 20),
+                Text(
+                  "Score: $score",
+                  style: TextStyle(
                       color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 50.0,
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 20),
+
+                // Top Items (targets)
+                Wrap(
+                  spacing: 16,
+                  runSpacing: 16,
+                  alignment: WrapAlignment.center,
+                  children: items.map((item) {
+                    return DragTarget<ItemModel>(
+                      onAccept: (receivedItem) =>
+                          handleMatch(item, receivedItem),
+                      builder: (context, accepted, rejected) {
+                        return Container(
+                          height: 140,
+                          width: 140,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: Colors.orange[900],
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: Text(
+                            item.name,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 24),
+                          ),
+                        );
+                      },
+                    );
+                  }).toList(),
+                ),
+                SizedBox(height: 40),
+
+                // Bottom Items (draggables)
+                Wrap(
+                  spacing: 16,
+                  runSpacing: 16,
+                  alignment: WrapAlignment.center,
+                  children: items2.map((item) {
+                    return Draggable<ItemModel>(
+                      data: item,
+                      feedback: Material(
+                        color: Colors.transparent,
+                        child: Container(
+                          height: 140,
+                          width: 140,
+                          decoration: BoxDecoration(
+                            color: Colors.orange[700],
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          alignment: Alignment.center,
+                          child: Text(
+                            item.name,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 24),
+                          ),
+                        ),
+                      ),
+                      childWhenDragging: Container(
+                        height: 140,
+                        width: 140,
+                        color: Colors.grey,
+                      ),
+                      child: Container(
+                        height: 140,
+                        width: 140,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: Colors.orange[700],
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: Text(
+                          item.name,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 24),
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                ),
+
+                SizedBox(height: 30),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ElevatedButton(
+                      onPressed: resetGame,
+                      child: Text("Reset", style: TextStyle(fontSize: 22)),
+                      style: ElevatedButton.styleFrom(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                        backgroundColor: Colors.blue,
+                      ),
                     ),
-                  ),
-                ])),
-
-                if (!gameOver)
-                  Column(
-                    children: <Widget>[
-                      // Top Row with "number and number" boxes
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: items.map((item) {
-                          return Container(
-                            margin: const EdgeInsets.all(8.0),
-                            child: DragTarget<ItemModel>(
-                              onAccept: (receivedItem) {
-                                if (item.value == receivedItem.value) {
-                                  setState(() {
-                                    items.remove(item);
-                                    items2.remove(receivedItem);
-                                    score += 10;
-                                  });
-                                } else {
-                                  setState(() {
-                                    score -= 5;
-                                  });
-                                }
-                              },
-                              onLeave: (receivedItem) {},
-                              onWillAccept: (receivedItem) => true,
-                              builder: (context, acceptedItems, rejectedItem) {
-                                return Container(
-                                  color: Colors.orange[900],
-                                  height: 170,
-                                  width: 170,
-                                  alignment: Alignment.center,
-                                  margin: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    item.name,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 30.0,
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                          );
-                        }).toList(),
+                    ElevatedButton(
+                      onPressed: newGame,
+                      child: Text("New Game", style: TextStyle(fontSize: 22)),
+                      style: ElevatedButton.styleFrom(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                        backgroundColor: Colors.green,
                       ),
-                      SizedBox(height: 40),
+                    ),
+                  ],
+                ),
 
-                      // Bottom Row with LCM boxes
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: items2.map((item) {
-                          return Draggable<ItemModel>(
-                            data: item,
-                            childWhenDragging: Container(
-                              height: 170,
-                              width: 170,
-                              color: Colors.grey,
-                              child: Center(
-                                child: Text(
-                                  item.name,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 30.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            feedback: Material(
-                              color: Colors.transparent,
-                              child: Container(
-                                height: 170,
-                                width: 170,
-                                color: Colors.orange[900],
-                                child: Center(
-                                  child: Text(
-                                    item.name,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 30.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            child: Container(
-                              height: 170,
-                              width: 170,
-                              color: Colors.orange[900],
-                              child: Center(
-                                child: Text(
-                                  item.name,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 30.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          );
-                        }).toList(),
-                      ),
-                    ],
-                  ),
+                SizedBox(height: 30),
 
-                // Game Over Message
                 if (gameOver)
                   Text(
-                    "Game Over",
+                    "🎉 Game Over! 🎉",
                     style: TextStyle(
-                      color: Colors.red,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24.0,
-                    ),
+                        color: Colors.yellow,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 36),
                   ),
-                if (gameOver)
-                  Center(
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.pink,
-                        textStyle: TextStyle(color: Colors.white),
-                      ),
-                      child: Text("New Game"),
-                      onPressed: () {
-                        initGame();
-                        setState(() {});
-                      },
-                    ),
-                  )
               ],
             ),
           ),
-        ),
+        ],
       ),
     );
   }
@@ -262,8 +320,5 @@ class ItemModel {
   final String name;
   final String value;
 
-  ItemModel({
-    required this.name,
-    required this.value,
-  });
+  ItemModel({required this.name, required this.value});
 }

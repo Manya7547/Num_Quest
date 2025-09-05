@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import '../widgets/MultipageContainer.dart';
 import 'practice_even.dart';
-//import 'package:num_quest/FlashCards/EvenNumberExamplesPage.dart';
+import '../analytics_engine.dart';
 
 class EvenNumberInfoPage extends StatefulWidget {
   @override
@@ -14,6 +14,7 @@ class EvenNumberInfoPage extends StatefulWidget {
 class _EvenNumberInfoPageState extends State<EvenNumberInfoPage> {
   final FlutterTts flutterTts = FlutterTts();
   List<dynamic> lessonData = [];
+  final String lessonType = 'even_numbers';
 
   Future<void> loadLessonData() async {
     final String jsonData =
@@ -27,6 +28,34 @@ class _EvenNumberInfoPageState extends State<EvenNumberInfoPage> {
     await flutterTts.setLanguage(isEnglish ? 'en-US' : 'es-ES');
     await flutterTts.setPitch(1.0);
     await flutterTts.speak(text);
+    // Log audio button click
+    String language = AnalyticsEngine.getLanguageString(isEnglish);
+    AnalyticsEngine.logAudioButtonClickLessons(language, lessonType);
+     print('Audio in composite logged');
+  }
+
+  Future<void> stopSpeaking() async {
+    await flutterTts.stop();
+  }
+
+  void _onQuizPressed() {
+    stopSpeaking(); // stop TTS before navigating
+    print('Quiz in composite is logged');
+    // Log lesson completion when Quiz button is clicked
+    AnalyticsEngine.logLessonCompletion(lessonType);
+    
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => WordProblemPractice()),
+    );
+  }
+
+    @override
+  void dispose() {
+    stopSpeaking(); // stop TTS when leaving page
+    //flutterTts.dispose(); // release resources
+    super.dispose();
   }
 
   @override
@@ -46,6 +75,7 @@ class _EvenNumberInfoPageState extends State<EvenNumberInfoPage> {
     }
 
     return MultipageContainer(
+      lessonType: lessonType,
       pages: lessonData.map<Widget Function(bool)>((page) {
         return (bool isEnglish) => Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -75,6 +105,7 @@ class _EvenNumberInfoPageState extends State<EvenNumberInfoPage> {
                         IconButton(
                           icon: Icon(Icons.play_arrow),
                           onPressed: () {
+                            stopSpeaking();
                             speak(
                               isEnglish
                                   ? page['english']['text']
@@ -104,13 +135,7 @@ class _EvenNumberInfoPageState extends State<EvenNumberInfoPage> {
                 Image.asset(page['image'], height: 400),
                 if (page == lessonData.last)
                   ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => WordProblemPractice()),
-                      );
-                    },
+                    onPressed: _onQuizPressed,
                     style: ElevatedButton.styleFrom(
                       padding:
                           EdgeInsets.symmetric(horizontal: 20, vertical: 20),

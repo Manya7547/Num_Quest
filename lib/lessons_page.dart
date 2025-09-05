@@ -9,6 +9,7 @@ import 'lessons/square_number_info_page.dart';
 import 'lessons/fibonacci_number_info_page.dart';
 import 'lessons/factors_info_page.dart';
 import 'lessons/cube_number_info_page.dart';
+import 'analytics_engine.dart';
 
 class LessonsPage extends StatelessWidget {
   final List<Map<String, dynamic>> lessons = [
@@ -26,6 +27,11 @@ class LessonsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Log module navigation when lessons page is accessed
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      AnalyticsEngine.logModuleNavigation('lessons');
+       print('A Lesson in modules is logged');
+    });
     return Scaffold(
       appBar: AppBar(
         title: Text('LESSON PLAN'),
@@ -71,6 +77,8 @@ class LessonsPage extends StatelessWidget {
                     return LessonButton(
                       title: lesson['title'],
                       onPressed: () {
+                        String lessonType = AnalyticsEngine.getLessonTypeFromContext(lesson['title']);
+                        AnalyticsEngine.logContentSelection('lesson', lesson['title']);
                         Navigator.push(
                           context,
                           MaterialPageRoute(
