@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../analytics_engine.dart'; // Import analytics engine
 
 class WordProblemsGame extends StatefulWidget {
   @override
@@ -6,13 +7,15 @@ class WordProblemsGame extends StatefulWidget {
 }
 
 class _WordProblemsGameState extends State<WordProblemsGame> {
+  final String gameType = 'triangle_tower'; // Define game type
+  int totalScore = 0; // Track total score for analytics
+  
   final List<Map<String, dynamic>> questions = [
     {
       'question':
           'If John has 5 apples and he gives 2 to Mary, how many apples does John have left?',
       'answers': ['1 apple', '2 apples', '3 apples', '4 apples'],
-      'correctAnswerIndex':
-          2, // Index of the correct answer in the 'answers' list
+      'correctAnswerIndex': 2,
       'explanation':
           'John starts with 5 apples and gives 2 away, so he has 5 - 2 = 3 apples left.',
     },
@@ -24,7 +27,6 @@ class _WordProblemsGameState extends State<WordProblemsGame> {
       'explanation':
           'Sara starts with 8 candies and eats 3, so she has 8 - 3 = 5 candies left.',
     },
-    // Add more questions related to number theory
     {
       'question': 'What is the smallest prime number?',
       'answers': ['1', '2', '3', '4'],
@@ -40,12 +42,11 @@ class _WordProblemsGameState extends State<WordProblemsGame> {
     },
     {
       'question': 'What is the sum of the first 5 prime numbers?',
-      'answers': ['12', '15', '18', '20'],
-      'correctAnswerIndex': 1,
+      'answers': ['12', '15', '18', '28'],
+      'correctAnswerIndex': 3,
       'explanation':
           'The first 5 prime numbers are 2, 3, 5, 7, and 11. Their sum is 2 + 3 + 5 + 7 + 11 = 28.',
     },
-    // Add more questions as needed
   ];
 
   late Map<String, dynamic> currentQuestion;
@@ -55,6 +56,9 @@ class _WordProblemsGameState extends State<WordProblemsGame> {
   void initState() {
     super.initState();
     generateQuestion();
+    
+    // Log game start when game initializes
+    AnalyticsEngine.logGameStart(gameType);
   }
 
   void generateQuestion() {
@@ -64,6 +68,24 @@ class _WordProblemsGameState extends State<WordProblemsGame> {
     setState(() {
       currentQuestion = questions[randomIndex];
       selectedAnswerIndex = null;
+    });
+  }
+
+  void _checkAnswer() {
+    if (selectedAnswerIndex == currentQuestion['correctAnswerIndex']) {
+      totalScore += 10; // Add to total score for analytics
+    }
+  }
+
+  // Method to end game and log completion (can be called when user decides to finish)
+  void endGame() {
+    AnalyticsEngine.logGameComplete(gameType, totalScore);
+  }
+
+  void _newGame() {
+    setState(() {
+      totalScore = 0; // Reset total score
+      generateQuestion();
     });
   }
 
@@ -78,8 +100,7 @@ class _WordProblemsGameState extends State<WordProblemsGame> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage(
-                "assets/word_problem.jpg"), // replace with your image
+            image: AssetImage("assets/word_problem.jpg"),
             fit: BoxFit.cover,
           ),
         ),
@@ -94,56 +115,69 @@ class _WordProblemsGameState extends State<WordProblemsGame> {
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: generateQuestion,
-                child: Text('Generate Word Problem',
-                    style: TextStyle(color: Colors.white)),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue, // background
-                  foregroundColor: Colors.white, // foreground
-                ),
-              ),
-              ...[
-                SizedBox(height: 20),
-                Card(
-                  elevation: 5,
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Column(
-                      children: [
-                        Text(currentQuestion['question'],
-                            style: TextStyle(fontSize: 18),
-                            textAlign: TextAlign.center),
-                        SizedBox(height: 20),
-                        ...List.generate(currentQuestion['answers'].length,
-                            (index) {
-                          return RadioListTile(
-                            title: Text(currentQuestion['answers'][index]),
-                            value: index,
-                            groupValue: selectedAnswerIndex,
-                            onChanged: (value) {
-                              setState(() {
-                                selectedAnswerIndex = value;
-                              });
-                            },
-                          );
-                        }),
-                        if (selectedAnswerIndex != null) ...[
-                          SizedBox(height: 20),
-                          Text(
-                            selectedAnswerIndex ==
-                                    currentQuestion['correctAnswerIndex']
-                                ? 'Correct! Explanation: ${currentQuestion['explanation']}'
-                                : 'Incorrect. Try again!',
-                            style: TextStyle(fontSize: 18, color: Colors.green),
-                            textAlign: TextAlign.center,
-                          ),
-                        ],
-                      ],
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(
+                    onPressed: generateQuestion,
+                    child: Text('Generate Word Problem',
+                        style: TextStyle(color: Colors.white)),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue,
+                      foregroundColor: Colors.white,
                     ),
                   ),
+                  ElevatedButton(
+                    onPressed: _newGame,
+                    child: Text('New Game',
+                        style: TextStyle(color: Colors.white)),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green,
+                      foregroundColor: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 20),
+              Card(
+                elevation: 5,
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    children: [
+                      Text(currentQuestion['question'],
+                          style: TextStyle(fontSize: 18),
+                          textAlign: TextAlign.center),
+                      SizedBox(height: 20),
+                      ...List.generate(currentQuestion['answers'].length,
+                          (index) {
+                        return RadioListTile(
+                          title: Text(currentQuestion['answers'][index]),
+                          value: index,
+                          groupValue: selectedAnswerIndex,
+                          onChanged: (value) {
+                            setState(() {
+                              selectedAnswerIndex = value;
+                            });
+                            _checkAnswer(); // Check answer for scoring
+                          },
+                        );
+                      }),
+                      if (selectedAnswerIndex != null) ...[
+                        SizedBox(height: 20),
+                        Text(
+                          selectedAnswerIndex ==
+                                  currentQuestion['correctAnswerIndex']
+                              ? 'Correct! Explanation: ${currentQuestion['explanation']}'
+                              : 'Incorrect. Try again!',
+                          style: TextStyle(fontSize: 18, color: Colors.green),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ],
+                  ),
                 ),
-              ],
+              ),
             ],
           ),
         ),

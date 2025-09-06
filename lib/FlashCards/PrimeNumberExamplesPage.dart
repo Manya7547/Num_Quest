@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_tts/flutter_tts.dart';
+import '../analytics_engine.dart';
 
 class PrimeNumberPracticePage extends StatefulWidget {
   @override
@@ -8,8 +10,11 @@ class PrimeNumberPracticePage extends StatefulWidget {
 }
 
 class _PrimeNumberPracticePageState extends State<PrimeNumberPracticePage> {
-  bool _isEnglish = true; // State to keep track of language
+  bool _isEnglish = true;
   List<Map<String, dynamic>> _examples = [];
+  late FlutterTts flutterTts;
+  final String practiceType = 'prime_numbers';
+
   final List<Map<String, dynamic>> _allExamples = [
     {
       'question_en': 'Which of the following is a prime number?',
@@ -61,36 +66,98 @@ class _PrimeNumberPracticePageState extends State<PrimeNumberPracticePage> {
       'options': ['10 (ten)', '12 (twelve)', '17 (seventeen)'],
       'answer': '17 (seventeen)',
     },
-
-    // Add more questions here with the same format
   ];
 
   @override
   void initState() {
     super.initState();
     _refreshExamples();
+    flutterTts = FlutterTts();
+  }
+
+  Future<void> speak(String text) async {
+    await flutterTts.setLanguage("en-US");
+    await flutterTts.setPitch(1.0);
+    await flutterTts.speak(text);
   }
 
   void _refreshExamples() {
     setState(() {
       _examples = (_allExamples.toList()..shuffle()).take(3).toList();
     });
+     // Log "More Examples" button click
+    AnalyticsEngine.logMoreExamplesClick(practiceType);
+    print('More Examples clicked in Composite Practice');
+  }
+
+
+  void _onTranslatePressed() {
+    setState(() {
+      _isEnglish = !_isEnglish;
+    });
+    
+    // Log translate button click
+    String language = AnalyticsEngine.getLanguageString(_isEnglish);
+    AnalyticsEngine.logTranslateButtonClickPractice(language, practiceType);
+    print('Translate button clicked in Composite Practice: $language');
   }
 
   void _checkAnswer(String selectedOption, String correctAnswer) {
-    final message = selectedOption == correctAnswer ? 'Correct!' : 'Try Again!';
+    bool isCorrect = selectedOption == correctAnswer;
+    String message = isCorrect
+        ? (_isEnglish ? 'Correct!' : '¡Correcto!')
+        : (_isEnglish ? 'Try Again.' : 'Intenta de nuevo.');
+    
+    // Log practice answer
+    AnalyticsEngine.logPracticeAnswer(practiceType, isCorrect);
+    print('Practice Answer logged: ${isCorrect ? 'Correct' : 'Incorrect'}');
+    speak(message); // Speak the result
+    showResultDialog(context, isCorrect);
+  }
+  void showResultDialog(BuildContext context, bool isCorrect) {
+    String message = isCorrect
+        ? (_isEnglish ? 'Correct!' : '¡Correcto!')
+        : (_isEnglish ? 'Try Again.' : 'Intenta de nuevo.');
+
     showDialog(
       context: context,
-      builder: (_) => AlertDialog(
-        title: Text(message),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: Text('OK'),
+      barrierDismissible: false,
+      builder: (BuildContext dialogContext) {
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          title: Text(
+            isCorrect
+                ? (_isEnglish ? 'Well Done!' : '¡Bien hecho!')
+                : (_isEnglish ? 'Oops!' : '¡Vaya!'),
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: isCorrect ? Colors.green : Colors.red,
+            ),
           ),
-        ],
-      ),
+          content: Text(message, style: const TextStyle(fontSize: 20)),
+          actions: [
+            TextButton(
+              child: Text(
+                _isEnglish ? 'OK' : 'Aceptar',
+                style: TextStyle(fontSize: 18),
+              ),
+              onPressed: () {
+                Navigator.of(dialogContext, rootNavigator: true).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
+  }
+
+  @override
+  void dispose() {
+    flutterTts.stop();
+    super.dispose();
   }
 
   @override
@@ -160,8 +227,8 @@ class _PrimeNumberPracticePageState extends State<PrimeNumberPracticePage> {
                     ElevatedButton(
                       onPressed: _refreshExamples,
                       style: ElevatedButton.styleFrom(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 30, vertical: 15),
                         backgroundColor: Colors.lightBlueAccent.shade200,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
@@ -173,14 +240,10 @@ class _PrimeNumberPracticePageState extends State<PrimeNumberPracticePage> {
                       ),
                     ),
                     ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          _isEnglish = !_isEnglish;
-                        });
-                      },
+                      onPressed: _onTranslatePressed,
                       style: ElevatedButton.styleFrom(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 30, vertical: 15),
                         backgroundColor: Colors.amber.shade700,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
@@ -214,8 +277,7 @@ class _PrimeNumberPracticePageState extends State<PrimeNumberPracticePage> {
       child: Center(
         child: Container(
           height: 200,
-          width: MediaQuery.of(context).size.width *
-              0.8, // Adjust width to be smaller
+          width: MediaQuery.of(context).size.width * 0.8,
           decoration: BoxDecoration(
             color: Colors.white70,
             borderRadius: BorderRadius.circular(15.0),
@@ -234,6 +296,7 @@ class _PrimeNumberPracticePageState extends State<PrimeNumberPracticePage> {
                 children: options.map((option) {
                   return ElevatedButton(
                     onPressed: () {
+                     // speak(option); // Speak option when tapped
                       _checkAnswer(option, answer);
                     },
                     style: ElevatedButton.styleFrom(
@@ -246,7 +309,7 @@ class _PrimeNumberPracticePageState extends State<PrimeNumberPracticePage> {
                     ),
                     child: Text(
                       option,
-                      style: TextStyle(fontSize: 20, color: Colors.white),
+                      style: TextStyle(fontSize: 20, color: Colors.black),
                     ),
                   );
                 }).toList(),

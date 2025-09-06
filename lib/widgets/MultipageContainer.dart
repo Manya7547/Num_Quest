@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import '../analytics_engine.dart';
 
 class MultipageContainer extends StatefulWidget {
   final List<Widget Function(bool isEnglish)> pages;
   final bool initialLanguageEnglish;
+  final String lessonType;
 
   MultipageContainer({
     Key? key,
     required this.pages,
     this.initialLanguageEnglish = true,
+    required this.lessonType,
   }) : super(key: key);
 
   @override
@@ -21,6 +24,17 @@ class _MultipageContainerState extends State<MultipageContainer> {
   void initState() {
     super.initState();
     _isEnglish = widget.initialLanguageEnglish;
+  }
+
+  void _onTranslatePressed() {
+    setState(() {
+      _isEnglish = !_isEnglish;
+    });
+    
+    // Log translate button click
+    String language = AnalyticsEngine.getLanguageString(_isEnglish);
+    AnalyticsEngine.logTranslateButtonClickLessons(language, widget.lessonType);
+    print('Translate button is logged');
   }
 
   @override
@@ -45,11 +59,7 @@ class _MultipageContainerState extends State<MultipageContainer> {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          _isEnglish = !_isEnglish;
-                        });
-                      },
+                      onPressed: _onTranslatePressed,
                       style: ElevatedButton.styleFrom(
                         padding:
                             EdgeInsets.symmetric(horizontal: 30, vertical: 20),

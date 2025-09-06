@@ -1,5 +1,8 @@
-import 'package:flutter/material.dart';
 import 'dart:math';
+import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
+import 'package:confetti/confetti.dart';
+import '../analytics_engine.dart'; // Import analytics engine
 
 void main() => runApp(MaterialApp(home: HomePage()));
 
@@ -7,14 +10,14 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Home')),
+      appBar: AppBar(title: const Text('Home')),
       body: Center(
         child: ElevatedButton(
-          child: Text('Go to Game'),
+          child: const Text('Go to Game'),
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (_) => PerfectSquareFinder()),
+              MaterialPageRoute(builder: (_) => const PerfectSquareFinder()),
             );
           },
         ),
@@ -24,193 +27,353 @@ class HomePage extends StatelessWidget {
 }
 
 class PerfectSquareFinder extends StatelessWidget {
+  const PerfectSquareFinder({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Perfect Square Finder'),
+        title: const Text('Perfect Square Finder'),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () => Navigator.pop(context),
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+            // Log game completion with final score
+           AnalyticsEngine.logGameCompleteInMiddle();
+          },
         ),
       ),
-      body: SquareFinderGame(),
+      body: const SquareFinderGame(),
     );
   }
 }
 
-
-/**void main() => runApp(PerfectSquareFinder());
-
-class PerfectSquareFinder extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(title: Text('Perfect Square Finder'),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context); // Navigate back to the previous page
-          },
-        ),
-        ),
-        body: SquareFinderGame(),
-      ),
-    );
-  }
-}**/
-
 class SquareFinderGame extends StatefulWidget {
+  const SquareFinderGame({super.key});
+
   @override
-  _SquareFinderGameState createState() => _SquareFinderGameState();
+  State<SquareFinderGame> createState() => _SquareFinderGameState();
 }
 
 class _SquareFinderGameState extends State<SquareFinderGame> {
-  List<int> numbers = []; // Initialize as an empty list
-  List<int> draggedNumbers = [];
-  int score = 0;
+  late FlutterTts _tts;
+  late ConfettiController _confetti;
+  final String gameType = 'perfect_square'; // Define game type
+
+  final List<int> _perfectSquares = [1, 4, 9, 16, 25];
+  final List<int> _numbers = [];
+  final List<int> _collected = [];
+
+  int _score = 0;
+  String _message = '';
+  Color _messageColor = Colors.black87;
+  int totalScore = 0; // Track total score for analytics
+
+  bool _isHoveringDrop = false;
 
   @override
   void initState() {
     super.initState();
 
-    // Add perfect squares to the list
-    List<int> perfectSquares = [1, 4, 9, 16, 25];
-    numbers.addAll(perfectSquares);
+    _tts = FlutterTts();
+    _tts.setLanguage('en-US');
+    _tts.setSpeechRate(0.5);
+    _tts.setPitch(1.0);
 
-    // Generate random numbers until the total count is 20
-    while (numbers.length < 20) {
-      int randomNum = Random().nextInt(25) + 1; // Random numbers from 1 to 25
-      if (!numbers.contains(randomNum)) {
-        numbers.add(randomNum);
-      }
-    }
-    numbers.shuffle(); // Shuffle the numbers for randomness
+    _confetti = ConfettiController(duration: const Duration(seconds: 1));
+
+    _initNumbers();
+    
+    // Log game start when game initializes
+    AnalyticsEngine.logGameStart(gameType);
   }
 
-  bool isPerfectSquare(int number) {
-    int sqrtValue = sqrt(number).toInt();
-    return sqrtValue * sqrtValue == number;
+  void _initNumbers() {
+    _numbers.clear();
+    _numbers.addAll(_perfectSquares);
+    final rnd = Random();
+    while (_numbers.length < 20) {
+      final n = rnd.nextInt(30) + 1;
+      if (!_numbers.contains(n)) _numbers.add(n);
+    }
+    _numbers.shuffle();
+  }
+
+  bool _isPerfectSquare(int n) {
+    final r = sqrt(n).toInt();
+    return r * r == n;
+  }
+
+  Future<void> _speak(String text) async {
+    await _tts.stop();
+    await _tts.speak(text);
+  }
+
+  void _handleAccept(int number) {
+    if (_isPerfectSquare(number)) {
+      setState(() {
+        _collected.add(number);
+        _numbers.remove(number);
+        _score++;
+        totalScore += 10; // Add to total score for analytics
+        _message = 'Correct! Well done';
+        _messageColor = Colors.green.shade700;
+      });
+      _speak('Correct! Well done');
+      _confetti.play();
+      
+      // Check if all perfect squares are collected
+      if (_collected.length == _perfectSquares.length) {
+        // Log game completion with final score
+        AnalyticsEngine.logGameComplete(gameType, totalScore);
+      }
+    } else {
+      setState(() {
+        _message = 'Oops! Try again';
+        _messageColor = Colors.red.shade700;
+      });
+      _speak('Oops! Try again');
+    }
+  }
+
+  void _resetGame() {
+    setState(() {
+      _collected.clear();
+      _score = 0;
+      totalScore = 0; // Reset total score
+      _message = '';
+      _initNumbers();
+    });
+    
+    // Log new game start
+    AnalyticsEngine.logGameStart(gameType);
+    _speak('Game reset');
+  }
+
+  void _nextRound() {
+    setState(() {
+      _message = '';
+      _initNumbers();
+    });
+    _speak('New round');
+  }
+
+  @override
+  void dispose() {
+    _confetti.dispose();
+    _tts.stop();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        // Background image
         Positioned.fill(
           child: Image.asset(
-            'assets/background1.jpg', // Add your background image here
+            'assets/background1.jpg',
             fit: BoxFit.cover,
           ),
         ),
-        Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                'Find and drop the perfect squares!',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black54),
-              ),
-            ),
-            SizedBox(height: 20),
-            Text(
-              'Score: $score',
-              style: TextStyle(fontSize: 20, color: Colors.black54),
-            ),
-            Expanded(
-              child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 5, // More boxes in a row for smaller size
-                  crossAxisSpacing: 8,
-                  mainAxisSpacing: 8,
+
+        SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  'Find and drop the perfect squares!',
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.w800,
+                    color: Colors.black87,
+                  ),
                 ),
-                itemCount: numbers.length,
-                itemBuilder: (context, index) {
-                  final number = numbers[index];
-                  return Draggable<int>(
-                    data: number,
-                    feedback: Material(
-                      child: Container(
-                        padding: EdgeInsets.all(4), // Reduced padding for smaller size
-                        constraints: BoxConstraints(
-                          maxHeight: 40.0, // Smaller height for draggable feedback
-                          maxWidth: 40.0,  // Smaller width
-                        ),
-                        decoration: BoxDecoration(
-                          color: Colors.blueAccent,
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Center(
-                          child: Text(
-                            '$number',
-                            style: TextStyle(color: Colors.black54, fontSize: 18),
-                          ),
-                        ),
-                      ),
-                    ),
-                    childWhenDragging: Container(
-                      color: Colors.grey,
-                      child: Center(
-                        child: Text('$number', style: TextStyle(fontSize: 20)),
-                      ),
-                    ),
-                    child: Container(
-                      padding: EdgeInsets.all(4), // Reduced padding
-                      constraints: BoxConstraints(
-                        maxHeight: 40.0, // Reduced height
-                        maxWidth: 40.0,  // Reduced width
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.white70.withOpacity(0.8),
-                        borderRadius: BorderRadius.circular(8), // Slightly reduced border radius
-                        boxShadow: [BoxShadow(color: Colors.black38, blurRadius: 3)], // Softer shadow
-                      ),
-                      child: Center(
-                        child: Text(
-                          '$number',
-                          style: TextStyle(fontSize: 18, color: Colors.black),
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-            DragTarget<int>(
-              onAccept: (int number) {
-                if (isPerfectSquare(number)) {
-                  setState(() {
-                    draggedNumbers.add(number);
-                    numbers.remove(number);
-                    score++;
-                  });
-                }
-              },
-              builder: (context, accepted, rejected) {
-                return Container(
-                  height: 130, // Reduced height for drop box
-                  width: double.infinity,
-                  margin: EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Colors.greenAccent.withOpacity(0.8),
-                    borderRadius: BorderRadius.circular(20), // Rounded corners
-                    border: Border.all(color: Colors.white, width: 2), // White border
-                    boxShadow: [BoxShadow(color: Colors.black45, blurRadius: 8)], // Elevated shadow
-                  ),
+                const SizedBox(height: 8),
+                Text(
+                  'Score: $_score',
+                  style: const TextStyle(fontSize: 18, color: Colors.black87),
+                ),
+                const SizedBox(height: 10),
+
+                Expanded(
                   child: Center(
-                    child: Text(
-                      'Drop perfect squares here',
-                      style: TextStyle(fontSize: 22, color: Colors.white),
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(maxWidth: 650),
+                      child: GridView.builder(
+                        padding: const EdgeInsets.all(10),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 5,
+                          crossAxisSpacing: 10,
+                          mainAxisSpacing: 10,
+                          childAspectRatio: 1,
+                        ),
+                        itemCount: _numbers.length,
+                        itemBuilder: (_, i) {
+                          final n = _numbers[i];
+                          return Draggable<int>(
+                            data: n,
+                            feedback: Material(
+                              elevation: 4,
+                              borderRadius: BorderRadius.circular(10),
+                              child: _NumberTile(n: n, elevated: true),
+                            ),
+                            childWhenDragging: Opacity(
+                              opacity: 0.2,
+                              child: _NumberTile(n: n),
+                            ),
+                            child: _NumberTile(n: n),
+                          );
+                        },
+                      ),
                     ),
                   ),
-                );
-              },
+                ),
+
+                AnimatedOpacity(
+                  opacity: _message.isEmpty ? 0 : 1,
+                  duration: const Duration(milliseconds: 200),
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: Text(
+                      _message,
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700,
+                        color: _messageColor,
+                      ),
+                    ),
+                  ),
+                ),
+
+                DragTarget<int>(
+                  onWillAccept: (data) {
+                    setState(() => _isHoveringDrop = true);
+                    return true;
+                  },
+                  onLeave: (data) {
+                    setState(() => _isHoveringDrop = false);
+                  },
+                  onAccept: (data) {
+                    setState(() => _isHoveringDrop = false);
+                    _handleAccept(data);
+                  },
+                  builder: (context, accepted, rejected) {
+                    return AnimatedContainer(
+                      duration: const Duration(milliseconds: 200),
+                      height: 120,
+                      width: double.infinity,
+                      margin: const EdgeInsets.only(top: 8, bottom: 4),
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      decoration: BoxDecoration(
+                        color: (_isHoveringDrop
+                                ? Colors.greenAccent
+                                : Colors.greenAccent.withOpacity(0.85))
+                            .withOpacity(0.9),
+                        borderRadius: BorderRadius.circular(18),
+                        border: Border.all(
+                          color: Colors.white,
+                          width: _isHoveringDrop ? 3 : 2,
+                        ),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Colors.black26,
+                            blurRadius: 8,
+                            offset: Offset(0, 3),
+                          )
+                        ],
+                      ),
+                      child: Center(
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: const [
+                            Icon(Icons.inbox_rounded,
+                                size: 28, color: Colors.white),
+                            SizedBox(width: 10),
+                            Text(
+                              'Drop perfect squares here',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    OutlinedButton.icon(
+                      onPressed: _resetGame,
+                      icon: const Icon(Icons.refresh),
+                      label: const Text('Reset'),
+                    ),
+                    const SizedBox(width: 12),
+                    ElevatedButton.icon(
+                      onPressed: _nextRound,
+                      icon: const Icon(Icons.play_arrow),
+                      label: const Text('Next Round'),
+                    ),
+                  ],
+                ),
+              ],
             ),
-          ],
+          ),
+        ),
+
+        Align(
+          alignment: Alignment.topCenter,
+          child: ConfettiWidget(
+            confettiController: _confetti,
+            blastDirectionality: BlastDirectionality.explosive,
+            shouldLoop: false,
+            emissionFrequency: 0.05,
+            numberOfParticles: 20,
+            gravity: 0.7,
+          ),
         ),
       ],
+    );
+  }
+}
+
+class _NumberTile extends StatelessWidget {
+  final int n;
+  final bool elevated;
+  const _NumberTile({required this.n, this.elevated = false});
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 120),
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.92),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: Colors.black12),
+        boxShadow: elevated
+            ? const [
+                BoxShadow(color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
+              ]
+            : const [BoxShadow(color: Colors.black12, blurRadius: 3)],
+      ),
+      child: Center(
+        child: Text(
+          '$n',
+          style: const TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w700,
+            color: Colors.black87,
+          ),
+        ),
+      ),
     );
   }
 }

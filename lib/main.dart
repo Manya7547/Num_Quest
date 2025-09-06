@@ -1,17 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+import 'analytics_engine.dart';
 import 'package:num_quest/FlashCards/practice_page.dart';
 import 'game_list_page.dart';
 import 'lessons_page.dart';
 
-void main() => runApp(MaterialApp(
-      home: MyApp(),
-    ));
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  // Initialize Firebase with your generated config
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  
+  // Initialize Analytics after Firebase is ready
+  await AnalyticsEngine.init();
+  
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: MyApp(),
+  ));
+}
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Numquest',
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Stack(
           children: <Widget>[
@@ -21,6 +38,24 @@ class MyApp extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
+
+            // Dark gradient overlay for readability
+            Positioned.fill(
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Colors.black.withOpacity(0.4),
+                      Colors.black.withOpacity(0.7),
+                    ],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  ),
+                ),
+              ),
+            ),
+
+            // Content
             Center(
               child: LayoutBuilder(
                 builder: (context, constraints) {
@@ -29,22 +64,36 @@ class MyApp extends StatelessWidget {
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      // Responsive title
-                      Text(
-                        'NUMQUEST',
-                        style: TextStyle(
-                          fontSize: isSmallScreen ? 50 : 100,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'RaleWay',
-                          color: Colors.orange,
+                      // Fancy Title
+                      ShaderMask(
+                        shaderCallback: (bounds) => LinearGradient(
+                          colors: [Colors.orange, Colors.yellowAccent],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ).createShader(bounds),
+                        child: Text(
+                          'NUMQUEST',
+                          style: TextStyle(
+                            fontSize: isSmallScreen ? 60 : 100,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Raleway',
+                            color: Colors.white,
+                            shadows: [
+                              Shadow(
+                                blurRadius: 8,
+                                color: Colors.black54,
+                                offset: Offset(3, 3),
+                              )
+                            ],
+                          ),
                         ),
                       ),
-                      SizedBox(height: isSmallScreen ? 10 : 20),
 
-                      // Responsive buttons layout
+                      SizedBox(height: isSmallScreen ? 30 : 50),
+
+                   
                       if (isSmallScreen)
                         Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
                           children: _buildButtons(context, isSmallScreen),
                         )
                       else
@@ -65,8 +114,9 @@ class MyApp extends StatelessWidget {
 
   List<Widget> _buildButtons(BuildContext context, bool isSmallScreen) {
     return [
-      RoundedButton(
+      GameButton(
         text: 'LESSONS',
+        color: Colors.blueAccent,
         onPressed: () {
           Navigator.push(
             context,
@@ -75,9 +125,10 @@ class MyApp extends StatelessWidget {
         },
         isSmallScreen: isSmallScreen,
       ),
-      SizedBox(width: isSmallScreen ? 20 : 40, height: isSmallScreen ? 20 : 0),
-      RoundedButton(
+      SizedBox(width: isSmallScreen ? 0 : 30, height: isSmallScreen ? 20 : 0),
+      GameButton(
         text: 'PRACTICE',
+        color: Colors.greenAccent.shade700,
         onPressed: () {
           Navigator.push(
             context,
@@ -86,9 +137,10 @@ class MyApp extends StatelessWidget {
         },
         isSmallScreen: isSmallScreen,
       ),
-      SizedBox(width: isSmallScreen ? 20 : 40, height: isSmallScreen ? 20 : 0),
-      RoundedButton(
+      SizedBox(width: isSmallScreen ? 0 : 30, height: isSmallScreen ? 20 : 0),
+      GameButton(
         text: 'PLAY',
+        color: Colors.deepOrangeAccent,
         onPressed: () {
           Navigator.push(
             context,
@@ -101,39 +153,47 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class RoundedButton extends StatelessWidget {
+class GameButton extends StatelessWidget {
   final String text;
-  final Function onPressed;
+  final VoidCallback onPressed;
   final bool isSmallScreen;
+  final Color color;
 
-  RoundedButton({
+  GameButton({
     required this.text,
     required this.onPressed,
     required this.isSmallScreen,
+    required this.color,
   });
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () => onPressed(),
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
-        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20.0),
-            side: BorderSide(color: Colors.white),
+    return AnimatedContainer(
+      duration: Duration(milliseconds: 200),
+      margin: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+      child: ElevatedButton(
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          elevation: 8,
+          shadowColor: Colors.black54,
+          backgroundColor: color,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(25.0),
+          ),
+          padding: EdgeInsets.symmetric(
+            vertical: isSmallScreen ? 14.0 : 22.0,
+            horizontal: isSmallScreen ? 28.0 : 40.0,
           ),
         ),
-        padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-          EdgeInsets.symmetric(
-            vertical: isSmallScreen ? 12.0 : 20.0,
-            horizontal: isSmallScreen ? 20.0 : 30.0,
+        child: Text(
+          text,
+          style: TextStyle(
+            fontSize: isSmallScreen ? 20 : 28,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+            letterSpacing: 1.5,
           ),
         ),
-      ),
-      child: Text(
-        text,
-        style: TextStyle(fontSize: isSmallScreen ? 18 : 24),
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flip_card/flip_card.dart';
 import "package:google_fonts/google_fonts.dart";
+import '../analytics_engine.dart'; 
 
 class PerfectNumberPracticePage extends StatefulWidget {
   const PerfectNumberPracticePage({super.key});
@@ -14,6 +15,8 @@ class PerfectNumberPracticePage extends StatefulWidget {
 class _PerfectNumberPracticePageState extends State<PerfectNumberPracticePage> {
   bool _isEnglish = true; // State to keep track of language
   List<Map<String, String>> _examples = [];
+  final String practiceType = 'perfect_numbers';
+
   final List<Map<String, String>> _allExamples = [
     {
       'Front_en': 'What is the smallest perfect number?',
@@ -99,6 +102,20 @@ class _PerfectNumberPracticePageState extends State<PerfectNumberPracticePage> {
     setState(() {
       _examples = (_allExamples.toList()..shuffle()).take(3).toList();
     });
+    // Log "More Examples" button click
+    AnalyticsEngine.logMoreExamplesClick(practiceType);
+    print('More Examples clicked in Even/Odd Practice');
+  }
+
+  void _onTranslatePressed() {
+    setState(() {
+      _isEnglish = !_isEnglish;
+    });
+    
+    // Log translate button click
+    String language = AnalyticsEngine.getLanguageString(_isEnglish);
+    AnalyticsEngine.logTranslateButtonClickPractice(language, practiceType);
+    print('Translate button clicked in Even/Odd Practice: $language');
   }
 
   String _numberToWords(String numberText) {
@@ -220,14 +237,10 @@ class _PerfectNumberPracticePageState extends State<PerfectNumberPracticePage> {
                   ),
                 ),
                 ElevatedButton.icon(
-                  onPressed: () {
-                    setState(() {
-                      _isEnglish = !_isEnglish;
-                    });
-                  },
+                  onPressed: _onTranslatePressed,
                   icon: Icon(Icons.translate),
                   label: Text(
-                      _isEnglish ? 'Switch to Spanish' : 'Cambiar a Inglés'),
+                      _isEnglish ?  'Tap to Translate' : 'Toca para Traducir'),
                 ),
               ],
             ),

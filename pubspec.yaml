@@ -30,6 +30,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  firebase_core: ^3.8.0
+  firebase_auth: ^5.3.3
+  firebase_database: ^11.1.6
   google_fonts: ^5.0.0
   flip_card: ^0.7.0
   flutter_tts: ^3.8.3
@@ -37,6 +40,7 @@ dependencies:
   tflite_flutter_helper: ^0.3.1
   confetti: ^0.7.0
   audioplayers: ^5.2.1
+  firebase_analytics: ^11.3.0 
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -97,12 +101,20 @@ flutter:
     - assets/composite2.png
     - assets/composite3.png
     - assets/triangular1.png
+    - assets/triangular2.png
     - assets/factors1.png
     - assets/factors3.png
     - assets/fibonacci1.png
     - assets/fibonacci2.png
     - assets/fibonacci3.png
     - assets/sounds/celebration.mp3
+    - assets/composite_lesson.json
+    - assets/triangular_lesson.json
+    - assets/perfectnum_lesson.json 
+    - assets/squarenum_lesson.json
+    - assets/fibonacci_lesson.json 
+    - assets/factors_lesson.json
+    - assets/cubenum_lesson.json  
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

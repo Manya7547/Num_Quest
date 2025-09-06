@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flip_card/flip_card.dart';
 import "package:google_fonts/google_fonts.dart";
+import '../analytics_engine.dart';
 
 class CubesExamplePage extends StatefulWidget {
   const CubesExamplePage({super.key});
@@ -12,6 +13,7 @@ class CubesExamplePage extends StatefulWidget {
 class _CubesExamplePageState extends State<CubesExamplePage> {
   bool _isEnglish = true;
   List<Map<String, String>> _examples = [];
+  final String practiceType = 'cube_numbers';
 
   final List<Map<String, String>> _allExamples = [
     {
@@ -56,6 +58,27 @@ class _CubesExamplePageState extends State<CubesExamplePage> {
     setState(() {
       _examples = (_allExamples.toList()..shuffle()).take(3).toList();
     });
+
+    // Log "More Examples" button click
+    AnalyticsEngine.logMoreExamplesClick(practiceType);
+    print('More Examples clicked in cube Practice');
+  }
+
+  void _onCardFlip() {
+    // Log card flip interaction
+    AnalyticsEngine.logCardFlip(practiceType);
+    print('Card flipped in cube Practice');
+  }
+
+  void _onTranslatePressed() {
+    setState(() {
+      _isEnglish = !_isEnglish;
+    });
+    
+    // Log translate button click
+    String language = AnalyticsEngine.getLanguageString(_isEnglish);
+    AnalyticsEngine.logTranslateButtonClickPractice(language, practiceType);
+    print('Translate button clicked in cube Practice: $language');
   }
 
   String _numberToWords(String number) {
@@ -162,11 +185,7 @@ class _CubesExamplePageState extends State<CubesExamplePage> {
                         ),
                       ),
                       ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            _isEnglish = !_isEnglish;
-                          });
-                        },
+                        onPressed: _onTranslatePressed,
                         style: ElevatedButton.styleFrom(
                           padding:
                               EdgeInsets.symmetric(horizontal: 30, vertical: 10),
@@ -198,6 +217,7 @@ class _CubesExamplePageState extends State<CubesExamplePage> {
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: FlipCard(
         direction: FlipDirection.HORIZONTAL,
+        onFlip: _onCardFlip,
         front: Container(
           height: 150,
           width: MediaQuery.of(context).size.width * 0.8,
