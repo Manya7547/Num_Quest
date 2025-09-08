@@ -93,10 +93,21 @@ class _WordProblemsGameState extends State<WordProblemsGame> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:
-            Text('Word Problems Game', style: TextStyle(color: Colors.white)),
-        backgroundColor: Colors.blue,
+        title: Text('Word Problems Game', style: TextStyle(fontSize: 20)),backgroundColor: Colors.blue,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+            // Log game completion with final score
+            AnalyticsEngine.logGameCompleteInMiddle();
+          },
+        ),
       ),
+     // appBar: AppBar(
+        //title:
+          //  Text('Word Problems Game', style: TextStyle(color: Colors.white)),
+        //backgroundColor: Colors.blue,
+      //),
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -170,7 +181,7 @@ class _WordProblemsGameState extends State<WordProblemsGame> {
                                   currentQuestion['correctAnswerIndex']
                               ? 'Correct! Explanation: ${currentQuestion['explanation']}'
                               : 'Incorrect. Try again!',
-                          style: TextStyle(fontSize: 18, color: Colors.green),
+                          style: TextStyle(fontSize: 18, color:  Colors.green),
                           textAlign: TextAlign.center,
                         ),
                       ],

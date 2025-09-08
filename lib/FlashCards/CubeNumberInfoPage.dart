@@ -111,6 +111,14 @@ class _CubesExamplePageState extends State<CubesExamplePage> {
         title: Text(_isEnglish
             ? 'Cube Number Practice'
             : 'Práctica de Números Cúbicos'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+            // Log game completion with final score
+            AnalyticsEngine.logGameCompleteInMiddle();
+          },
+        ),
       ),
       body: Container(
         width: double.infinity,

@@ -33,13 +33,13 @@ class PerfectSquareFinder extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Perfect Square Finder'),
+        title: Text('Drag and Drop Perfect Squares', style: TextStyle(fontSize: 20)),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
             // Log game completion with final score
-           AnalyticsEngine.logGameCompleteInMiddle();
+            AnalyticsEngine.logGameCompleteInMiddle();
           },
         ),
       ),

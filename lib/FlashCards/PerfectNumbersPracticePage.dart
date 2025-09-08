@@ -179,6 +179,14 @@ class _PerfectNumberPracticePageState extends State<PerfectNumberPracticePage> {
         title: Text(_isEnglish
             ? 'Perfect Number Practice'
             : 'Práctica de Números perfecto'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+            // Log game completion with final score
+            AnalyticsEngine.logGameCompleteInMiddle();
+          },
+        ),
       ),
       body: Container(
         width: double.infinity,

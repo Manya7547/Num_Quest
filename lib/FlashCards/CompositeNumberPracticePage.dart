@@ -216,6 +216,14 @@ class _CompositeNumberPracticePageState
         title: Text(_isEnglish
             ? 'Composite Number Practice'
             : 'PrÃ¡ctica de NÃºmeros compuesto'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+            // Log game completion with final score
+            AnalyticsEngine.logGameCompleteInMiddle();
+          },
+        ),
       ),
       body: Container(
         width: double.infinity,

@@ -79,7 +79,7 @@ class _WordProblemPracticeState extends State<WordProblemPractice> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_isEnglish ? 'Word Problem Practice' : 'Práctica de Problemas de Palabras'),
+        title: Text(_isEnglish ? 'Word Problem Practice ' : 'Práctica de Problemas de Palabras'),
         actions: [
           // Add translate button to app bar
           IconButton(

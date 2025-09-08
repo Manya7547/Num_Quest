@@ -48,7 +48,7 @@ class _SquareNumberInfoPageState extends State<SquareNumberInfoPage>{
     Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => SquaresExamplePage()),
+          builder: (context) => PerfectSquareFinder()),
     );
   }
 

@@ -121,7 +121,7 @@ class PracticePage extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => SquaresExamplePage()),
+                              builder: (context) => PerfectSquareFinder()),
                         );
                       },
                     ),
@@ -155,7 +155,7 @@ class PracticePage extends StatelessWidget {
                       title: 'MODULO\nNUMBERS',
                       onPressed: () {
                         // Log content selection before navigation
-                        AnalyticsEngine.logContentSelection('practice', 'MODULO NUMBERS');
+                       // AnalyticsEngine.logContentSelection('practice', 'MODULO NUMBERS');
                         
                         // Future Implementation
                       },

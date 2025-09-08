@@ -157,6 +157,14 @@ class _FactorsPracticePageState extends State<FactorsPracticePage> {
         title:
             Text(_isEnglish ? 'Factors Practice' : 'Práctica de Factores'),
         backgroundColor: Colors.orange,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+            // Log game completion with final score
+            AnalyticsEngine.logGameCompleteInMiddle();
+          },
+        ),
       ),
       body: Container(
         width: double.infinity,

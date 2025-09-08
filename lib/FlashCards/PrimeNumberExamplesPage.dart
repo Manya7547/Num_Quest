@@ -167,6 +167,14 @@ class _PrimeNumberPracticePageState extends State<PrimeNumberPracticePage> {
         title: Text(_isEnglish
             ? 'Prime Number Practice'
             : 'Práctica de Números Primos'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+            // Log game completion with final score
+            AnalyticsEngine.logGameCompleteInMiddle();
+          },
+        ),
       ),
       body: Container(
         width: double.infinity,
