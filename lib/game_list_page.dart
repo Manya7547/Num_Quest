@@ -80,7 +80,7 @@ class GameListPage extends StatelessWidget {
                         
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => SquareFinderGame()),
+                          MaterialPageRoute(builder: (context) => PerfectSquareFinder()),
                         );
                       },
                     ),

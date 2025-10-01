@@ -4,9 +4,9 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'package:confetti/confetti.dart';
 import '../analytics_engine.dart'; // Import analytics engine
 
-void main() => runApp(MaterialApp(home: HomePage()));
+void main() => runApp(MaterialApp(home: PerfectSquareFinder()));
 
-class HomePage extends StatelessWidget {
+/**class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +24,7 @@ class HomePage extends StatelessWidget {
       ),
     );
   }
-}
+}*/
 
 class PerfectSquareFinder extends StatelessWidget {
   const PerfectSquareFinder({super.key});
@@ -126,6 +126,11 @@ class _SquareFinderGameState extends State<SquareFinderGame> {
       if (_collected.length == _perfectSquares.length) {
         // Log game completion with final score
         AnalyticsEngine.logGameComplete(gameType, totalScore);
+        setState(() {
+        _message = 'You have completed all questions! Final score: $totalScore';
+       // _confettiController.play();
+      });
+      _showGameOverDialog();
       }
     } else {
       setState(() {
@@ -136,6 +141,27 @@ class _SquareFinderGameState extends State<SquareFinderGame> {
     }
   }
 
+void _showGameOverDialog() {
+    Future.delayed(Duration(seconds: 3), () {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Game Complete!'),
+            content: Text('Congratulations!\nFinal Score: $totalScore points'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text('Play Again'),
+              ),
+            ],
+          );
+        },
+      );
+    });
+  }
   void _resetGame() {
     setState(() {
       _collected.clear();
