@@ -3,46 +3,132 @@
     {
       "english": {
         "text": "Even numbers can be small or they can be very big. If a number ends in a 0 (zero), 2 (two), 4 (four), 6 (six), or 8 (eight), it is an even number.",
-        "description": "Imagine you have some candies, and you want to share them equally between you and your friend. If you can give each of you exactly the same amount of candies without any extras, then the number of candies you have is an even number! Even Numbers can be halved with no remainders left over."
+        "description": "Imagine you have some candies, and you want to share them equally between you and your friend. If you can give each of you exactly the same amount of candies without any extras, then the number of candies you have is an even number! Even Numbers can be halved with no remainders left over.",
+        "title": "Spot Even Numbers Fast",
+        "keyIdeas": [
+          "Even numbers always end in 0, 2, 4, 6, or 8.",
+          "They can be split into two equal groups with none left over.",
+          "Think of evens as \"pair-friendly\" numbers."
+        ],
+        "imageCaption": "Candy pieces split into happy pairs.",
+        "callout": "Even numbers make perfect pairs!",
+        "extraDetail": "Even numbers are multiples of two, so you can always divide them evenly.",
+        "pairSteps": [
+          "Group candies two by two to check if everyone has a buddy.",
+          "Slide the tray and see pairs forming side by side.",
+          "If no sweet is left solo, the number you counted is even."
+        ]
       },
       "spanish": {
         "text": "Los números pares pueden ser pequeños o muy grandes. Si un número termina en 0, 2, 4, 6 u 8, es un número par.",
-        "description": "Imagina que tienes algunos dulces y quieres compartirlos en partes iguales entre tú y tu amigo. Si pueden darles a cada uno exactamente la misma cantidad de dulces sin extras, ¡entonces la cantidad de dulces que tienen es par! Los números pares se pueden dividir por la mitad sin dejar restos."
+        "description": "Imagina que tienes algunos dulces y quieres compartirlos en partes iguales entre tú y tu amigo. Si pueden darles a cada uno exactamente la misma cantidad de dulces sin extras, ¡entonces la cantidad de dulces que tienen es par! Los números pares se pueden dividir por la mitad sin dejar restos.",
+        "title": "Identifica números pares rápido",
+        "keyIdeas": [
+          "Los números pares terminan en 0, 2, 4, 6 o 8.",
+          "Se dividen en dos grupos iguales sin sobrar nada.",
+          "Piensa en ellos como números que aman ir en pareja."
+        ],
+        "imageCaption": "Los caramelos se reparten en parejas felices.",
+        "callout": "¡Los números pares hacen parejas perfectas!",
+        "extraDetail": "Los números pares son múltiplos de dos, por eso siempre se reparten de forma pareja.",
+        "pairSteps": [
+          "Agrupa los caramelos de dos en dos para comprobar que todos tengan pareja.",
+          "Desliza la bandeja y observa cómo las parejas se alinean.",
+          "Si ningún dulce queda solo, el número que contaste es par."
+        ]
       },
-      "image": "assets/candies.png"
+      "image": "assets/candies.png",
+      "highlightNumbers": ["2", "4", "6", "8", "10", "12"]
     },
     {
       "english": {
         "text": "Suppose you have 6 (six) candies. Let's make pairs, and we see that all the candies are in pairs, with no candies left over. That means 6 (six) is an even number! Even Numbers can be halved with no remainders left over.",
-        "description": ""
+        "description": "",
+        "title": "Pairing Makes It Even",
+        "keyIdeas": [
+          "Six treats form three perfect pairs.",
+          "Whenever nothing is left behind, the number is even.",
+          "Halves mirror each other exactly."
+        ],
+        "imageCaption": "Every treat finds a matching friend.",
+        "callout": "Pairing proves a number is even.",
+        "extraDetail": "Pairs keep numbers balanced and make counting quicker."
       },
       "spanish": {
         "text": "Supongamos que tienes 6 caramelos. Hagamos parejas, vemos que todos los caramelos están emparejados y no queda ningún caramelo sobrante. ¡Eso significa que 6 es un número par! Los números pares se pueden dividir por la mitad sin dejar restos.",
-        "description": ""
+        "description": "",
+        "title": "Emparejar los hace pares",
+        "keyIdeas": [
+          "Seis dulces forman tres parejas perfectas.",
+          "Cuando no sobra nada, el número es par.",
+          "Las mitades se reflejan exactamente."
+        ],
+        "imageCaption": "Cada dulce encuentra a su amigo idéntico.",
+        "callout": "Emparejar revela si es par.",
+        "extraDetail": "Las parejas mantienen los números equilibrados y aceleran el conteo."
       },
-      "image": "assets/candies2.png"
+      "image": "assets/candies2.png",
+      "highlightNumbers": ["6", "12", "18", "24"]
     },
     {
       "english": {
         "text": "This is a number square. Do you see the numbers that are highlighted in a special color? Those are our even numbers! They form a special pattern! Can you see the way they line up in neat rows and columns?",
-        "description": ""
+        "description": "",
+        "title": "Patterns on the Number Grid",
+        "keyIdeas": [
+          "Every second square on the grid lights up as even.",
+          "Even numbers stack into tidy columns and rows.",
+          "Pattern spotting helps predict the next even friend."
+        ],
+        "imageCaption": "Even numbers light up the grid with symmetry.",
+        "callout": "Patterns are shining clues.",
+        "extraDetail": "Spotting structure on number charts makes math feel like a puzzle."
       },
       "spanish": {
         "text": "Este es un cuadrado numérico. ¿Ves los números que están resaltados en un color especial? ¡Esos son nuestros números pares! ¡Forman un patrón especial! ¿Puedes ver cómo se alinean en filas y columnas ordenadas?",
-        "description": ""
+        "description": "",
+        "title": "Patrones en la cuadrícula numérica",
+        "keyIdeas": [
+          "Cada segundo cuadro de la cuadrícula es par.",
+          "Los pares se acomodan en columnas y filas ordenadas.",
+          "Detectar patrones ayuda a predecir el siguiente par."
+        ],
+        "imageCaption": "Los números pares iluminan la cuadrícula con simetría.",
+        "callout": "Los patrones son pistas brillantes.",
+        "extraDetail": "Ver la estructura en la tabla numérica vuelve las matemáticas un rompecabezas."
       },
-      "image": "assets/number_square.png"
+      "image": "assets/number_square.png",
+      "highlightNumbers": ["20", "22", "24", "26", "28"]
     },
     {
       "english": {
-        "text": "Now that you know what even numbers are let’s go ahead and solve some fun problems.",
-        "description": ""
+        "text": "Now that you know what even numbers are let's go ahead and solve some fun problems.",
+        "description": "",
+        "title": "You're Ready to Practice!",
+        "keyIdeas": [
+          "Check the last digit for a quick even test.",
+          "Skip-count by twos to stay on even numbers.",
+          "Draw circles in pairs to double-check your answer."
+        ],
+        "imageCaption": "Time to use what you know in games and quizzes.",
+        "callout": "Ready for a challenge?",
+        "extraDetail": "Mix practice with play to make even numbers unforgettable."
       },
       "spanish": {
         "text": "Ahora que sabes qué son los números pares, vamos a resolver algunos problemas divertidos.",
-        "description": ""
+        "description": "",
+        "title": "¡Listo para practicar!",
+        "keyIdeas": [
+          "Revisa el último dígito para saber si es par.",
+          "Cuenta de dos en dos para permanecer en números pares.",
+          "Dibuja círculos en pareja para confirmar tu respuesta."
+        ],
+        "imageCaption": "Es momento de usar lo aprendido en juegos y cuestionarios.",
+        "callout": "¿Listo para un reto?",
+        "extraDetail": "Combina práctica y juego para que los números pares sean inolvidables."
       },
-      "image": "assets/practice.png"
+      "image": "assets/practice.png",
+      "highlightNumbers": ["32", "34", "36", "38"]
     }
   ]
 }
