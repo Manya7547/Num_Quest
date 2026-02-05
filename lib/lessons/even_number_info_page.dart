@@ -454,15 +454,19 @@ class _EvenNumberInfoPageState extends State<EvenNumberInfoPage> {
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: AspectRatio(
-              aspectRatio: 4 / 3,
+          Container(
+            constraints: const BoxConstraints(maxHeight: 280),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: Colors.grey.shade100,
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
               child: Image.asset(
                 imagePath,
-                fit: BoxFit.cover,
+                fit: BoxFit.contain,
               ),
             ),
           ),

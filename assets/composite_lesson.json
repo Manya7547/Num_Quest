@@ -1,53 +1,126 @@
 {
-    "pages":[
-        {
-            "english":{
-                "text": "Composite numbers have more than 2 factors. 16 (sixteen) is an example of a composite number. The factors of 16 are 1(one), 2(two), 4(four), 8(eight) and 16(sixteen). All of these numbers divide into 16(sixteen) evenly. Let's use pictures to visualize composite numbers.",
-                "description":"A farmer is inventing a new egg carton where he will store the eggs his hens lay. He wants each carton to hold 16 (sixteen) eggs.He could have 1 (one) row of 16 (sixteen) eggs. He could also have 2 (two) rows with 8 (eight) eggs in each row."
-
-            },
-            "spanish":{
-                "text":"Los números compuestos tienen más de 2 factores. 16 es un ejemplo de un número compuesto. Los factores de 16 son 1, 2, 4, 8 y 16. Todos estos números se dividen en 16 de manera uniforme. Usemos imágenes para visualizar los números compuestos.",
-                "description":"Un granjero está inventando un nuevo cartón de huevos donde almacenará los huevos que ponen sus gallinas. Quiere que cada cartón contenga 16 huevos. Podría tener 1 fila de 16 huevos. También podría tener 2 filas con 8 huevos en cada fila."
-            },
-            "image": "assets/composite1.png"
-        },
-        {
-            "english":{
-                "text": "4 (four) rows with 4 (four) eggs in each row. An array of 16 (sixteen) eggs arranged in 4 (four) rows of 4 (four) eggs each. Composite numbers have more than one way that they can be divided into equal groups.",
-                "description":""
-
-            },
-            "spanish":{
-                "text":"4 filas con 4 huevos en cada fila. Una matriz de 16 huevos dispuestos en 4 filas de 4 huevos cada una. Los números compuestos tienen más de una forma en que pueden dividirse en grupos iguales.",
-                "description":""
-            },
-            "image": "assets/composite2.png"
-        },
-        {
-            "english":{
-                "text": "The chart below shows the composite numbers up to 100 (one hundred), represented in coloured boxes.",
-                "description":""
-
-            },
-            "spanish":{
-                "text":"El cuadro de abajo muestra los números compuestos hasta 100, representados en cuadros de colores.",
-                "description":""
-            },
-            "image": "assets/composite3.png"
-        },
-        {
-           "english":{
-                "text": "Now that you know what composite numbers are let's go ahead and solve some fun problems.",
-                "description":""
-
-            },
-            "spanish":{
-                "text":"Ahora que sabes qué son los números compuestos, vamos a resolver algunos problemas divertidos.",
-                "description":""
-            },
-             "image": "assets/practice.png"  
-        }
-
-    ]
+  "pages": [
+    {
+      "english": {
+        "text": "Composite numbers have more than 2 factors. 16 is an example of a composite number. The factors of 16 are 1, 2, 4, 8, and 16.",
+        "description": "A farmer is inventing a new egg carton where he will store the eggs his hens lay. He wants each carton to hold 16 eggs. He could have 1 row of 16 eggs, or 2 rows with 8 eggs in each row!",
+        "title": "What are Composite Numbers?",
+        "keyIdeas": [
+          "Composite numbers have MORE than 2 factors.",
+          "They can be divided into equal groups in many ways.",
+          "16 has factors: 1, 2, 4, 8, and 16."
+        ],
+        "imageCaption": "The farmer arranges eggs in different group sizes!",
+        "callout": "Composite numbers love to share in many ways!",
+        "extraDetail": "Think of composite numbers as flexible - they can be split into different equal groups.",
+        "pairSteps": []
+      },
+      "spanish": {
+        "text": "Los números compuestos tienen más de 2 factores. 16 es un ejemplo de un número compuesto. Los factores de 16 son 1, 2, 4, 8 y 16.",
+        "description": "Un granjero está inventando un nuevo cartón de huevos donde almacenará los huevos que ponen sus gallinas. Quiere que cada cartón contenga 16 huevos. ¡Podría tener 1 fila de 16 huevos o 2 filas con 8 huevos en cada fila!",
+        "title": "¿Qué son los Números Compuestos?",
+        "keyIdeas": [
+          "Los números compuestos tienen MÁS de 2 factores.",
+          "Se pueden dividir en grupos iguales de muchas formas.",
+          "16 tiene factores: 1, 2, 4, 8 y 16."
+        ],
+        "imageCaption": "¡El granjero organiza los huevos en diferentes tamaños de grupos!",
+        "callout": "¡A los números compuestos les encanta compartir de muchas maneras!",
+        "extraDetail": "Piensa en los números compuestos como flexibles - se pueden dividir en diferentes grupos iguales.",
+        "pairSteps": []
+      },
+      "image": "assets/composite1.png",
+      "highlightNumbers": ["4", "6", "8", "9", "10", "12"]
+    },
+    {
+      "english": {
+        "text": "4 rows with 4 eggs in each row. An array of 16 eggs arranged in 4 rows of 4 eggs each. Composite numbers have more than one way to be divided into equal groups.",
+        "description": "",
+        "title": "Multiple Ways to Arrange",
+        "keyIdeas": [
+          "16 eggs can make a 4 × 4 square!",
+          "Same number, different arrangements.",
+          "That's the magic of composite numbers!"
+        ],
+        "imageCaption": "A perfect 4 × 4 square of eggs.",
+        "callout": "One number, many arrangements!",
+        "extraDetail": "Composite numbers are great for making rectangles and squares with equal parts."
+      },
+      "spanish": {
+        "text": "4 filas con 4 huevos en cada fila. Una matriz de 16 huevos dispuestos en 4 filas de 4 huevos cada una. Los números compuestos tienen más de una forma de dividirse en grupos iguales.",
+        "description": "",
+        "title": "Múltiples Formas de Organizar",
+        "keyIdeas": [
+          "¡16 huevos pueden formar un cuadrado de 4 × 4!",
+          "Mismo número, diferentes arreglos.",
+          "¡Esa es la magia de los números compuestos!"
+        ],
+        "imageCaption": "Un cuadrado perfecto de 4 × 4 huevos.",
+        "callout": "¡Un número, muchos arreglos!",
+        "extraDetail": "Los números compuestos son geniales para hacer rectángulos y cuadrados con partes iguales."
+      },
+      "image": "assets/composite2.png",
+      "highlightNumbers": ["14", "15", "16", "18", "20"]
+    },
+    {
+      "english": {
+        "text": "The chart below shows the composite numbers up to 100, represented in colored boxes.",
+        "description": "",
+        "title": "Composite Number Chart",
+        "keyIdeas": [
+          "Most numbers on the chart are composite!",
+          "Composite numbers fill in the spaces between primes.",
+          "The larger the number, the more likely it's composite."
+        ],
+        "imageCaption": "Composite numbers color the chart beautifully.",
+        "callout": "Composite numbers are everywhere!",
+        "extraDetail": "Can you count how many composite numbers are between 1 and 100?"
+      },
+      "spanish": {
+        "text": "El cuadro de abajo muestra los números compuestos hasta 100, representados en cuadros de colores.",
+        "description": "",
+        "title": "Tabla de Números Compuestos",
+        "keyIdeas": [
+          "¡La mayoría de los números en la tabla son compuestos!",
+          "Los números compuestos llenan los espacios entre los primos.",
+          "Cuanto más grande es el número, más probable es que sea compuesto."
+        ],
+        "imageCaption": "Los números compuestos colorean la tabla hermosamente.",
+        "callout": "¡Los números compuestos están en todas partes!",
+        "extraDetail": "¿Puedes contar cuántos números compuestos hay entre 1 y 100?"
+      },
+      "image": "assets/composite3.png",
+      "highlightNumbers": ["21", "22", "24", "25", "26"]
+    },
+    {
+      "english": {
+        "text": "Now that you know what composite numbers are, let's go ahead and solve some fun problems!",
+        "description": "",
+        "title": "Time to Practice!",
+        "keyIdeas": [
+          "Composite numbers have more than 2 factors.",
+          "They can be arranged in multiple ways.",
+          "Now show off your skills!"
+        ],
+        "imageCaption": "Ready to find composite numbers?",
+        "callout": "Let's test your composite number skills!",
+        "extraDetail": "Remember: if a number can be divided evenly by more than just 1 and itself, it's composite!"
+      },
+      "spanish": {
+        "text": "Ahora que sabes qué son los números compuestos, ¡vamos a resolver algunos problemas divertidos!",
+        "description": "",
+        "title": "¡Hora de Practicar!",
+        "keyIdeas": [
+          "Los números compuestos tienen más de 2 factores.",
+          "Se pueden organizar de múltiples maneras.",
+          "¡Ahora muestra tus habilidades!"
+        ],
+        "imageCaption": "¿Listo para encontrar números compuestos?",
+        "callout": "¡Pon a prueba tus habilidades con números compuestos!",
+        "extraDetail": "Recuerda: si un número se puede dividir uniformemente por más que solo 1 y sí mismo, ¡es compuesto!"
+      },
+      "image": "assets/practice.png",
+      "highlightNumbers": ["27", "28", "30", "32", "33"]
+    }
+  ]
 }

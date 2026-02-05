@@ -2,36 +2,95 @@
   "pages": [
     {
       "english": {
-        "text": "A perfect number is a positive integer equal to the total of its positive divisors, except the number itself in number theory. For example, 6 is a perfect number since 1 + 2 + 3 equals 6.",
-        "description": "Some of the first perfect numbers are 6, 28, 496, and 8128. Perfect numbers are also known as “Complete Numbers” and “Proper Numbers“."
+        "text": "A perfect number is a positive integer equal to the sum of its divisors, except the number itself. For example, 6 is a perfect number since 1 + 2 + 3 equals 6!",
+        "description": "Some of the first perfect numbers are 6, 28, 496, and 8128. Perfect numbers are also known as 'Complete Numbers'.",
+        "title": "What are Perfect Numbers?",
+        "keyIdeas": [
+          "A perfect number equals the sum of its smaller divisors.",
+          "6 is perfect because 1 + 2 + 3 = 6.",
+          "Perfect numbers are rare and special!"
+        ],
+        "imageCaption": "The number 6 is perfectly balanced!",
+        "callout": "Perfect numbers are math magic - they equal their parts!",
+        "extraDetail": "Finding perfect numbers is like finding hidden treasure in math!",
+        "pairSteps": []
       },
       "spanish": {
-        "text": "Un número perfecto es un número entero positivo que es igual a la suma de sus divisores positivos, excepto el propio número, en la teoría de números. Por ejemplo, 6 es un número perfecto ya que 1 + 2 + 3 es igual a 6.",
-        "description": "Algunos de los primeros números perfectos son 6, 28, 496 y 8128. Los números perfectos también se conocen como 'Números Completos' y 'Números Propios'."
+        "text": "Un número perfecto es un número entero positivo igual a la suma de sus divisores, excepto el propio número. ¡Por ejemplo, 6 es un número perfecto ya que 1 + 2 + 3 es igual a 6!",
+        "description": "Algunos de los primeros números perfectos son 6, 28, 496 y 8128. Los números perfectos también se conocen como 'Números Completos'.",
+        "title": "¿Qué son los Números Perfectos?",
+        "keyIdeas": [
+          "Un número perfecto es igual a la suma de sus divisores menores.",
+          "6 es perfecto porque 1 + 2 + 3 = 6.",
+          "¡Los números perfectos son raros y especiales!"
+        ],
+        "imageCaption": "¡El número 6 está perfectamente equilibrado!",
+        "callout": "¡Los números perfectos son magia matemática - son iguales a sus partes!",
+        "extraDetail": "¡Encontrar números perfectos es como encontrar tesoros escondidos en matemáticas!",
+        "pairSteps": []
       },
-      "image": "assets/perfect1.png"
+      "image": "assets/perfect1.png",
+      "highlightNumbers": ["6", "28", "496"]
     },
     {
       "english": {
-        "text": "The smallest perfect number example is the number six. However, there are also several other small perfect numbers whose divisors can be figured out and summed together manually. Below is a short, perfect number list that includes a few smaller perfect numbers. Please keep in mind that this list is not exhaustive.",
-        "description": ""
+        "text": "The smallest perfect number is 6. There are also several other perfect numbers whose divisors can be figured out and summed together. Below is a list of some perfect numbers.",
+        "description": "",
+        "title": "Finding Perfect Numbers",
+        "keyIdeas": [
+          "6 = 1 + 2 + 3 (the smallest perfect number!)",
+          "28 = 1 + 2 + 4 + 7 + 14",
+          "Perfect numbers get very big very quickly!"
+        ],
+        "imageCaption": "Each perfect number has a special balance.",
+        "callout": "Add up the divisors and watch the magic happen!",
+        "extraDetail": "After 6 and 28, the next perfect number is 496!"
       },
       "spanish": {
-        "text": "El ejemplo más pequeño de número perfecto es el número seis. Sin embargo, también hay varios otros números perfectos pequeños cuyos divisores pueden ser calculados y sumados manualmente. A continuación, se presenta una lista corta de números perfectos que incluye algunos de los números perfectos más pequeños. Por favor, tenga en cuenta que esta lista no es exhaustiva.",
-        "description": ""
+        "text": "El número perfecto más pequeño es el 6. También hay varios otros números perfectos cuyos divisores pueden ser calculados y sumados. A continuación hay una lista de algunos números perfectos.",
+        "description": "",
+        "title": "Encontrando Números Perfectos",
+        "keyIdeas": [
+          "6 = 1 + 2 + 3 (¡el número perfecto más pequeño!)",
+          "28 = 1 + 2 + 4 + 7 + 14",
+          "¡Los números perfectos se vuelven muy grandes muy rápido!"
+        ],
+        "imageCaption": "Cada número perfecto tiene un equilibrio especial.",
+        "callout": "¡Suma los divisores y observa la magia!",
+        "extraDetail": "¡Después de 6 y 28, el siguiente número perfecto es 496!"
       },
-      "image": "assets/perfect2.png"
+      "image": "assets/perfect2.png",
+      "highlightNumbers": ["1", "2", "3", "4", "7", "14"]
     },
     {
       "english": {
-        "text": "Now that you know what even numbers are let’s go ahead and solve some fun problems.",
-        "description": ""
+        "text": "Now that you know what perfect numbers are, let's go ahead and solve some fun problems!",
+        "description": "",
+        "title": "Time to Practice!",
+        "keyIdeas": [
+          "Perfect numbers equal the sum of their divisors.",
+          "6 and 28 are the most common examples.",
+          "Now test your perfect number skills!"
+        ],
+        "imageCaption": "Ready to find perfect numbers?",
+        "callout": "Let's test your perfect number skills!",
+        "extraDetail": "Remember: add all divisors except the number itself!"
       },
       "spanish": {
-        "text": "Ahora que sabes qué son los números pares, vamos a resolver algunos problemas divertidos.",
-        "description": ""
+        "text": "Ahora que sabes qué son los números perfectos, ¡vamos a resolver algunos problemas divertidos!",
+        "description": "",
+        "title": "¡Hora de Practicar!",
+        "keyIdeas": [
+          "Los números perfectos son iguales a la suma de sus divisores.",
+          "6 y 28 son los ejemplos más comunes.",
+          "¡Ahora pon a prueba tus habilidades con números perfectos!"
+        ],
+        "imageCaption": "¿Listo para encontrar números perfectos?",
+        "callout": "¡Pon a prueba tus habilidades con números perfectos!",
+        "extraDetail": "Recuerda: ¡suma todos los divisores excepto el número mismo!"
       },
-      "image": "assets/practice.png"
+      "image": "assets/practice.png",
+      "highlightNumbers": ["6", "28", "496", "8128"]
     }
   ]
 }
