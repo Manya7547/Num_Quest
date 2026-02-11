@@ -102,7 +102,7 @@ class _DartGamePageState extends State<DartGamePage> {
       await flutterTts.speak(isEnglish ? "Correct!" : "¡Correcto!");
 
     } else {
-      await flutterTts.speak(isEnglish? "Try again!" : "Inténtalo de nuevo!");
+      await flutterTts.speak(isEnglish? "Incorrect" : "Inténtalo de nuevo!");
     }
   }
 
