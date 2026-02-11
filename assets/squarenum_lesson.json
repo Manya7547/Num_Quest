@@ -1,53 +1,126 @@
 {
-    "pages":[
-        {
-            "english":{
-                "text": "When a number or integer (not a fraction) is multiplied by itself, the resultant is called a 'Square Number' For example, 3 multiplied by 3 is equal to 3-squared or 3 x 3 = 3². The exponential form of multiplication of a number or integer by itself is called a square number. Also, if we multiply the number by itself again, we get the cube of the integer: a x a x a = a³.",
-                "description":"Square numbers are always positive. If a negative sign is multiplied by itself, it results in a positive sign (+). For example, (-4)² = 16. So, we can say here 16 is a positive square number, whose square root is an integer again, i.e. √16 = 4."
-
-            },
-            "spanish":{
-                "text":"Cuando un número o entero (no una fracción) se multiplica por sí mismo, el resultado se llama 'Número Cuadrado'. Por ejemplo, 3 multiplicado por 3 es igual a 3 al cuadrado o 3 x 3 = 3². La forma exponencial de multiplicar un número o entero por sí mismo se llama número cuadrado. Además, si multiplicamos el número por sí mismo nuevamente, obtenemos el cubo del entero: a x a x a = a³.",
-                "description":"Los números cuadrados siempre son positivos. Si un signo negativo se multiplica por sí mismo, resulta en un signo positivo (+). Por ejemplo, (-4)² = 16. Entonces, podemos decir que 16 es un número cuadrado positivo, cuya raíz cuadrada es un número entero, es decir, √16 = 4."
-            },
-            "image": "assets/square2.png"
-        },
-        {
-            "english":{
-                "text": "In geometry, a square shape has all its sides equal. Therefore the area of the square is equal to the square of its side.",
-                "description":""
-
-            },
-            "spanish":{
-                "text":"En geometría, una forma cuadrada tiene todos sus lados iguales. Por lo tanto, el área del cuadrado es igual al cuadrado de su lado.",
-                "description":""
-            },
-            "image": "assets/square1.png"
-        },
-        {
-            "english":{
-                "text": "The area of square is best example of square of a number.",
-                "description":""
-
-            },
-            "spanish":{
-                "text":"El área de un cuadrado es el mejor ejemplo del cuadrado de un número.",
-                "description":""
-            },
-            "image": "assets/square3.png"
-        },
-        {
-           "english":{
-                "text": "Now that you know what composite numbers are let's go ahead and solve some fun problems.",
-                "description":""
-
-            },
-            "spanish":{
-                "text":"Ahora que sabes qué son los números compuestos, vamos a resolver algunos problemas divertidos.",
-                "description":""
-            },
-             "image": "assets/practice.png"  
-        }
-
-    ]
+  "pages": [
+    {
+      "english": {
+        "text": "When a number is multiplied by itself, the result is called a 'Square Number'. For example, 3 × 3 = 9, so 9 is a square number!",
+        "description": "Square numbers are always positive. Even (-4) × (-4) = 16, which is positive! So 16 is a positive square number.",
+        "title": "What are Square Numbers?",
+        "keyIdeas": [
+          "A square number = a number × itself.",
+          "Examples: 1, 4, 9, 16, 25, 36, 49...",
+          "They're called 'square' because they form perfect squares!"
+        ],
+        "imageCaption": "Watch numbers multiply by themselves!",
+        "callout": "Square numbers are a number times itself!",
+        "extraDetail": "3 × 3 = 9, so we say '3 squared equals 9' or write it as 3² = 9.",
+        "pairSteps": []
+      },
+      "spanish": {
+        "text": "Cuando un número se multiplica por sí mismo, el resultado se llama 'Número Cuadrado'. ¡Por ejemplo, 3 × 3 = 9, así que 9 es un número cuadrado!",
+        "description": "Los números cuadrados siempre son positivos. ¡Incluso (-4) × (-4) = 16, que es positivo! Entonces 16 es un número cuadrado positivo.",
+        "title": "¿Qué son los Números Cuadrados?",
+        "keyIdeas": [
+          "Un número cuadrado = un número × sí mismo.",
+          "Ejemplos: 1, 4, 9, 16, 25, 36, 49...",
+          "¡Se llaman 'cuadrados' porque forman cuadrados perfectos!"
+        ],
+        "imageCaption": "¡Mira los números multiplicarse por sí mismos!",
+        "callout": "¡Los números cuadrados son un número por sí mismo!",
+        "extraDetail": "3 × 3 = 9, así que decimos '3 al cuadrado es igual a 9' o lo escribimos como 3² = 9.",
+        "pairSteps": []
+      },
+      "image": "assets/square2.png",
+      "highlightNumbers": ["1", "4", "9", "16", "25", "36"]
+    },
+    {
+      "english": {
+        "text": "In geometry, a square shape has all its sides equal. The area of a square is the square of its side length!",
+        "description": "",
+        "title": "Squares in Geometry",
+        "keyIdeas": [
+          "A square with side 3 has area 3 × 3 = 9.",
+          "A square with side 4 has area 4 × 4 = 16.",
+          "That's why we call them square numbers!"
+        ],
+        "imageCaption": "Square shapes and square numbers are connected!",
+        "callout": "The area of a square = side × side!",
+        "extraDetail": "You can arrange 9 dots into a 3×3 square grid. That's the square number 9!"
+      },
+      "spanish": {
+        "text": "En geometría, una forma cuadrada tiene todos sus lados iguales. ¡El área de un cuadrado es el cuadrado de la longitud de su lado!",
+        "description": "",
+        "title": "Cuadrados en Geometría",
+        "keyIdeas": [
+          "Un cuadrado con lado 3 tiene área 3 × 3 = 9.",
+          "Un cuadrado con lado 4 tiene área 4 × 4 = 16.",
+          "¡Por eso los llamamos números cuadrados!"
+        ],
+        "imageCaption": "¡Las formas cuadradas y los números cuadrados están conectados!",
+        "callout": "¡El área de un cuadrado = lado × lado!",
+        "extraDetail": "Puedes organizar 9 puntos en una cuadrícula de 3×3. ¡Ese es el número cuadrado 9!"
+      },
+      "image": "assets/square1.png",
+      "highlightNumbers": ["49", "64", "81", "100"]
+    },
+    {
+      "english": {
+        "text": "The area of a square is the best example of a square number!",
+        "description": "",
+        "title": "Square Number Patterns",
+        "keyIdeas": [
+          "1² = 1 (one dot)",
+          "2² = 4 (a 2×2 grid)",
+          "3² = 9 (a 3×3 grid)"
+        ],
+        "imageCaption": "Square numbers grow bigger and bigger!",
+        "callout": "Can you find the next square number?",
+        "extraDetail": "Hint: 10 × 10 = 100, so 100 is a square number!"
+      },
+      "spanish": {
+        "text": "¡El área de un cuadrado es el mejor ejemplo de un número cuadrado!",
+        "description": "",
+        "title": "Patrones de Números Cuadrados",
+        "keyIdeas": [
+          "1² = 1 (un punto)",
+          "2² = 4 (una cuadrícula de 2×2)",
+          "3² = 9 (una cuadrícula de 3×3)"
+        ],
+        "imageCaption": "¡Los números cuadrados crecen más y más!",
+        "callout": "¿Puedes encontrar el siguiente número cuadrado?",
+        "extraDetail": "Pista: 10 × 10 = 100, ¡así que 100 es un número cuadrado!"
+      },
+      "image": "assets/square3.png",
+      "highlightNumbers": ["121", "144", "169", "196"]
+    },
+    {
+      "english": {
+        "text": "Now that you know what square numbers are, let's go ahead and solve some fun problems!",
+        "description": "",
+        "title": "Time to Practice!",
+        "keyIdeas": [
+          "Square numbers = number × itself.",
+          "They form perfect square grids.",
+          "Now find square numbers yourself!"
+        ],
+        "imageCaption": "Ready to square some numbers?",
+        "callout": "Let's test your square number skills!",
+        "extraDetail": "Remember: 5² means 5 × 5 = 25!"
+      },
+      "spanish": {
+        "text": "Ahora que sabes qué son los números cuadrados, ¡vamos a resolver algunos problemas divertidos!",
+        "description": "",
+        "title": "¡Hora de Practicar!",
+        "keyIdeas": [
+          "Números cuadrados = número × sí mismo.",
+          "Forman cuadrículas cuadradas perfectas.",
+          "¡Ahora encuentra números cuadrados tú mismo!"
+        ],
+        "imageCaption": "¿Listo para elevar algunos números al cuadrado?",
+        "callout": "¡Pon a prueba tus habilidades con números cuadrados!",
+        "extraDetail": "Recuerda: 5² significa 5 × 5 = 25!"
+      },
+      "image": "assets/practice.png",
+      "highlightNumbers": ["225", "256", "289", "324"]
+    }
+  ]
 }

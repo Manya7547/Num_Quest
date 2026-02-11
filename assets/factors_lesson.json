@@ -1,52 +1,126 @@
 {
-    "pages":[
-        {
-            "english":{
-                "text": "A factor is a number that divides into another number exactly, i.e. with no remainder. A factor in maths is one of two or more numbers that divides into a number without a remainder. For example, 10 (ten) is a factor of 30 (thirty) since 30 divided by 10 is 3(three). However, 10 is not a factor of 27 (twenty seven) because 27 divided by 10 is 2 with a remainder of 7 (seven).",
-                "description":""
-
-            },
-            "spanish":{
-                "text":"Un factor es un número que se divide en otro número exactamente, es decir, sin dejar residuo. Un factor en matemáticas es uno de dos o más números que se dividen en un número sin dejar residuo. Por ejemplo, 10 es un factor de 30 ya que 30 dividido por 10 es 3. Sin embargo, 10 no es un factor de 27 porque 27 dividido por 10 es 2 con un residuo de 7.",
-                "description":""
-            },
-            "image": "assets/factors1.png"
-        },
-        {
-            "english":{
-                "text": "Types of Factors:\nPrime Factors - Most numbers (except square numbers) have an even number of factors. However, a prime number has only two factors – the prime number itself and the number 1 (one). This means it only has one factor pair.\nCommon Factors - When working out the factors of two numbers, there will often be some factors which appear in both lists. We call these common factors. Factors of 18 (eighteen) are 1 (one), 2 (two), 3 (three), 6 (six), 9 (nine) and 18 (eighteen). Factors of 24 (twenty-four) are 1 (one), 2 (two), 3 (three), 4 (four), 6 (six), 8 (eight), 12 (twelve) and 24 (twenty-four). The common factors of 18 (eighteen) and 24 (twenty-four) are 1 (one), 2 (two), 3 (three) and 6 (six).\nThe highest common factor is the common factor with the greatest value. Amongst the common factors of 18 (eighteen) and 24 (twenty-four), the highest number is 6 (six) so 6 (six) is the highest common factor of these two numbers.",
-                "description":""
-
-            },
-            "spanish":{
-                "text":"Tipos de Factores: Factores Primos - La mayoría de los números (excepto los números cuadrados) tienen un número par de factores. Sin embargo, un número primo solo tiene dos factores: el propio número primo y el número 1. Esto significa que solo tiene un par de factores.Un factor primo es simplemente un factor que también es un número primo. Es un número mayor que 1 que no puede ser dividido exactamente por ningún número excepto por sí mismo o por 1.Factores Comunes Al calcular los factores de dos números, a menudo habrá algunos factores que aparezcan en ambas listas. A estos los llamamos 'factores comunes'. Los factores de 18 son 1, 2, 3, 6, 9 y 18. Los factores de 24 son 1, 2, 3, 4, 6, 8, 12 y 24. Los factores comunes de 18 y 24 son 1, 2, 3 y 6. \nEl factor común más alto es el factor común con el mayor valor. Entre los factores comunes de 18 y 24, el número más alto es 6, por lo que 6 es el factor común más alto de estos dos números.",
-                "description":""
-            }
-        },
-        {
-            "english":{
-                "text": "Here is an example that shows how to find factors using multiplication",
-                "description":""
-
-            },
-            "spanish":{
-                "text":"Aquí hay un ejemplo que muestra cómo encontrar factores usando la multiplicación.",
-                "description":""
-            },
-            "image": "assets/factors3.png"
-        },
-        {
-           "english":{
-                "text": "Now that you know what composite numbers are let's go ahead and solve some fun problems.",
-                "description":""
-
-            },
-            "spanish":{
-                "text":"Ahora que sabes qué son los números compuestos, vamos a resolver algunos problemas divertidos.",
-                "description":""
-            },
-             "image": "assets/practice.png"  
-        }
-
-    ]
+  "pages": [
+    {
+      "english": {
+        "text": "A factor is a number that divides into another number exactly, with no remainder. For example, 10 is a factor of 30 since 30 ÷ 10 = 3 with nothing left over!",
+        "description": "",
+        "title": "What are Factors?",
+        "keyIdeas": [
+          "Factors divide evenly into a number.",
+          "10 is a factor of 30 (30 ÷ 10 = 3).",
+          "But 10 is NOT a factor of 27 (27 ÷ 10 = 2 remainder 7)."
+        ],
+        "imageCaption": "Factors split numbers into equal groups!",
+        "callout": "Factors divide numbers perfectly - no leftovers!",
+        "extraDetail": "Every number has at least two factors: 1 and itself!",
+        "pairSteps": []
+      },
+      "spanish": {
+        "text": "Un factor es un número que se divide en otro número exactamente, sin dejar residuo. ¡Por ejemplo, 10 es un factor de 30 ya que 30 ÷ 10 = 3 sin sobrar nada!",
+        "description": "",
+        "title": "¿Qué son los Factores?",
+        "keyIdeas": [
+          "Los factores dividen un número uniformemente.",
+          "10 es un factor de 30 (30 ÷ 10 = 3).",
+          "Pero 10 NO es factor de 27 (27 ÷ 10 = 2 con residuo 7)."
+        ],
+        "imageCaption": "¡Los factores dividen números en grupos iguales!",
+        "callout": "¡Los factores dividen números perfectamente - sin sobras!",
+        "extraDetail": "¡Todo número tiene al menos dos factores: 1 y él mismo!",
+        "pairSteps": []
+      },
+      "image": "assets/factors1.png",
+      "highlightNumbers": ["1", "2", "3", "5", "6", "10"]
+    },
+    {
+      "english": {
+        "text": "Prime Factors are factors that are also prime numbers. Common Factors appear in the factor lists of two or more numbers. The Highest Common Factor (HCF) is the biggest common factor.",
+        "description": "",
+        "title": "Types of Factors",
+        "keyIdeas": [
+          "Prime factors: factors that are prime (2, 3, 5, 7...).",
+          "Common factors of 18 and 24: 1, 2, 3, 6.",
+          "The HCF of 18 and 24 is 6 (the biggest common factor)."
+        ],
+        "imageCaption": "Find the factors both numbers share!",
+        "callout": "Common factors appear in both number's lists!",
+        "extraDetail": "Finding the HCF helps simplify fractions!"
+      },
+      "spanish": {
+        "text": "Los Factores Primos son factores que también son números primos. Los Factores Comunes aparecen en las listas de factores de dos o más números. El Máximo Común Divisor (MCD) es el factor común más grande.",
+        "description": "",
+        "title": "Tipos de Factores",
+        "keyIdeas": [
+          "Factores primos: factores que son primos (2, 3, 5, 7...).",
+          "Factores comunes de 18 y 24: 1, 2, 3, 6.",
+          "El MCD de 18 y 24 es 6 (el factor común más grande)."
+        ],
+        "imageCaption": "¡Encuentra los factores que ambos números comparten!",
+        "callout": "¡Los factores comunes aparecen en las listas de ambos números!",
+        "extraDetail": "¡Encontrar el MCD ayuda a simplificar fracciones!"
+      },
+      "image": "",
+      "highlightNumbers": ["18", "24", "6", "12"]
+    },
+    {
+      "english": {
+        "text": "Here is an example that shows how to find factors using multiplication. If 3 × 4 = 12, then both 3 and 4 are factors of 12!",
+        "description": "",
+        "title": "Finding Factors",
+        "keyIdeas": [
+          "Use multiplication to find factor pairs.",
+          "3 × 4 = 12, so 3 and 4 are factors of 12.",
+          "Factors of 12: 1, 2, 3, 4, 6, 12."
+        ],
+        "imageCaption": "Factor pairs multiply to make the number!",
+        "callout": "Multiply factors together to get the number!",
+        "extraDetail": "Factor pairs: 1×12, 2×6, 3×4 all equal 12!"
+      },
+      "spanish": {
+        "text": "Aquí hay un ejemplo que muestra cómo encontrar factores usando la multiplicación. ¡Si 3 × 4 = 12, entonces tanto 3 como 4 son factores de 12!",
+        "description": "",
+        "title": "Encontrando Factores",
+        "keyIdeas": [
+          "Usa la multiplicación para encontrar pares de factores.",
+          "3 × 4 = 12, así que 3 y 4 son factores de 12.",
+          "Factores de 12: 1, 2, 3, 4, 6, 12."
+        ],
+        "imageCaption": "¡Los pares de factores se multiplican para formar el número!",
+        "callout": "¡Multiplica factores juntos para obtener el número!",
+        "extraDetail": "Pares de factores: 1×12, 2×6, 3×4 ¡todos dan 12!"
+      },
+      "image": "assets/factors3.png",
+      "highlightNumbers": ["1", "2", "3", "4", "6", "12"]
+    },
+    {
+      "english": {
+        "text": "Now that you know what factors are, let's go ahead and solve some fun problems!",
+        "description": "",
+        "title": "Time to Practice!",
+        "keyIdeas": [
+          "Factors divide a number with no remainder.",
+          "Common factors appear in multiple numbers.",
+          "Now find factors yourself!"
+        ],
+        "imageCaption": "Ready to find some factors?",
+        "callout": "Let's test your factor-finding skills!",
+        "extraDetail": "Remember: factor pairs multiply to make the number!"
+      },
+      "spanish": {
+        "text": "Ahora que sabes qué son los factores, ¡vamos a resolver algunos problemas divertidos!",
+        "description": "",
+        "title": "¡Hora de Practicar!",
+        "keyIdeas": [
+          "Los factores dividen un número sin residuo.",
+          "Los factores comunes aparecen en múltiples números.",
+          "¡Ahora encuentra factores tú mismo!"
+        ],
+        "imageCaption": "¿Listo para encontrar algunos factores?",
+        "callout": "¡Pon a prueba tus habilidades para encontrar factores!",
+        "extraDetail": "Recuerda: ¡los pares de factores se multiplican para formar el número!"
+      },
+      "image": "assets/practice.png",
+      "highlightNumbers": ["15", "20", "30", "36"]
+    }
+  ]
 }

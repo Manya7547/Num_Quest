@@ -1,41 +1,94 @@
 {
-    "pages":[
-        {
-            "english":{
-                "text": "A cube number (or a perfect cube) is a number that is the result of multiplying an integer by itself twice. In other words, it is the product of an integer raised to the power of three.",
-                "description":"For example, the number 27 (twenty seven) is a cube number because it can be written as 3 × 3 × 3. ). Here, 3 is the integer that has been multiplied by itself twice to produce 27."
-
-            },
-            "spanish":{
-                "text":"Un número cúbico (o un cubo perfecto) es un número que resulta de multiplicar un número entero por sí mismo dos veces. En otras palabras, es el producto de un número entero elevado a la potencia de tres.",
-                "description":"Por ejemplo, el número 27 es un número cúbico porque se puede escribir como 3 × 3 × 3. Aquí, 3 es el número entero que se ha multiplicado por sí mismo dos veces para producir 27."
-            },
-            "image": "assets/cube1.png"
-        },
-        {
-            "english":{
-                "text": "To cube a number all you do is multiply it and by itself and then itself again. This works for all numbers. So for example 11 (eleven) cubed is 11³ or 11 x 11 x 11 which is 1331. Another example could be 256³ (two hundred fifty six cube) or 256 x 256 x 256 which is 16,777,216 As you can see when you cube a whole number, you’ll find the numbers get very big very quickly!",
-                "description":""
-
-            },
-            "spanish":{
-                "text":"Para elevar un número al cubo, todo lo que tienes que hacer es multiplicarlo por sí mismo y luego por sí mismo otra vez. Esto funciona para todos los números. Por ejemplo, 11 al cubo es 11³ o 11 x 11 x 11, lo cual es 1331. Otro ejemplo podría ser 256³ o 256 x 256 x 256, lo cual es 16,777,216. ¡Como puedes ver, cuando elevas un número entero al cubo, los números se vuelven muy grandes muy rápido!'",
-                "description":""
-            },
-            "image": "assets/cube2.png"
-        },
-        {
-           "english":{
-                "text": "Now that you know what composite numbers are let's go ahead and solve some fun problems.",
-                "description":""
-
-            },
-            "spanish":{
-                "text":"Ahora que sabes qué son los números compuestos, vamos a resolver algunos problemas divertidos.",
-                "description":""
-            },
-             "image": "assets/practice.png"  
-        }
-
-    ]
+  "pages": [
+    {
+      "english": {
+        "text": "A cube number (or a perfect cube) is a number that is the result of multiplying an integer by itself THREE times. In other words, it is the product of an integer raised to the power of three!",
+        "description": "For example, the number 27 is a cube number because it can be written as 3 × 3 × 3. Here, 3 is the integer that has been multiplied by itself twice to produce 27.",
+        "title": "What are Cube Numbers?",
+        "keyIdeas": [
+          "A cube number = a number × itself × itself again.",
+          "Examples: 1, 8, 27, 64, 125, 216...",
+          "They're called 'cube' because they form perfect cubes!"
+        ],
+        "imageCaption": "Watch numbers multiply three times!",
+        "callout": "Cube numbers are a number times itself times itself!",
+        "extraDetail": "3 × 3 × 3 = 27, so we say '3 cubed equals 27' or write it as 3³ = 27."
+      },
+      "spanish": {
+        "text": "Un número cúbico (o un cubo perfecto) es un número que resulta de multiplicar un número entero por sí mismo TRES veces. ¡En otras palabras, es el producto de un número entero elevado a la potencia de tres!",
+        "description": "Por ejemplo, el número 27 es un número cúbico porque se puede escribir como 3 × 3 × 3. Aquí, 3 es el número entero que se ha multiplicado por sí mismo dos veces para producir 27.",
+        "title": "¿Qué son los Números Cúbicos?",
+        "keyIdeas": [
+          "Un número cúbico = un número × sí mismo × sí mismo otra vez.",
+          "Ejemplos: 1, 8, 27, 64, 125, 216...",
+          "¡Se llaman 'cúbicos' porque forman cubos perfectos!"
+        ],
+        "imageCaption": "¡Mira los números multiplicarse tres veces!",
+        "callout": "¡Los números cúbicos son un número por sí mismo por sí mismo!",
+        "extraDetail": "3 × 3 × 3 = 27, así que decimos '3 al cubo es igual a 27' o lo escribimos como 3³ = 27."
+      },
+      "image": "assets/cube1.png",
+      "highlightNumbers": ["1", "8", "27", "64", "125", "216"]
+    },
+    {
+      "english": {
+        "text": "To cube a number, all you do is multiply it by itself, and then by itself again. This works for all numbers!",
+        "description": "",
+        "title": "Cubing Numbers",
+        "keyIdeas": [
+          "11³ = 11 × 11 × 11 = 1331",
+          "5³ = 5 × 5 × 5 = 125",
+          "Cube numbers get BIG very quickly!"
+        ],
+        "imageCaption": "Watch numbers grow bigger and bigger!",
+        "callout": "256³ = 16,777,216 - WOW that's huge!",
+        "extraDetail": "When you cube whole numbers, the results grow very fast. That's the power of multiplication!"
+      },
+      "spanish": {
+        "text": "Para elevar un número al cubo, todo lo que tienes que hacer es multiplicarlo por sí mismo, y luego por sí mismo otra vez. ¡Esto funciona para todos los números!",
+        "description": "",
+        "title": "Elevando Números al Cubo",
+        "keyIdeas": [
+          "11³ = 11 × 11 × 11 = 1331",
+          "5³ = 5 × 5 × 5 = 125",
+          "¡Los números cúbicos crecen MUY rápido!"
+        ],
+        "imageCaption": "¡Mira cómo crecen los números!",
+        "callout": "256³ = 16,777,216 - ¡WOW eso es enorme!",
+        "extraDetail": "Cuando elevas números enteros al cubo, los resultados crecen muy rápido. ¡Ese es el poder de la multiplicación!"
+      },
+      "image": "assets/cube2.png",
+      "highlightNumbers": ["343", "512", "729", "1000"]
+    },
+    {
+      "english": {
+        "text": "In geometry, a cube shape has all its edges equal. The volume of a cube is the cube of its edge length!",
+        "description": "",
+        "title": "Cubes in Geometry",
+        "keyIdeas": [
+          "A cube with edge 2 has volume 2 × 2 × 2 = 8.",
+          "A cube with edge 3 has volume 3 × 3 × 3 = 27.",
+          "That's why we call them cube numbers!"
+        ],
+        "imageCaption": "Cube shapes and cube numbers are connected!",
+        "callout": "The volume of a cube = edge × edge × edge!",
+        "extraDetail": "You can arrange 8 unit cubes into a 2×2×2 big cube. That's the cube number 8!"
+      },
+      "spanish": {
+        "text": "En geometría, un cubo tiene todas sus aristas iguales. ¡El volumen de un cubo es el cubo de la longitud de su arista!",
+        "description": "",
+        "title": "Cubos en Geometría",
+        "keyIdeas": [
+          "Un cubo con arista 2 tiene volumen 2 × 2 × 2 = 8.",
+          "Un cubo con arista 3 tiene volumen 3 × 3 × 3 = 27.",
+          "¡Por eso los llamamos números cúbicos!"
+        ],
+        "imageCaption": "¡Los cubos y los números cúbicos están conectados!",
+        "callout": "¡El volumen de un cubo = arista × arista × arista!",
+        "extraDetail": "Puedes organizar 8 cubos unitarios en un cubo grande de 2×2×2. ¡Ese es el número cúbico 8!"
+      },
+      "image": "assets/practice.png",
+      "highlightNumbers": ["1", "8", "27", "64"]
+    }
+  ]
 }

@@ -1,25 +1,127 @@
 {
-    "pages": [
-      {
-        "text_en": "A prime number can be defined as a natural number greater than 1 (one) whose only factors are 1 (one) and the number itself.",
-        "text_es": "Un número primo se puede definir como un número natural mayor que 1 cuyos únicos factores son 1 y el propio número.",
-        "image": "assets/prime1.png"
+  "pages": [
+    {
+      "english": {
+        "text": "A prime number can be defined as a natural number greater than 1 whose only factors are 1 and the number itself.",
+        "description": "Imagine you have a secret number that can only be split into groups of 1 or itself. That's what makes a number prime! Prime numbers are like math superheroes - they can't be broken down any further.",
+        "title": "Meet the Prime Numbers",
+        "keyIdeas": [
+          "Prime numbers have exactly 2 factors: 1 and itself.",
+          "The smallest prime number is 2.",
+          "1 is NOT a prime number because it only has one factor."
+        ],
+        "imageCaption": "Prime numbers are special math stars!",
+        "callout": "Prime numbers can only be divided by 1 and themselves!",
+        "extraDetail": "Think of prime numbers as building blocks - you can't break them into smaller equal groups.",
+        "pairSteps": []
       },
-      {
-        "text_en": "A prime number is always bigger than 1. The number 1 is not a prime number...",
-        "text_es": "Un número primo siempre es mayor que 1. El número 1 no es un número primo...",
-        "image": "assets/prime2.png"
+      "spanish": {
+        "text": "Un número primo se puede definir como un número natural mayor que 1 cuyos únicos factores son 1 y el propio número.",
+        "description": "Imagina que tienes un número secreto que solo se puede dividir en grupos de 1 o de sí mismo. ¡Eso es lo que hace que un número sea primo! Los números primos son como superhéroes matemáticos - no se pueden descomponer más.",
+        "title": "Conoce los Números Primos",
+        "keyIdeas": [
+          "Los números primos tienen exactamente 2 factores: 1 y ellos mismos.",
+          "El número primo más pequeño es el 2.",
+          "1 NO es un número primo porque solo tiene un factor."
+        ],
+        "imageCaption": "¡Los números primos son estrellas matemáticas especiales!",
+        "callout": "¡Los números primos solo se pueden dividir por 1 y por sí mismos!",
+        "extraDetail": "Piensa en los números primos como bloques de construcción - no puedes dividirlos en grupos iguales más pequeños.",
+        "pairSteps": []
       },
-      {
-        "text_en": "The chart below shows the prime numbers up to 100 (one hundred), represented in coloured boxes.",
-        "text_es": "El cuadro de abajo muestra los números primos hasta 100, representados en cuadros de colores.",
-        "image": "assets/prime3.png"
+      "image": "assets/prime1.png",
+      "highlightNumbers": ["2", "3", "5", "7", "11", "13"]
+    },
+    {
+      "english": {
+        "text": "A prime number is always bigger than 1. The number 1 is not a prime number because it only has one factor - itself!",
+        "description": "",
+        "title": "Why 1 is Not Prime",
+        "keyIdeas": [
+          "To be prime, a number needs EXACTLY two different factors.",
+          "The number 1 only has ONE factor (itself).",
+          "So 1 is special, but not prime!"
+        ],
+        "imageCaption": "The number 1 stands alone - it's unique but not prime.",
+        "callout": "Remember: 1 is NOT a prime number!",
+        "extraDetail": "Prime numbers start at 2 because that's the first number with exactly two factors."
       },
-      {
-        "text_en": "Now that you know what prime numbers are let's go ahead and solve some fun problems.",
-        "text_es": "Ahora que sabes qué son los números primos, vamos a resolver algunos problemas divertidos.",
-        "image": "assets/practice.png"
-      }
-    ]
-  }
+      "spanish": {
+        "text": "Un número primo siempre es mayor que 1. El número 1 no es un número primo porque solo tiene un factor - ¡él mismo!",
+        "description": "",
+        "title": "Por qué el 1 no es Primo",
+        "keyIdeas": [
+          "Para ser primo, un número necesita EXACTAMENTE dos factores diferentes.",
+          "El número 1 solo tiene UN factor (él mismo).",
+          "¡Así que el 1 es especial, pero no primo!"
+        ],
+        "imageCaption": "El número 1 está solo - es único pero no primo.",
+        "callout": "¡Recuerda: 1 NO es un número primo!",
+        "extraDetail": "Los números primos empiezan en 2 porque ese es el primer número con exactamente dos factores."
+      },
+      "image": "assets/prime2.png",
+      "highlightNumbers": ["2", "3", "5", "7"]
+    },
+    {
+      "english": {
+        "text": "The chart below shows the prime numbers up to 100, represented in colored boxes. Can you spot the pattern?",
+        "description": "",
+        "title": "Prime Number Chart",
+        "keyIdeas": [
+          "Prime numbers are scattered throughout the number chart.",
+          "There are 25 prime numbers between 1 and 100.",
+          "As numbers get bigger, primes become more spread out."
+        ],
+        "imageCaption": "Prime numbers light up the chart like scattered stars.",
+        "callout": "Prime numbers form a special pattern!",
+        "extraDetail": "Finding prime numbers is like a treasure hunt - they're hidden throughout all numbers!"
+      },
+      "spanish": {
+        "text": "El cuadro de abajo muestra los números primos hasta 100, representados en cuadros de colores. ¿Puedes ver el patrón?",
+        "description": "",
+        "title": "Tabla de Números Primos",
+        "keyIdeas": [
+          "Los números primos están esparcidos por toda la tabla.",
+          "Hay 25 números primos entre 1 y 100.",
+          "A medida que los números crecen, los primos se vuelven más dispersos."
+        ],
+        "imageCaption": "Los números primos iluminan la tabla como estrellas dispersas.",
+        "callout": "¡Los números primos forman un patrón especial!",
+        "extraDetail": "¡Encontrar números primos es como una búsqueda del tesoro - están escondidos entre todos los números!"
+      },
+      "image": "assets/prime3.png",
+      "highlightNumbers": ["17", "19", "23", "29", "31"]
+    },
+    {
+      "english": {
+        "text": "Now that you know what prime numbers are, let's go ahead and solve some fun problems!",
+        "description": "",
+        "title": "Time to Practice!",
+        "keyIdeas": [
+          "You learned that primes have exactly 2 factors.",
+          "2 is the only even prime number.",
+          "Now test your prime number skills!"
+        ],
+        "imageCaption": "Ready to become a prime number expert?",
+        "callout": "Let's put your knowledge to the test!",
+        "extraDetail": "Practice makes perfect - soon you'll spot prime numbers instantly!"
+      },
+      "spanish": {
+        "text": "Ahora que sabes qué son los números primos, ¡vamos a resolver algunos problemas divertidos!",
+        "description": "",
+        "title": "¡Hora de Practicar!",
+        "keyIdeas": [
+          "Aprendiste que los primos tienen exactamente 2 factores.",
+          "2 es el único número primo par.",
+          "¡Ahora pon a prueba tus habilidades con los primos!"
+        ],
+        "imageCaption": "¿Listo para convertirte en un experto en números primos?",
+        "callout": "¡Pon a prueba tus conocimientos!",
+        "extraDetail": "¡La práctica hace al maestro - pronto identificarás los números primos al instante!"
+      },
+      "image": "assets/practice.png",
+      "highlightNumbers": ["37", "41", "43", "47"]
+    }
+  ]
+}
   
