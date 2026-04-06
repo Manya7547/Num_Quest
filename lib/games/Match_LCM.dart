@@ -208,7 +208,7 @@ class _LCMGamePageState extends State<LCMGamePage> {
                 padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
               ),
               child: Text(
-                isEnglish ? '🌐 ES' : '🌐 EN',
+                isEnglish ? 'Tap to Translate' : 'Toca para Traducir',
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 15,
