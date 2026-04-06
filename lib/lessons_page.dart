@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:math';
 import 'lessons/even_number_info_page.dart';
 import 'lessons/odd_number_info_page.dart';
 import 'lessons/prime_number_info_page.dart';
@@ -134,22 +133,15 @@ class _LessonsPageState extends State<LessonsPage>
     return Scaffold(
       body: Stack(
         children: [
-          // Background gradient
+          // Background image (same as Play & Practice)
           Container(
             decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Color(0xFF1A1A2E),
-                  Color(0xFF16213E),
-                  Color(0xFF0F3460),
-                ],
+              image: DecorationImage(
+                image: AssetImage('assets/background1.jpg'),
+                fit: BoxFit.cover,
               ),
             ),
           ),
-          // Stars
-          const _StarsBackground(),
           // Content
           SafeArea(
             child: Column(
@@ -475,101 +467,4 @@ class _HoverCardState extends State<_HoverCard> {
       ),
     );
   }
-}
-
-class _StarsBackground extends StatefulWidget {
-  const _StarsBackground();
-
-  @override
-  State<_StarsBackground> createState() => _StarsBackgroundState();
-}
-
-class _StarsBackgroundState extends State<_StarsBackground>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  final List<_Star> _stars = [];
-  final Random _random = Random();
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 3),
-    )..repeat();
-
-    // Generate stars
-    for (int i = 0; i < 150; i++) {
-      _stars.add(_Star(
-        x: _random.nextDouble(),
-        y: _random.nextDouble(),
-        size: _random.nextDouble() * 2.5 + 0.5,
-        opacity: _random.nextDouble() * 0.6 + 0.4,
-        twinkleSpeed: _random.nextDouble() * 2 + 1,
-      ));
-    }
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _controller,
-      builder: (context, child) {
-        return CustomPaint(
-          painter: _StarsPainter(_stars, _controller.value),
-          size: Size.infinite,
-        );
-      },
-    );
-  }
-}
-
-class _Star {
-  final double x;
-  final double y;
-  final double size;
-  final double opacity;
-  final double twinkleSpeed;
-
-  _Star({
-    required this.x,
-    required this.y,
-    required this.size,
-    required this.opacity,
-    required this.twinkleSpeed,
-  });
-}
-
-class _StarsPainter extends CustomPainter {
-  final List<_Star> stars;
-  final double animationValue;
-
-  _StarsPainter(this.stars, this.animationValue);
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    for (final star in stars) {
-      final twinkle = (sin(animationValue * pi * 2 * star.twinkleSpeed) + 1) / 2;
-      final currentOpacity = star.opacity * (0.5 + twinkle * 0.5);
-
-      final paint = Paint()
-        ..color = Colors.white.withOpacity(currentOpacity)
-        ..style = PaintingStyle.fill;
-
-      canvas.drawCircle(
-        Offset(star.x * size.width, star.y * size.height),
-        star.size,
-        paint,
-      );
-    }
-  }
-
-  @override
-  bool shouldRepaint(covariant _StarsPainter oldDelegate) => true;
 }
