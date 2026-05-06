@@ -6,7 +6,6 @@ import 'CompositeNumberPracticePage.dart';
 import 'PerfectNumbersPracticePage.dart';
 import 'CubeNumberInfoPage.dart';
 import 'FactorsNumberInfoPage.dart';
-import 'ModuloPracticePage.dart';
 import '../analytics_engine.dart'; 
 
 class PracticePage extends StatefulWidget {
@@ -177,13 +176,9 @@ class _PracticePageState extends State<PracticePage> {
                       title: t('MODULO\nNUMBERS', 'NÚMEROS\nMÓDULO'),
                       onPressed: () {
                         // Log content selection before navigation
-                        AnalyticsEngine.logContentSelection('practice', 'MODULO NUMBERS');
-
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ModuloPracticePage()),
-                        );
+                       // AnalyticsEngine.logContentSelection('practice', 'MODULO NUMBERS');
+                        
+                        // Future Implementation
                       },
                     ),
                   ],
